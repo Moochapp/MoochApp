@@ -1,0 +1,8 @@
+app_identifier("com.moochapp.MoochAppiOS") # The bundle identifier of your app
+apple_id("dev@rlukedavis.com") # Your Apple email address
+
+itc_team_id("118910790") # App Store Connect Team ID
+team_id("D79J8LWFF2") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

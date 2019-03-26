@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Social View Controller-->
+        <scene sceneID="qK2-xA-NEO">
+            <objects>
+                <viewController storyboardIdentifier="SocialViewController" id="5Zj-iY-Eu9" customClass="SocialViewController" customModule="Mooch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9H1-H4-5YM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mooch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISB-wD-9qA">
+                                <rect key="frame" x="161" y="323" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCk-K4-cao">
+                                <rect key="frame" x="16" y="360" width="343" height="101.5"/>
+                                <string key="text">The Mooch page will show a feed of items that have been added recently by friends. Clicking on an item shows the item detail view, and clicking on the friend shows the user detail view.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ISB-wD-9qA" firstAttribute="centerY" secondItem="9H1-H4-5YM" secondAttribute="centerY" id="QcC-ae-8xq"/>
+                            <constraint firstItem="ISB-wD-9qA" firstAttribute="centerX" secondItem="9H1-H4-5YM" secondAttribute="centerX" id="Rfe-gk-RBE"/>
+                            <constraint firstItem="iCk-K4-cao" firstAttribute="leading" secondItem="gCN-Rn-ZSw" secondAttribute="leading" constant="16" id="mlz-YQ-btI"/>
+                            <constraint firstItem="iCk-K4-cao" firstAttribute="top" secondItem="ISB-wD-9qA" secondAttribute="bottom" constant="16" id="pl9-Xb-O1S"/>
+                            <constraint firstAttribute="trailing" secondItem="iCk-K4-cao" secondAttribute="trailing" constant="16" id="qVy-dO-nn4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gCN-Rn-ZSw"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mIc-qC-ece" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

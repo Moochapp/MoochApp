@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="KC6-QC-Afu">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="PNK-Im-dEC" customClass="ProfileViewController" customModule="Mooch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sTP-kK-cnC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ1-er-9eK">
+                                <rect key="frame" x="163" y="323" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je4-vh-eEZ">
+                                <rect key="frame" x="16" y="360" width="343" height="81.5"/>
+                                <string key="text">The profile page will work very similar to instagram. Users come here intuitivly to see their own posts, their friends, change their profile settings, etc.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t1o-nd-YUH" firstAttribute="trailing" secondItem="je4-vh-eEZ" secondAttribute="trailing" constant="16" id="17j-fv-Gk3"/>
+                            <constraint firstItem="je4-vh-eEZ" firstAttribute="leading" secondItem="t1o-nd-YUH" secondAttribute="leading" constant="16" id="DuF-pH-eyI"/>
+                            <constraint firstItem="mJ1-er-9eK" firstAttribute="centerY" secondItem="sTP-kK-cnC" secondAttribute="centerY" id="kxi-YI-omB"/>
+                            <constraint firstItem="mJ1-er-9eK" firstAttribute="centerX" secondItem="sTP-kK-cnC" secondAttribute="centerX" id="ntB-hr-QlY"/>
+                            <constraint firstItem="je4-vh-eEZ" firstAttribute="top" secondItem="mJ1-er-9eK" secondAttribute="bottom" constant="16" id="qjc-zW-DY9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="t1o-nd-YUH"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QY4-7h-Vmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
+        </scene>
+    </scenes>
+</document>
