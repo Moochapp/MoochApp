@@ -75,7 +75,7 @@ class MainCoordinator: Coordinator {
         nav4.viewControllers = [explore]
         
         let nav5 = UINavigationController()
-        let inventory = InventoryViewController.instantiate(from: "MainApp")
+        let inventory = InventoryViewController()
         inventory.coordinator = self
         inventory.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
         inventory.tabBarItem.title = "Inventory"

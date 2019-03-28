@@ -31,12 +31,13 @@ class ItemDetailTableViewManager: NSObject, UITableViewDelegate, UITableViewData
         self.coordinator = coordinator
         self.viewController = viewController
         self.dataSource = dataSource
+        super.init()
     }
     
     weak var coordinator: MainCoordinator!
     weak var viewController: ItemDetailViewController!
     let cellDescriptions = ["ImageAreaSectionCell", "DetailsSectionCell", "SimilarItemsCell", "MoreItemsCell"]
-    var item: Item
+//    var item: Item
     var dataSource: [String] = []
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,18 +54,24 @@ class ItemDetailTableViewManager: NSObject, UITableViewDelegate, UITableViewData
             // Configure cell 1
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.row], for: indexPath)
             
-            let bg = UIImageView(image: <#T##UIImage?#>)
+//            let bg = UIImageView(image: )
             
             return cell
         } else if section == 1 {
             // Configure cell 2
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.row], for: indexPath)
             
+            return cell
         } else if section == 2 {
             // Configure cell 3
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.row], for: indexPath)
             
-        } else if section == 3 {
+            return cell
+        } else {
             // Configure cell 4
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.row], for: indexPath)
             
+            return cell
         }
     }
     

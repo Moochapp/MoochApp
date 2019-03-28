@@ -264,6 +264,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		732B4B08224D2C10009E8FF5 /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
+				733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */,
+			);
+			path = Inventory;
+			sourceTree = "<group>";
+		};
 		733B9E5C224BCD8000D702DA /* Explore Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,8 +320,7 @@
 				73CEBE9E22010D2E007B8620 /* Search */,
 				73CEBE9D22010D0B007B8620 /* Social */,
 				73417F88222DD419005A6714 /* Explore */,
-				733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */,
-				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
+				732B4B08224D2C10009E8FF5 /* Inventory */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
