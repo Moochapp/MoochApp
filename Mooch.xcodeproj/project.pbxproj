@@ -31,6 +31,8 @@
 		731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B07492211E3A60079E45A /* FirebaseUserManager.swift */; };
 		731B074C221240A40079E45A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B074B221240A40079E45A /* Item.swift */; };
 		73318A0A2249CD8A00BB1443 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */; };
+		733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */; };
+		733B9E61224C2F0A00D702DA /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */; };
 		733DFBE22229D65200A16995 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733DFBE12229D65100A16995 /* ExploreViewController.swift */; };
 		73417F87222DC171005A6714 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73417F86222DC171005A6714 /* MainApp.storyboard */; };
 		73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73417F89222DD55B005A6714 /* ExploreViewModel.swift */; };
@@ -105,6 +107,8 @@
 		731B07492211E3A60079E45A /* FirebaseUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserManager.swift; sourceTree = "<group>"; };
 		731B074B221240A40079E45A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
+		733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		733DFBE12229D65100A16995 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		73417F86222DC171005A6714 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		73417F89222DD55B005A6714 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
@@ -260,12 +264,29 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		73417F88222DD419005A6714 /* Explore */ = {
+		733B9E5C224BCD8000D702DA /* Explore Page */ = {
 			isa = PBXGroup;
 			children = (
 				733DFBE12229D65100A16995 /* ExploreViewController.swift */,
 				73417F89222DD55B005A6714 /* ExploreViewModel.swift */,
 				73B2DDDB222F59E50011E03F /* Table View */,
+			);
+			path = "Explore Page";
+			sourceTree = "<group>";
+		};
+		733B9E5F224BCDBF00D702DA /* Subcategory */ = {
+			isa = PBXGroup;
+			children = (
+				733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */,
+			);
+			path = Subcategory;
+			sourceTree = "<group>";
+		};
+		73417F88222DD419005A6714 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				733B9E5C224BCD8000D702DA /* Explore Page */,
+				733B9E5F224BCDBF00D702DA /* Subcategory */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -290,6 +311,7 @@
 				73CEBE9E22010D2E007B8620 /* Search */,
 				73CEBE9D22010D0B007B8620 /* Social */,
 				73417F88222DD419005A6714 /* Explore */,
+				733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */,
 				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
 			);
 			path = Screens;
@@ -483,6 +505,7 @@
 				TargetAttributes = {
 					730CE8D021FA497F00350C40 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -699,6 +722,7 @@
 				73782E1E220B846C00145B92 /* PhoneNumberExtension.swift in Sources */,
 				731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */,
 				731B074C221240A40079E45A /* Item.swift in Sources */,
+				733B9E61224C2F0A00D702DA /* ItemDetailViewController.swift in Sources */,
 				73782E24220BB89900145B92 /* AlertManager.swift in Sources */,
 				734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */,
 				73026A5922021DC100CC767E /* MoochCoordinator.swift in Sources */,
@@ -707,6 +731,7 @@
 				731B07462210CB0F0079E45A /* UIView+Nib.swift in Sources */,
 				731B07442210CB0F0079E45A /* Object+ClassName.swift in Sources */,
 				73026A5B2202206B00CC767E /* ProfileViewController.swift in Sources */,
+				733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */,
 				731B07432210CB0F0079E45A /* UIScreen+Utils.swift in Sources */,
 				735E28BD21FCD7310035AD82 /* Session.swift in Sources */,
 				73318A0A2249CD8A00BB1443 /* FavoritesCollectionViewCell.swift in Sources */,
@@ -897,7 +922,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.moochapp.MoochAppiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -918,7 +943,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.moochapp.MoochAppiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

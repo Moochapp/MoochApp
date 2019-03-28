@@ -85,9 +85,16 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(tabbar, animated: true)
     }
     
+    func showSubCategories(with category: String, image: UIImage) {
+        let vc = SubcategoryViewController()
+        vc.coordinator = self
+        vc.category = category
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func finish() {
         navigationController.popToRootViewController(animated: true)
     }
-    
     
 }
