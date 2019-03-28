@@ -75,12 +75,13 @@ class MainCoordinator: Coordinator {
         nav4.viewControllers = [explore]
         
         let nav5 = UINavigationController()
-        let inventory = InventoryViewController()
+        let inventory = InventoryViewController.instantiate(from: "MainApp")
         inventory.coordinator = self
         inventory.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
         inventory.tabBarItem.title = "Inventory"
+        nav5.viewControllers = [inventory]
         
-        tabbar.viewControllers = [nav2, nav4, nav3, inventory]
+        tabbar.viewControllers = [nav2, nav3, nav4, nav5]
         navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(tabbar, animated: true)
     }
