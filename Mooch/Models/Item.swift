@@ -13,6 +13,9 @@ class Item {
     var name: String
     var category: String
     var owner: String
+//    var availableFor: [String]
+//    var status: String
+//    var likes: Int
     
     init(document: DocumentSnapshot) {
         if let itemData = document.data() {

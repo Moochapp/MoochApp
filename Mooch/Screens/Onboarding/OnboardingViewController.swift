@@ -123,7 +123,7 @@ extension OnboardingViewController: UIPageViewControllerDelegate, UIPageViewCont
 //            return nil
 //        }
         
-        guard let vcindex = onboardingViewControllers.index(of: viewController) else { return nil }
+        guard let vcindex = onboardingViewControllers.firstIndex(of: viewController) else { return nil }
         
         let previous = vcindex - 1
         
@@ -154,7 +154,7 @@ extension OnboardingViewController: UIPageViewControllerDelegate, UIPageViewCont
         
         // set the pageControl.currentPage to the index of the current viewController in pages
         if let viewControllers = pageViewController.viewControllers {
-            if let viewControllerIndex = self.onboardingViewControllers.index(of: viewControllers[0]) {
+            if let viewControllerIndex = self.onboardingViewControllers.firstIndex(of: viewControllers[0]) {
                 self.pageControl.currentPage = viewControllerIndex
             }
         }

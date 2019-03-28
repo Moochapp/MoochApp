@@ -79,15 +79,23 @@ class MainCoordinator: Coordinator {
         inventory.coordinator = self
         inventory.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
         inventory.tabBarItem.title = "Inventory"
+        nav5.viewControllers = [inventory]
         
-        tabbar.viewControllers = [nav2, nav4, nav3, inventory]
+        tabbar.viewControllers = [nav2, nav3, nav4, nav5]
         navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(tabbar, animated: true)
+    }
+    
+    func showSubCategories(with category: String, image: UIImage) {
+        let vc = SubcategoryViewController()
+        vc.coordinator = self
+        vc.category = category
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func finish() {
         navigationController.popToRootViewController(animated: true)
     }
-    
     
 }

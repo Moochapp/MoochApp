@@ -23,7 +23,8 @@ class ExploreViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         title = "Explore"
-        viewModel = ExploreViewModel()
+        viewModel = ExploreViewModel(viewController: self)
+        viewModel.setDelegatesForDataObjectManagers()
         self.tableView = UITableView()
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -37,6 +38,9 @@ class ExploreViewController: UIViewController, Storyboarded {
         tableView.backgroundColor = .white
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        coordinator.navigationController.isNavigationBarHidden = true
+    }
     
     
 }
@@ -128,11 +132,11 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 class FeaturedDataObject: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     init(images: [UIImage]) {
         self.images = images
     }
     
+    var delegate: ExploreDataObjectDelegate?
     var images: [UIImage]
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -173,6 +177,7 @@ class FeaturedDataObject: NSObject, UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        
     }
     
 }
@@ -213,6 +218,7 @@ class CategoriesDataObject: NSObject, UICollectionViewDataSource, UICollectionVi
         self.titles = titles
     }
     
+    var delegate: ExploreDataObjectDelegate?
     var images: [UIImage]
     var titles: [String]
     
@@ -269,5 +275,12 @@ class CategoriesDataObject: NSObject, UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        let category = titles[indexPath.row]
+        let image = images[indexPath.row]
+        delegate?.didSelectItem(category: category, image: image)
     }
+}
+
+protocol ExploreDataObjectDelegate {
+    func didSelectItem(category: String, image: UIImage)
 }
