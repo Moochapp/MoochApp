@@ -30,6 +30,13 @@
 		731B07462210CB0F0079E45A /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B07402210CB0F0079E45A /* UIView+Nib.swift */; };
 		731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B07492211E3A60079E45A /* FirebaseUserManager.swift */; };
 		731B074C221240A40079E45A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B074B221240A40079E45A /* Item.swift */; };
+		732B4B0A224E85DF009E8FF5 /* ChooseMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */; };
+		732B4B0C224E8BC4009E8FF5 /* Photographer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B0B224E8BC4009E8FF5 /* Photographer.swift */; };
+		732B4B0E224E9949009E8FF5 /* SnappingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */; };
+		732B4B10224E9ED3009E8FF5 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */; };
+		732B4B11224EA159009E8FF5 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */; };
+		732B4B12224EA159009E8FF5 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		732B4B15224EB403009E8FF5 /* ImagePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */; };
 		73318A0A2249CD8A00BB1443 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */; };
 		733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */; };
 		733B9E61224C2F0A00D702DA /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */; };
@@ -75,6 +82,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		732B4B13224EA159009E8FF5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				732B4B12224EA159009E8FF5 /* ImagePicker.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		055BE60FA44B764596F741E9 /* Pods-Mooch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mooch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mooch/Pods-Mooch.debug.xcconfig"; sourceTree = "<group>"; };
 		13C13CE9CDDA58B60676EBEC /* Pods-Mooch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mooch.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mooch/Pods-Mooch.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +127,11 @@
 		731B07402210CB0F0079E45A /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		731B07492211E3A60079E45A /* FirebaseUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserManager.swift; sourceTree = "<group>"; };
 		731B074B221240A40079E45A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMethodViewController.swift; sourceTree = "<group>"; };
+		732B4B0B224E8BC4009E8FF5 /* Photographer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photographer.swift; sourceTree = "<group>"; };
+		732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnappingCollectionViewLayout.swift; sourceTree = "<group>"; };
+		732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = "<group>"; };
+		732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewer.swift; sourceTree = "<group>"; };
 		73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
 		733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +174,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				732B4B10224E9ED3009E8FF5 /* ImagePicker.framework in Frameworks */,
+				732B4B11224EA159009E8FF5 /* ImagePicker.framework in Frameworks */,
 				78CB4E2C260FB0CCC13FEF70 /* Pods_Mooch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +227,7 @@
 				730CE8E821FA498000350C40 /* MoochTests */,
 				730CE8D221FA497F00350C40 /* Products */,
 				5CF2C83D38B9C7DCB3453C53 /* Pods */,
+				732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */,
 				1AB09DC0E3081439E8247E9D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -268,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
+				732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */,
 				733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */,
 			);
 			path = Inventory;
@@ -344,6 +374,9 @@
 			children = (
 				73782E23220BB89900145B92 /* AlertManager.swift */,
 				737927D62230BBB400E33A35 /* MoochPhoneNumberTextField.swift */,
+				732B4B0B224E8BC4009E8FF5 /* Photographer.swift */,
+				732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */,
+				732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -472,6 +505,7 @@
 				7AEFF078F0D3ACE68E4A09CF /* [CP] Embed Pods Frameworks */,
 				731465BC220644CB0092FBE0 /* AIBN */,
 				0E03CFC9FB03D0320664EC02 /* [CP] Copy Pods Resources */,
+				732B4B13224EA159009E8FF5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -754,14 +788,18 @@
 				73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */,
 				73026A5F2202209700CC767E /* SearchViewController.swift in Sources */,
 				731B07412210CB0F0079E45A /* UIColor+Utils.swift in Sources */,
+				732B4B0C224E8BC4009E8FF5 /* Photographer.swift in Sources */,
 				731465BB2206341D0092FBE0 /* Moocher.swift in Sources */,
 				73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */,
 				73026A512202108000CC767E /* LandingViewModel.swift in Sources */,
 				731B07382210CAAB0079E45A /* EntryManager.swift in Sources */,
 				737C87D421FFDA9E006B5F18 /* Coordinator.swift in Sources */,
 				73CEBE992200DE04007B8620 /* LandingViewController.swift in Sources */,
+				732B4B15224EB403009E8FF5 /* ImagePreviewer.swift in Sources */,
 				73026A53220217DD00CC767E /* OnboardingViewController.swift in Sources */,
+				732B4B0E224E9949009E8FF5 /* SnappingCollectionViewLayout.swift in Sources */,
 				73CA25A02241466E006A8087 /* InventoryViewController.swift in Sources */,
+				732B4B0A224E85DF009E8FF5 /* ChooseMethodViewController.swift in Sources */,
 				731B07422210CB0F0079E45A /* CGRect+Utils.swift in Sources */,
 				737C87D621FFE44C006B5F18 /* Storyboarded.swift in Sources */,
 			);
@@ -923,6 +961,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = D79J8LWFF2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Mooch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -944,6 +986,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = D79J8LWFF2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Mooch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

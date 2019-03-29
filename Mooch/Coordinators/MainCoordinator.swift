@@ -51,23 +51,31 @@ class MainCoordinator: Coordinator {
         let tabbar = UITabBarController()
         
         let nav1 = UINavigationController()
+        nav1.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav1.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let search = SearchViewController.instantiate(from: "Search")
         search.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         nav1.viewControllers = [search]
         
         let nav2 = UINavigationController()
+        nav2.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav2.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let mooch = SocialViewController.instantiate(from: "Social")
         mooch.coordinator = self
         mooch.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
         nav2.viewControllers = [mooch]
         
         let nav3 = UINavigationController()
+        nav3.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav3.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let profile = ProfileViewController.instantiate(from: "Profile")
         profile.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
         profile.coordinator = self
         nav3.viewControllers = [profile]
         
         let nav4 = UINavigationController()
+        nav4.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav4.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let explore = ExploreViewController.instantiate(from: "MainApp")
         explore.coordinator = self
         explore.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 3)
@@ -75,14 +83,18 @@ class MainCoordinator: Coordinator {
         nav4.viewControllers = [explore]
         
         let nav5 = UINavigationController()
+        nav5.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav5.navigationBar.backgroundColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav5.navigationBar.isTranslucent = false
+        nav5.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let inventory = InventoryViewController.instantiate(from: "MainApp")
         inventory.coordinator = self
         inventory.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
         
-        tabbar.viewControllers = [nav2, nav3, nav4, nav5]
-        navigationController.isNavigationBarHidden = true
+        tabbar.viewControllers = [mooch, explore, inventory, profile]
+        navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(tabbar, animated: true)
     }
     
@@ -92,6 +104,26 @@ class MainCoordinator: Coordinator {
         vc.category = category
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func chooseCreateMethod() {
+        let vc = ChooseMethodViewController.instantiate(from: "MainApp")
+        vc.coordinator = self
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showItemDetail(with images: [UIImage]) {
+        let vc = ItemDetailViewController()
+        vc.item = Item()
+        vc.item.images = images
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showItemDetail(for item: Item) {
+        let vc = ItemDetailViewController()
+        vc.item = item
     }
     
     func finish() {

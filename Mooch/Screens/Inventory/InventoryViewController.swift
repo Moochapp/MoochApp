@@ -43,19 +43,21 @@ class InventoryViewController: UIViewController, Storyboarded {
         self.view.addSubview(collectionView)
         // Add to subview and make constraints
         collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(8)
+//            make.left.right.equalToSuperview().inset(8)
+//            make.top.bottom.equalToSuperview().inset(16)
+            make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges).inset(8)
         }
         
     }
     
     @objc func addItem(sender: UIBarButtonItem) {
-        print("Add")
+        coordinator.chooseCreateMethod()
     }
 }
 
 extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 14
+        return 19
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,6 +76,14 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         let width = (cWidth - (numberPerRow * spacing)) / numberPerRow
         
         return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8.0
     }
     
 }

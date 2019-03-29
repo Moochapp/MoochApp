@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         UNUserNotificationCenter.current().delegate = self
         
         let nav = UINavigationController()
+        nav.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         mainCoordinator = MainCoordinator(nav: nav)
         
         if shouldStartOnTabbar {

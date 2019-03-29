@@ -13,9 +13,18 @@ class Item {
     var name: String
     var category: String
     var owner: String
+    var images: [UIImage] = []
 //    var availableFor: [String]
 //    var status: String
 //    var likes: Int
+    
+    init() {
+        self.id = ""
+        self.name = ""
+        self.category = ""
+        self.owner = ""
+        self.images = []
+    }
     
     init(document: DocumentSnapshot) {
         if let itemData = document.data() {
@@ -27,4 +36,6 @@ class Item {
             fatalError("Missing data. Should have complete item data.")
         }
     }
+    
+    
 }
