@@ -93,7 +93,12 @@ class MainCoordinator: Coordinator {
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
         
-        tabbar.viewControllers = [mooch, explore, inventory, profile]
+        setupNavs(nav: nav2)
+        setupNavs(nav: nav3)
+        setupNavs(nav: nav4)
+        setupNavs(nav: nav5)
+        
+        tabbar.viewControllers = [nav2, nav3, nav4, nav5]
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(tabbar, animated: true)
     }
@@ -130,4 +135,14 @@ class MainCoordinator: Coordinator {
         navigationController.popToRootViewController(animated: true)
     }
     
+    
+
+}
+
+extension MainCoordinator {
+    private func setupNavs(nav: UINavigationController) {
+        nav.navigationBar.barTintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        nav.navigationBar.tintColor = .white
+        nav.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
 }
