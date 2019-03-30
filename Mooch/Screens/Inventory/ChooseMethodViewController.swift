@@ -17,12 +17,20 @@ class ChooseMethodViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
 
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        setupButtons()
         
     }
     
     @IBOutlet weak var takePhotoButton: UIButton!
     @IBOutlet weak var chooseFromLibraryButton: UIButton!
     @IBOutlet weak var scanBarcodeButton: UIButton!
+    
+    func setupButtons() {
+        takePhotoButton.layer.cornerRadius = 10
+        chooseFromLibraryButton.layer.cornerRadius = 10
+        scanBarcodeButton.layer.cornerRadius = 10
+    }
+    
     
     @IBAction func takePhoto(_ sender: UIButton) {
         let config = Configuration()
@@ -45,11 +53,19 @@ class ChooseMethodViewController: UIViewController, Storyboarded {
     
     @IBAction func scanBarcode(_ sender: UIButton) {
         print("Scan")
+        showDemoMessage(title: "Scanner", desc: "This feature hasn't been implimented yet.")
     }
     
     func proceedWithPhotos(images: [UIImage]) {
         print("proceeding with \(images.count) photos")
         coordinator.createItem(with: images)
+    }
+    
+    private func showDemoMessage(title: String, desc: String) {
+        let manager = EntryManager(viewController: self)
+        manager.showNotificationMessage(attributes: manager.topFloat, title: title, desc: desc,
+                                        textColor: .white, imageName: nil, backgroundColor: EKColor.Mooch.darkGray, haptic: .error)
+        
     }
     
 }
@@ -84,3 +100,4 @@ extension ChooseMethodViewController: ImagePickerDelegate {
         imagePicker.dismiss(animated: true, completion: nil)
     }
 }
+

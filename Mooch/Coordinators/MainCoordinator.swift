@@ -98,7 +98,7 @@ class MainCoordinator: Coordinator {
         setupNavs(nav: nav4)
         setupNavs(nav: nav5)
         
-        tabbar.viewControllers = [nav2, nav3, nav4, nav5]
+        tabbar.viewControllers = [nav5, nav4, nav3]
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(tabbar, animated: true)
     }

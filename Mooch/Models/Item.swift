@@ -14,9 +14,13 @@ class Item {
     var category: String
     var owner: String
     var images: [UIImage] = []
-//    var availableFor: [String]
+    var availableFor: [Availability: Bool] = [.buy: false, .rent: false, .mooch: false]
 //    var status: String
 //    var likes: Int
+    
+    enum Availability {
+        case mooch, rent, buy
+    }
     
     init() {
         self.id = ""

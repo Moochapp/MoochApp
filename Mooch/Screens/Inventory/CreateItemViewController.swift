@@ -48,6 +48,7 @@ class CreateItemViewController: UIViewController {
         for item in cellDescriptions {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: item)
         }
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.clipsToBounds = true
         tableView.layer.cornerRadius = 20
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -112,7 +113,7 @@ class CreateItemViewController: UIViewController {
 extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -281,29 +282,52 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             header.font = UIFont(name: "Avenir", size: 20)
             header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
             header.text = "AVAILABLE FOR"
-            
-            let textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
-            
             cell.addSubview(header)
-            cell.addSubview(textfield)
-            
             header.snp.makeConstraints { (make) in
                 make.left.top.right.equalToSuperview().inset(16)
             }
             
-            textfield.snp.makeConstraints { (make) in
-                make.left.right.equalToSuperview().inset(16)
+            let w = cell.frame.width
+            let width = (w - 32 - 16) / 3
+            let height = CGFloat(50)
+            
+            let mooching = Checkbox(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
+            mooching.setTitle(text: "Mooching")
+            mooching.delegate = self
+            
+            let renting = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            renting.setTitle(text: "Renting")
+            renting.delegate = self
+            
+            let buying = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            buying.setTitle(text: "Buying")
+            buying.delegate = self
+            
+            cell.addSubview(mooching)
+            cell.addSubview(renting)
+            cell.addSubview(buying)
+            
+            mooching.snp.makeConstraints { (make) in
+                make.left.equalToSuperview().inset(16)
                 make.top.equalTo(header.snp.bottom).offset(8)
-                make.height.equalTo(35)
+                make.width.equalTo(width)
+                make.height.equalTo(height)
             }
             
-            textfield.borderStyle = .none
-            textfield.layer.borderColor = UIColor.lightGray.cgColor
-            textfield.layer.borderWidth = 1
-            textfield.layer.cornerRadius = textfield.frame.height / 2
-            textfield.setLeftPaddingPoints(16)
-            textfield.delegate = self
-            textfield.tag = 24
+            renting.snp.makeConstraints { (make) in
+                make.left.equalTo(mooching.snp.right).offset(8)
+                make.top.equalTo(header.snp.bottom).offset(8)
+                make.width.equalTo(width)
+                make.height.equalTo(height)
+            }
+            
+            buying.snp.makeConstraints { (make) in
+                make.left.equalTo(renting.snp.right).offset(8)
+                make.top.equalTo(header.snp.bottom).offset(8)
+                make.width.equalTo(width)
+                make.height.equalTo(height)
+            }
+            
             
             return cell
         } else if section == 5 {
@@ -385,6 +409,48 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
         } else if section == 6 {
             // Configure cell 3
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
+            cell.selectionStyle = .none
+            
+            let header = UILabel(frame: .zero)
+            header.font = UIFont(name: "Avenir", size: 20)
+            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+            header.text = "SALE PRICE"
+            cell.addSubview(header)
+            
+            let lbl2 = UILabel(frame: .zero)
+            cell.addSubview(lbl2)
+            lbl2.font = UIFont(name: "Avenir", size: 20)
+            lbl2.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+            lbl2.text = "$"
+            lbl2.sizeToFit()
+            
+            let priceTF = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
+            cell.addSubview(priceTF)
+            priceTF.borderStyle = .none
+            priceTF.layer.borderColor = UIColor.lightGray.cgColor
+            priceTF.layer.borderWidth = 1
+            priceTF.layer.cornerRadius = 5
+            priceTF.setLeftPaddingPoints(8)
+            priceTF.placeholder = "0.00"
+            priceTF.tag = 27
+            priceTF.delegate = self
+            
+            header.snp.makeConstraints { (make) in
+                make.left.top.right.equalToSuperview().inset(16)
+            }
+            
+            lbl2.snp.makeConstraints { (make) in
+                make.left.equalToSuperview().offset(16)
+                make.top.equalTo(header.snp.bottom).offset(8)
+            }
+            
+            priceTF.snp.makeConstraints { (make) in
+                make.left.equalTo(lbl2.snp.right).offset(8)
+                make.centerY.equalTo(lbl2.snp.centerY)
+                make.width.equalTo(100)
+                make.height.equalTo(35)
+            }
+            
             
             return cell
         } else {
@@ -542,6 +608,32 @@ extension CreateItemViewController: UIPickerViewDelegate, UIPickerViewDataSource
             guard dataSource.count > 0 else { return }
             let item = dataSource[row]
             tf.text = item
+        }
+    }
+}
+
+extension CreateItemViewController: CheckBoxDelegate {
+    func checkbox(checkbox: Checkbox, didChange checked: Bool) {
+        switch checkbox.title.text {
+        case "Mooching":
+            print("Mooching")
+        case "Renting":
+            print("Renting")
+            if checked {
+                item.availableFor[.rent] = true
+                
+            } else {
+                item.availableFor[.rent] = false
+            }
+        case "Buying":
+            print("Buying")
+            if checked {
+                item.availableFor[.buy] = true
+            } else {
+                item.availableFor[.buy] = false
+            }
+        default:
+            break
         }
     }
 }

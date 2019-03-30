@@ -40,11 +40,20 @@ class EntryManager {
  
     */
     
-    func showNotificationMessage(attributes: EKAttributes, title: String, desc: String, textColor: UIColor, imageName: String? = nil) {
+    func showNotificationMessage(attributes: EKAttributes, title: String, desc: String, textColor: UIColor, imageName: String? = nil, backgroundColor: UIColor? = nil, haptic: EKAttributes.NotificationHapticFeedback? = nil) {
         let title = EKProperty.LabelContent(text: title,
-                                            style: .init(font: MainFont.medium.with(size: 16),
-                                                         color: textColor))
+                                            style: EKProperty.LabelStyle(font: MainFont.medium.with(size: 16),
+                                                                         color: textColor))
         let description = EKProperty.LabelContent(text: desc, style: .init(font: MainFont.light.with(size: 14), color: textColor))
+        
+        var attributes = attributes
+        if let color = backgroundColor {
+            attributes.entryBackground = .color(color: color)
+        }
+        
+        if let haptic = haptic {
+            attributes.hapticFeedbackType = haptic
+        }
         
         var image: EKProperty.ImageContent?
         if let imageName = imageName {
@@ -168,7 +177,7 @@ class EntryManager {
         attributes.hapticFeedbackType = .success
         attributes.displayDuration = EKAttributes.DisplayDuration.infinity
         attributes.popBehavior = .animated(animation: .translation)
-        attributes.entryBackground = .color(color: EKColor.LightBlue.a700)
+        attributes.entryBackground = .color(color: EKColor.Mooch.lightBlue)
         attributes.statusBar = .light
         
         let text = title
@@ -190,7 +199,7 @@ class EntryManager {
     var topToast: EKAttributes = {
         var attr = EKAttributes.topToast
         attr.hapticFeedbackType = .success
-        attr.entryBackground = .color(color: EKColor.LightBlue.a700)
+        attr.entryBackground = .color(color: EKColor.Mooch.lightBlue)
         attr.entranceAnimation = .init(translate: .init(duration: 0.3), scale: .init(from: 1.07, to: 1, duration: 0.3))
         attr.exitAnimation = .init(translate: .init(duration: 0.3))
         attr.statusBar = .hidden
@@ -202,7 +211,7 @@ class EntryManager {
     var bottomToast: EKAttributes = {
         var attributes = EKAttributes.bottomToast
         attributes.hapticFeedbackType = .success
-        attributes.entryBackground = .color(color: EKColor.LightBlue.a700)
+        attributes.entryBackground = .color(color: EKColor.Mooch.lightBlue)
         attributes.entranceAnimation = .init(translate: .init(duration: 0.3),
                                              scale: .init(from: 1.07, to: 1, duration: 0.3))
         attributes.exitAnimation = .init(translate: .init(duration: 0.3))
@@ -215,7 +224,7 @@ class EntryManager {
     var topFloat: EKAttributes = {
        var attributes = EKAttributes.topFloat
         attributes.hapticFeedbackType = .success
-        attributes.entryBackground = .color(color: EKColor.LightBlue.a700)
+        attributes.entryBackground = .color(color: EKColor.Mooch.lightBlue)
 //            .gradient(gradient: .init(colors: [.amber, .pinky], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
         attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.3), scale: .init(from: 1, to: 0.7, duration: 0.7)))
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10))

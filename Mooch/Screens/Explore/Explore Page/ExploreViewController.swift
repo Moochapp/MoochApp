@@ -23,6 +23,7 @@ class ExploreViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         title = "Explore"
+        self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         viewModel = ExploreViewModel(viewController: self)
         viewModel.setDelegatesForDataObjectManagers()
         self.tableView = UITableView()
@@ -35,7 +36,8 @@ class ExploreViewController: UIViewController, Storyboarded {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "featuredCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "favoritesCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,10 +63,12 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "featuredCell", for: indexPath)
+            cell.selectionStyle = .none
+            cell.backgroundColor = .clear
             
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
             cell.addSubview(collectionView)
-            collectionView.backgroundColor = .white
+            collectionView.backgroundColor = .clear
             if let layout = collectionView.collectionViewLayout as?  UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
             }
@@ -82,6 +86,8 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "favoritesCell", for: indexPath)
+            cell.selectionStyle = .none
+            cell.backgroundColor = .clear
             
             let image = UIImageView(image: viewModel.images[indexPath.row])
             cell.addSubview(image)
@@ -96,11 +102,13 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath)
+            cell.selectionStyle = .none
+            cell.backgroundColor = .clear
             
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
             cell.addSubview(collectionView)
             
-            collectionView.backgroundColor = .white
+            collectionView.backgroundColor = .clear
             collectionView.snp.makeConstraints { (make) in
                 make.top.bottom.equalToSuperview().inset(8)
                 make.left.right.equalToSuperview().inset(8)

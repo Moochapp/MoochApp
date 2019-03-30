@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CheckBoxDelegate {
+    func checkbox(checkbox: Checkbox, didChange checked: Bool)
+}
+
 class Checkbox: UIView {
     
     override init(frame: CGRect) {
@@ -31,17 +35,25 @@ class Checkbox: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var title: UILabel!
     
+    var delegate: CheckBoxDelegate?
     var isChecked: Bool = false
     
     @IBAction func didChangeValue(_ sender: UIButton) {
         if isChecked {
             image.image = UIImage(named: "UnCheckBox")
+            delegate?.checkbox(checkbox: self, didChange: false)
         } else {
             image.image = UIImage(named: "CheckBox")
+            delegate?.checkbox(checkbox: self, didChange: true)
         }
         
         isChecked = !isChecked
+    }
+    
+    public func setTitle(text: String) {
+        title.text = text
     }
     
 }

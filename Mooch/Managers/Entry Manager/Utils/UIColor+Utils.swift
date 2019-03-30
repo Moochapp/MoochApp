@@ -103,4 +103,9 @@ struct EKColor {
         static let first = UIColor(rgb: 0xff9a9e)
         static let last = UIColor(rgb: 0xfad0c4)
     }
+    
+    struct Mooch {
+        static let darkGray = UIColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1))
+        static let lightBlue = UIColor(#colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1))
+    }
 }

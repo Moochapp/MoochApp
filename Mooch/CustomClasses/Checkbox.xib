@@ -12,46 +12,55 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Checkbox" customModule="Mooch" customModuleProvider="target">
             <connections>
-                <outlet property="button" destination="BqO-gs-Dts" id="eOB-aG-TVi"/>
+                <outlet property="button" destination="3EM-Pj-sUg" id="Rdg-2V-pZA"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="38F-uc-vz4"/>
                 <outlet property="image" destination="ucA-YZ-qiH" id="gTJ-7k-sKO"/>
+                <outlet property="title" destination="luG-db-voR" id="E8i-Q3-C8u"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="317" height="128"/>
+            <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucA-YZ-qiH">
-                    <rect key="frame" x="8" y="8" width="112" height="112"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="ucA-YZ-qiH" secondAttribute="height" multiplier="1:1" id="d8X-rT-V1c"/>
-                    </constraints>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UnCheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="ucA-YZ-qiH">
+                    <rect key="frame" x="0.0" y="2" width="100" height="22"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BqO-gs-Dts">
-                    <rect key="frame" x="128" y="8" width="181" height="112"/>
-                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
-                    <state key="normal" title="MOOCHING">
-                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="luG-db-voR">
+                    <rect key="frame" x="2" y="26" width="96" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="oNJ-Uf-5q1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EM-Pj-sUg">
+                    <rect key="frame" x="4" y="4" width="92" height="42"/>
                     <connections>
-                        <action selector="didChangeValue:" destination="-1" eventType="touchUpInside" id="Ml3-Q9-YVC"/>
+                        <action selector="didChangeValue:" destination="-1" eventType="touchUpInside" id="shW-3Q-5D4"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="BqO-gs-Dts" secondAttribute="bottom" constant="8" id="40w-5X-LHo"/>
-                <constraint firstItem="ucA-YZ-qiH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Agk-M1-kgj"/>
-                <constraint firstItem="BqO-gs-Dts" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Hz2-tS-J5P"/>
-                <constraint firstAttribute="bottom" secondItem="ucA-YZ-qiH" secondAttribute="bottom" constant="8" id="OXb-5c-wjM"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BqO-gs-Dts" secondAttribute="trailing" constant="8" id="tmc-fi-Qbx"/>
-                <constraint firstItem="BqO-gs-Dts" firstAttribute="leading" secondItem="ucA-YZ-qiH" secondAttribute="trailing" constant="8" id="ufc-dS-X4O"/>
-                <constraint firstItem="ucA-YZ-qiH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="v4Z-2M-XsG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3EM-Pj-sUg" secondAttribute="trailing" constant="4" id="1US-DC-K4m"/>
+                <constraint firstItem="luG-db-voR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="2b0-rp-Kst"/>
+                <constraint firstItem="ucA-YZ-qiH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="6QH-ec-8ki"/>
+                <constraint firstItem="3EM-Pj-sUg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="8fY-Fm-lpC"/>
+                <constraint firstAttribute="bottom" secondItem="3EM-Pj-sUg" secondAttribute="bottom" constant="4" id="Evv-Gl-omm"/>
+                <constraint firstItem="ucA-YZ-qiH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MlX-Ht-g5g"/>
+                <constraint firstItem="3EM-Pj-sUg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="SJg-Xv-VCv"/>
+                <constraint firstItem="luG-db-voR" firstAttribute="top" secondItem="ucA-YZ-qiH" secondAttribute="bottom" constant="2" id="Y52-9L-4O5"/>
+                <constraint firstAttribute="trailing" secondItem="luG-db-voR" secondAttribute="trailing" constant="2" id="bbG-Qj-flZ"/>
+                <constraint firstAttribute="bottom" secondItem="luG-db-voR" secondAttribute="bottom" constant="2" id="rlo-dF-zoe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-22.463768115942031" y="291.96428571428572"/>
+            <point key="canvasLocation" x="-10.144927536231885" y="268.52678571428572"/>
         </view>
     </objects>
+    <resources>
+        <image name="UnCheckBox" width="100" height="100"/>
+    </resources>
 </document>

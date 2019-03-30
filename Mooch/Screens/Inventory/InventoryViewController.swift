@@ -66,7 +66,7 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath)
         
-        cell.backgroundColor = .red
+        cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 5
         
         return cell
