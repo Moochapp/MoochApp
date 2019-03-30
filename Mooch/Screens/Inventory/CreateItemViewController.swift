@@ -26,7 +26,7 @@ class CreateItemViewController: UIViewController {
         setupCollectionViews()
         setupPickerView()
         setupToolbar()
-        
+        setupDoneButton()
     }
     
     var tableView: UITableView!
@@ -83,9 +83,14 @@ class CreateItemViewController: UIViewController {
         let toolbar = UIToolbar()
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneEditing))
+        done.tintColor = EKColor.Mooch.lightBlue
         toolbar.setItems([spacer, done], animated: false)
         toolbar.sizeToFit()
         self.toolbar = toolbar
+    }
+    
+    func setupDoneButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createItem))
     }
     
     @objc func changeContentMode(sender: UITapGestureRecognizer) {
@@ -104,9 +109,78 @@ class CreateItemViewController: UIViewController {
     @objc func doneEditing() {
         self.view.endEditing(true)
     }
+    @objc func createItem() {
+        print("Created Item")
+        guard let name = (view.viewWithTag(12) as? UITextField)?.text else { return }
+        guard name.isEmpty == false else {
+            showAlert(title: "Hmm...", desc: "Please enter a name for the item.")
+            return
+        }
+        self.item.name = name
+        
+        guard let category = (view.viewWithTag(22) as? UITextField)?.text else { return }
+        guard category.isEmpty == false else {
+            showAlert(title: "Hmm...", desc: "Please select an item from categories.")
+            return
+        }
+        self.item.category = category
+        
+        guard let subcategory = (view.viewWithTag(32) as? UITextField)?.text else { return }
+        guard subcategory.isEmpty == false else {
+            showAlert(title: "Hmm...", desc: "Please select an item from subcategories.")
+            return
+        }
+        self.item.subcategory = subcategory
+        
+        guard let mooching = (view.viewWithTag(42) as? Checkbox)?.isChecked else { return }
+        guard let renting = (view.viewWithTag(43) as? Checkbox)?.isChecked else { return }
+        guard let buying = (view.viewWithTag(44) as? Checkbox)?.isChecked else { return }
+        
+        self.item.availableFor = [.buy: buying, .mooch: mooching, .rent: renting]
+        
+        guard mooching == true || renting == true || buying == true else {
+            showAlert(title: "Hmm...", desc: "Please select availability for this item.")
+            return
+        }
+        
+        if renting == true {
+            guard let rentalFee = (view.viewWithTag(53) as? UITextField)?.text else {
+                showAlert(title: "Hmm...", desc: "Please enter a fee for renting this item.")
+                return
+            }
+            
+            guard let unit = (view.viewWithTag(55) as? UITextField)?.text else { return }
+            guard unit.isEmpty == false else {
+                showAlert(title: "Hmm...", desc: "Please select a rental fee interval.")
+                return
+            }
+            
+            item.rentalFee = Double(rentalFee) ?? 0.0
+            self.item.rentalInterval = unit
+        }
+        
+        if buying == true {
+            guard let price = (view.viewWithTag(63) as? UITextField)?.text else { return }
+            guard price.isEmpty == false else {
+                showAlert(title: "Hmm...", desc: "Please enter a price for this item.")
+                return
+            }
+            item.price = Double(price) ?? 0.0
+        }
+        
+        print(self.item)
+        
+    }
     
     let categoryData = ExploreViewModel.categoryData.data
     let units = ["Hour", "Day", "Week", "Month"]
+    
+    func showAlert(title: String, desc: String) {
+        let em = EntryManager(viewController: self)
+        em.showNotificationMessage(attributes: em.topToast, title: title, desc: desc,
+                                   textColor: UIColor.white, imageName: nil, backgroundColor: EKColor.Mooch.darkGray,
+                                   haptic: .error)
+    }
     
 }
 
@@ -136,21 +210,25 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             
             if self.item.images.count > 1 {
-                let layout = SnappingCollectionViewLayout()
-                layout.scrollDirection = .horizontal
-                imageGallaryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-                imageGallaryCollectionView?.backgroundColor = .clear
-                imageGallaryCollectionView?.decelerationRate = .fast
-                imageGallaryCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ItemImage")
-                imageGallaryCollectionView?.delegate = self
-                imageGallaryCollectionView?.dataSource = self
-                imageGallaryCollectionView?.backgroundColor = .clear
-                
-                cell.addSubview(imageGallaryCollectionView!)
-                cell.backgroundColor = .clear
-                
-                imageGallaryCollectionView!.snp.makeConstraints { (make) in
-                    make.edges.equalToSuperview()
+                if let cv = self.view.viewWithTag(01) as? UICollectionView {
+                    imageGallaryCollectionView = cv
+                } else {
+                    let layout = SnappingCollectionViewLayout()
+                    layout.scrollDirection = .horizontal
+                    imageGallaryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+                    imageGallaryCollectionView?.backgroundColor = .clear
+                    imageGallaryCollectionView?.decelerationRate = .fast
+                    imageGallaryCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ItemImage")
+                    imageGallaryCollectionView?.delegate = self
+                    imageGallaryCollectionView?.dataSource = self
+                    imageGallaryCollectionView?.backgroundColor = .clear
+                    imageGallaryCollectionView?.tag = 01
+                    
+                    cell.addSubview(imageGallaryCollectionView!)
+                    cell.backgroundColor = .clear
+                    imageGallaryCollectionView!.snp.makeConstraints { (make) in
+                        make.edges.equalToSuperview()
+                    }
                 }
                 
             } else {
@@ -176,33 +254,40 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
             cell.selectionStyle = .none
             
-            let header = UILabel(frame: .zero)
-            header.font = UIFont(name: "Avenir", size: 20)
-            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-            header.text = "ITEM"
-            
-            let textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
-            
-            cell.addSubview(header)
-            cell.addSubview(textfield)
-            
-            header.snp.makeConstraints { (make) in
-                make.left.top.right.equalToSuperview().inset(16)
+            var header: UILabel
+            if let label = self.view.viewWithTag(11) as? UILabel {
+                header = label
+            } else {
+                header = UILabel(frame: .zero)
+                header.font = UIFont(name: "Avenir", size: 20)
+                header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+                header.text = "ITEM"
+                header.tag = 11
+                cell.addSubview(header)
+                header.snp.makeConstraints { (make) in
+                    make.left.top.right.equalToSuperview().inset(16)
+                }
             }
             
-            textfield.snp.makeConstraints { (make) in
-                make.left.right.equalToSuperview().inset(16)
-                make.top.equalTo(header.snp.bottom).offset(8)
-                make.height.equalTo(35)
+            var textfield: UITextField
+            if let view = self.view.viewWithTag(12) as? UITextField {
+                textfield = view
+            } else {
+                textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
+                cell.addSubview(textfield)
+                textfield.snp.makeConstraints { (make) in
+                    make.left.right.equalToSuperview().inset(16)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                    make.height.equalTo(35)
+                }
+                textfield.borderStyle = .none
+                textfield.layer.borderColor = UIColor.lightGray.cgColor
+                textfield.layer.borderWidth = 1
+                textfield.layer.cornerRadius = textfield.frame.height / 2
+                textfield.setLeftPaddingPoints(16)
+                textfield.delegate = self
+                textfield.tag = 12
             }
-            
-            textfield.borderStyle = .none
-            textfield.layer.borderColor = UIColor.lightGray.cgColor
-            textfield.layer.borderWidth = 1
-            textfield.layer.cornerRadius = textfield.frame.height / 2
-            textfield.setLeftPaddingPoints(16)
-            textfield.delegate = self
-            textfield.tag = 21
             
             return cell
         } else if section == 2 {
@@ -210,33 +295,41 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
             cell.selectionStyle = .none
             
-            let header = UILabel(frame: .zero)
-            header.font = UIFont(name: "Avenir", size: 20)
-            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-            header.text = "CATEGORY"
-            
-            let textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
-            
-            cell.addSubview(header)
-            cell.addSubview(textfield)
-            
-            header.snp.makeConstraints { (make) in
-                make.left.top.right.equalToSuperview().inset(16)
+            let header: UILabel
+            if let label = self.view.viewWithTag(21) as? UILabel {
+                header = label
+            } else {
+                header = UILabel(frame: .zero)
+                header.font = UIFont(name: "Avenir", size: 20)
+                header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+                header.text = "CATEGORY"
+                header.tag = 21
+                cell.addSubview(header)
+                header.snp.makeConstraints { (make) in
+                    make.left.top.right.equalToSuperview().inset(16)
+                }
             }
             
-            textfield.snp.makeConstraints { (make) in
-                make.left.right.equalToSuperview().inset(16)
-                make.top.equalTo(header.snp.bottom).offset(8)
-                make.height.equalTo(35)
+            let textfield: UITextField
+            if let tf = self.view.viewWithTag(22) as? UITextField {
+                textfield = tf
+            } else {
+                textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
+                textfield.borderStyle = .none
+                textfield.layer.borderColor = UIColor.lightGray.cgColor
+                textfield.layer.borderWidth = 1
+                textfield.layer.cornerRadius = textfield.frame.height / 2
+                textfield.setLeftPaddingPoints(16)
+                textfield.delegate = self
+                textfield.tag = 22
+                cell.addSubview(textfield)
+                
+                textfield.snp.makeConstraints { (make) in
+                    make.left.right.equalToSuperview().inset(16)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                    make.height.equalTo(35)
+                }
             }
-            
-            textfield.borderStyle = .none
-            textfield.layer.borderColor = UIColor.lightGray.cgColor
-            textfield.layer.borderWidth = 1
-            textfield.layer.cornerRadius = textfield.frame.height / 2
-            textfield.setLeftPaddingPoints(16)
-            textfield.delegate = self
-            textfield.tag = 22
             
             return cell
         } else if section == 3 {
@@ -244,33 +337,41 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
             cell.selectionStyle = .none
             
-            let header = UILabel(frame: .zero)
-            header.font = UIFont(name: "Avenir", size: 20)
-            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-            header.text = "SUBCATEGORY"
-            
-            let textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
-            
-            cell.addSubview(header)
-            cell.addSubview(textfield)
-            
-            header.snp.makeConstraints { (make) in
-                make.left.top.right.equalToSuperview().inset(16)
+            let header: UILabel
+            if let lbl = self.view.viewWithTag(31) as? UILabel {
+                header = lbl
+            } else {
+                header = UILabel(frame: .zero)
+                header.font = UIFont(name: "Avenir", size: 20)
+                header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+                header.text = "SUBCATEGORY"
+                header.tag = 31
+                cell.addSubview(header)
+                header.snp.makeConstraints { (make) in
+                    make.left.top.right.equalToSuperview().inset(16)
+                }
             }
             
-            textfield.snp.makeConstraints { (make) in
-                make.left.right.equalToSuperview().inset(16)
-                make.top.equalTo(header.snp.bottom).offset(8)
-                make.height.equalTo(35)
+            var textfield: UITextField
+            if let tf = self.view.viewWithTag(32) as? UITextField {
+                textfield = tf
+            } else {
+                textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
+                textfield.borderStyle = .none
+                textfield.layer.borderColor = UIColor.lightGray.cgColor
+                textfield.layer.borderWidth = 1
+                textfield.layer.cornerRadius = textfield.frame.height / 2
+                textfield.setLeftPaddingPoints(16)
+                textfield.delegate = self
+                textfield.tag = 32
+                cell.addSubview(textfield)
+                
+                textfield.snp.makeConstraints { (make) in
+                    make.left.right.equalToSuperview().inset(16)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                    make.height.equalTo(35)
+                }
             }
-            
-            textfield.borderStyle = .none
-            textfield.layer.borderColor = UIColor.lightGray.cgColor
-            textfield.layer.borderWidth = 1
-            textfield.layer.cornerRadius = textfield.frame.height / 2
-            textfield.setLeftPaddingPoints(16)
-            textfield.delegate = self
-            textfield.tag = 23
             
             return cell
         } else if section == 4 {
@@ -278,56 +379,75 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
             cell.selectionStyle = .none
             
-            let header = UILabel(frame: .zero)
-            header.font = UIFont(name: "Avenir", size: 20)
-            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-            header.text = "AVAILABLE FOR"
-            cell.addSubview(header)
-            header.snp.makeConstraints { (make) in
-                make.left.top.right.equalToSuperview().inset(16)
+            var header: UILabel
+            if let lbl = self.view.viewWithTag(41) as? UILabel {
+                header = lbl
+            } else {
+                header = UILabel(frame: .zero)
+                header.font = UIFont(name: "Avenir", size: 20)
+                header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+                header.text = "AVAILABLE FOR"
+                header.tag = 41
+                cell.addSubview(header)
+                header.snp.makeConstraints { (make) in
+                    make.left.top.right.equalToSuperview().inset(16)
+                }
             }
             
             let w = cell.frame.width
             let width = (w - 32 - 16) / 3
             let height = CGFloat(50)
             
-            let mooching = Checkbox(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
-            mooching.setTitle(text: "Mooching")
-            mooching.delegate = self
-            
-            let renting = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
-            renting.setTitle(text: "Renting")
-            renting.delegate = self
-            
-            let buying = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
-            buying.setTitle(text: "Buying")
-            buying.delegate = self
-            
-            cell.addSubview(mooching)
-            cell.addSubview(renting)
-            cell.addSubview(buying)
-            
-            mooching.snp.makeConstraints { (make) in
-                make.left.equalToSuperview().inset(16)
-                make.top.equalTo(header.snp.bottom).offset(8)
-                make.width.equalTo(width)
-                make.height.equalTo(height)
+            var mooching: Checkbox
+            if let cb = view.viewWithTag(42) as? Checkbox {
+                mooching = cb
+            } else {
+                mooching = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
+                mooching.setTitle(text: "Mooching")
+                mooching.delegate = self
+                mooching.tag = 42
+                cell.addSubview(mooching)
+                mooching.snp.makeConstraints { (make) in
+                    make.left.equalToSuperview().inset(16)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                    make.width.equalTo(width)
+                    make.height.equalTo(height)
+                }
             }
             
-            renting.snp.makeConstraints { (make) in
-                make.left.equalTo(mooching.snp.right).offset(8)
-                make.top.equalTo(header.snp.bottom).offset(8)
-                make.width.equalTo(width)
-                make.height.equalTo(height)
+            var renting: Checkbox
+            if let cb = view.viewWithTag(43) as? Checkbox {
+                renting = cb
+            } else {
+                renting = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
+                renting.setTitle(text: "Renting")
+                renting.delegate = self
+                renting.tag = 43
+                cell.addSubview(renting)
+                renting.snp.makeConstraints { (make) in
+                    make.left.equalTo(mooching.snp.right).offset(8)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                    make.width.equalTo(width)
+                    make.height.equalTo(height)
+                }
             }
             
-            buying.snp.makeConstraints { (make) in
-                make.left.equalTo(renting.snp.right).offset(8)
-                make.top.equalTo(header.snp.bottom).offset(8)
-                make.width.equalTo(width)
-                make.height.equalTo(height)
+            var buying: Checkbox
+            if let cb = view.viewWithTag(44) as? Checkbox {
+                buying = cb
+            } else {
+                buying = Checkbox(frame: CGRect(x: 0, y: 0, width: width, height: height))
+                buying.setTitle(text: "Buying")
+                buying.delegate = self
+                buying.tag = 44
+                cell.addSubview(buying)
+                buying.snp.makeConstraints { (make) in
+                    make.left.equalTo(renting.snp.right).offset(8)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                    make.width.equalTo(width)
+                    make.height.equalTo(height)
+                }
             }
-            
             
             return cell
         } else if section == 5 {
@@ -335,74 +455,97 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
             cell.selectionStyle = .none
             
-            let header = UILabel(frame: .zero)
-            header.font = UIFont(name: "Avenir", size: 20)
-            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-            header.text = "RENTAL FEE"
-            cell.addSubview(header)
-            
-            let lbl2 = UILabel(frame: .zero)
-            cell.addSubview(lbl2)
-            lbl2.font = UIFont(name: "Avenir", size: 20)
-            lbl2.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-            lbl2.text = "$"
-            lbl2.sizeToFit()
-            
-            let priceTF = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
-            cell.addSubview(priceTF)
-            priceTF.borderStyle = .none
-            priceTF.layer.borderColor = UIColor.lightGray.cgColor
-            priceTF.layer.borderWidth = 1
-            priceTF.layer.cornerRadius = 5
-            priceTF.setLeftPaddingPoints(8)
-            priceTF.placeholder = "0.00"
-            priceTF.tag = 25
-            
-            priceTF.delegate = self
-            
-            let lbl3 = UILabel(frame: .zero)
-            cell.addSubview(lbl3)
-            lbl3.font = UIFont(name: "Avenir", size: 20)
-            lbl3.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-            lbl3.text = "per"
-            lbl2.sizeToFit()
-            
-            let unit = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
-            cell.addSubview(unit)
-            unit.borderStyle = .none
-            unit.layer.borderColor = UIColor.lightGray.cgColor
-            unit.layer.borderWidth = 1
-            unit.layer.cornerRadius = unit.frame.height / 2
-            unit.setLeftPaddingPoints(16)
-            unit.delegate = self
-            unit.tag = 26
-            
-            header.snp.makeConstraints { (make) in
-                make.left.top.right.equalToSuperview().inset(16)
+            var header: UILabel
+            if let lbl = view.viewWithTag(51) as? UILabel {
+                header = lbl
+            } else {
+                header = UILabel(frame: .zero)
+                header.font = UIFont(name: "Avenir", size: 20)
+                header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+                header.text = "RENTAL FEE"
+                header.tag = 51
+                cell.addSubview(header)
+                header.snp.makeConstraints { (make) in
+                    make.left.top.right.equalToSuperview().inset(16)
+                }
             }
             
-            lbl2.snp.makeConstraints { (make) in
-                make.left.equalToSuperview().offset(16)
-                make.top.equalTo(header.snp.bottom).offset(8)
+            var lbl2: UILabel
+            if let lbl = view.viewWithTag(52) as? UILabel {
+                lbl2 = lbl
+            } else {
+                lbl2 = UILabel(frame: .zero)
+                lbl2.font = UIFont(name: "Avenir", size: 20)
+                lbl2.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+                lbl2.text = "$"
+                lbl2.tag = 52
+                lbl2.sizeToFit()
+                cell.addSubview(lbl2)
+                lbl2.snp.makeConstraints { (make) in
+                    make.left.equalToSuperview().offset(16)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                }
             }
             
-            priceTF.snp.makeConstraints { (make) in
-                make.left.equalTo(lbl2.snp.right).offset(8)
-                make.centerY.equalTo(lbl2.snp.centerY)
-                make.width.equalTo(100)
-                make.height.equalTo(35)
+            var priceTF: UITextField
+            if let tf = view.viewWithTag(53) as? UITextField {
+                priceTF = tf
+            } else {
+                priceTF = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
+                cell.addSubview(priceTF)
+                priceTF.borderStyle = .none
+                priceTF.layer.borderColor = UIColor.lightGray.cgColor
+                priceTF.layer.borderWidth = 1
+                priceTF.layer.cornerRadius = 5
+                priceTF.setLeftPaddingPoints(8)
+                priceTF.placeholder = "0.00"
+                priceTF.tag = 53
+                priceTF.keyboardType = .decimalPad
+                priceTF.delegate = self
+                priceTF.snp.makeConstraints { (make) in
+                    make.left.equalTo(lbl2.snp.right).offset(8)
+                    make.centerY.equalTo(lbl2.snp.centerY)
+                    make.width.equalTo(100)
+                    make.height.equalTo(35)
+                }
             }
             
-            lbl3.snp.makeConstraints { (make) in
-                make.left.equalTo(priceTF.snp.right).offset(8)
-                make.centerY.equalTo(priceTF.snp.centerY)
+            var lbl3: UILabel
+            if let lbl = view.viewWithTag(54) as? UILabel {
+                lbl3 = lbl
+            } else {
+                lbl3 = UILabel(frame: .zero)
+                cell.addSubview(lbl3)
+                lbl3.font = UIFont(name: "Avenir", size: 20)
+                lbl3.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+                lbl3.text = "per"
+                lbl3.tag = 54
+                lbl3.sizeToFit()
+                lbl3.snp.makeConstraints { (make) in
+                    make.left.equalTo(priceTF.snp.right).offset(8)
+                    make.centerY.equalTo(priceTF.snp.centerY)
+                }
             }
             
-            unit.snp.makeConstraints { (make) in
-                make.left.equalTo(lbl3.snp.right).offset(8)
-                make.centerY.equalTo(lbl3.snp.centerY)
-                make.width.equalTo(120)
-                make.height.equalTo(35)
+            var unit: UITextField
+            if let tf = view.viewWithTag(55) as? UITextField {
+                unit = tf
+            } else {
+                unit = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
+                cell.addSubview(unit)
+                unit.borderStyle = .none
+                unit.layer.borderColor = UIColor.lightGray.cgColor
+                unit.layer.borderWidth = 1
+                unit.layer.cornerRadius = unit.frame.height / 2
+                unit.setLeftPaddingPoints(16)
+                unit.delegate = self
+                unit.tag = 55
+                unit.snp.makeConstraints { (make) in
+                    make.left.equalTo(lbl3.snp.right).offset(8)
+                    make.centerY.equalTo(lbl3.snp.centerY)
+                    make.width.equalTo(120)
+                    make.height.equalTo(35)
+                }
             }
             
             return cell
@@ -411,44 +554,59 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellDescriptions[indexPath.section], for: indexPath)
             cell.selectionStyle = .none
             
-            let header = UILabel(frame: .zero)
-            header.font = UIFont(name: "Avenir", size: 20)
-            header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-            header.text = "SALE PRICE"
-            cell.addSubview(header)
-            
-            let lbl2 = UILabel(frame: .zero)
-            cell.addSubview(lbl2)
-            lbl2.font = UIFont(name: "Avenir", size: 20)
-            lbl2.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-            lbl2.text = "$"
-            lbl2.sizeToFit()
-            
-            let priceTF = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
-            cell.addSubview(priceTF)
-            priceTF.borderStyle = .none
-            priceTF.layer.borderColor = UIColor.lightGray.cgColor
-            priceTF.layer.borderWidth = 1
-            priceTF.layer.cornerRadius = 5
-            priceTF.setLeftPaddingPoints(8)
-            priceTF.placeholder = "0.00"
-            priceTF.tag = 27
-            priceTF.delegate = self
-            
-            header.snp.makeConstraints { (make) in
-                make.left.top.right.equalToSuperview().inset(16)
+            var header: UILabel
+            if let lbl = view.viewWithTag(61) as? UILabel {
+                header = lbl
+            } else {
+                header = UILabel(frame: .zero)
+                header.font = UIFont(name: "Avenir", size: 20)
+                header.textColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+                header.text = "SALE PRICE"
+                header.tag = 61
+                cell.addSubview(header)
+                header.snp.makeConstraints { (make) in
+                    make.left.top.right.equalToSuperview().inset(16)
+                }
             }
             
-            lbl2.snp.makeConstraints { (make) in
-                make.left.equalToSuperview().offset(16)
-                make.top.equalTo(header.snp.bottom).offset(8)
+            var lbl2: UILabel
+            if let lbl = view.viewWithTag(62) as? UILabel {
+                lbl2 = lbl
+            } else {
+                lbl2 = UILabel(frame: .zero)
+                cell.addSubview(lbl2)
+                lbl2.font = UIFont(name: "Avenir", size: 20)
+                lbl2.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+                lbl2.text = "$"
+                lbl2.sizeToFit()
+                lbl2.tag = 62
+                lbl2.snp.makeConstraints { (make) in
+                    make.left.equalToSuperview().offset(16)
+                    make.top.equalTo(header.snp.bottom).offset(8)
+                }
             }
             
-            priceTF.snp.makeConstraints { (make) in
-                make.left.equalTo(lbl2.snp.right).offset(8)
-                make.centerY.equalTo(lbl2.snp.centerY)
-                make.width.equalTo(100)
-                make.height.equalTo(35)
+            var priceTF: UITextField
+            if let tf = self.view.viewWithTag(63) as? UITextField {
+                priceTF = tf
+            } else {
+                priceTF = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
+                cell.addSubview(priceTF)
+                priceTF.placeholder = "0.00"
+                priceTF.borderStyle = .none
+                priceTF.layer.borderColor = UIColor.lightGray.cgColor
+                priceTF.layer.borderWidth = 1
+                priceTF.layer.cornerRadius = 5
+                priceTF.setLeftPaddingPoints(8)
+                priceTF.tag = 63
+                priceTF.keyboardType = .decimalPad
+                priceTF.delegate = self
+                priceTF.snp.makeConstraints { (make) in
+                    make.left.equalTo(lbl2.snp.right).offset(8)
+                    make.centerY.equalTo(lbl2.snp.centerY)
+                    make.width.equalTo(100)
+                    make.height.equalTo(35)
+                }
             }
             
             
@@ -553,14 +711,14 @@ extension CreateItemViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField.tag == 21 {
+        if textField.tag == 12 {
             //
         } else if textField.tag == 22 {
             dataSource = Array(categoryData.keys)
             pickerView.reloadAllComponents()
             textField.inputView = pickerView
             textField.inputAccessoryView = toolbar
-        } else if textField.tag == 23 {
+        } else if textField.tag == 32 {
             if let tf = self.view.viewWithTag(22) as? UITextField {
                 if tf.text!.count > 0 {
                     let category = tf.text!
@@ -571,15 +729,19 @@ extension CreateItemViewController: UITextFieldDelegate {
                         textField.inputAccessoryView = toolbar
                     }
                 } else {
+                    showAlert(title: "Oops!", desc: "Please select an item from the 'Category' first!")
                     return false
                 }
             }
-        } else if textField.tag == 24 {
-            //
-        } else if textField.tag == 25 {
-            
-        } else if textField.tag == 26 {
-            
+        } else if textField.tag == 53 {
+            textField.inputAccessoryView = toolbar
+        } else if textField.tag == 55 {
+            dataSource = self.units
+            pickerView.reloadAllComponents()
+            textField.inputView = pickerView
+            textField.inputAccessoryView = toolbar
+        } else if textField.tag == 63 {
+            textField.inputAccessoryView = toolbar
         }
         
         return true
@@ -588,6 +750,7 @@ extension CreateItemViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
     }
+    
 }
 
 extension CreateItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {

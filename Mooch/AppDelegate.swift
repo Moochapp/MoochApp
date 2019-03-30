@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     
     // MARK: - Developer
     var devMode = false
-    var shouldStartOnTabbar = true
+    var shouldStartOnTabbar = false
 
     // MARK: - Application
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

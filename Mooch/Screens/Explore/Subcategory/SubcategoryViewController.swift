@@ -67,6 +67,7 @@ class SubcategoryViewController: UIViewController {
     private func configureSegmentedControl() -> UISegmentedControl {
         let items = ["Mooch", "Rent", "Buy", "All"]
         let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.tintColor = EKColor.Mooch.lightBlue
         segmentedControl.addTarget(self, action: #selector(shouldUpdateFilter(sender:)), for: .valueChanged)
         return segmentedControl
     }

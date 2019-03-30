@@ -12,9 +12,13 @@ class Item {
     var id: String
     var name: String
     var category: String
+    var subcategory: String
     var owner: String
     var images: [UIImage] = []
     var availableFor: [Availability: Bool] = [.buy: false, .rent: false, .mooch: false]
+    var rentalFee: Double?
+    var rentalInterval: String?
+    var price: Double?
 //    var status: String
 //    var likes: Int
     
@@ -26,6 +30,7 @@ class Item {
         self.id = ""
         self.name = ""
         self.category = ""
+        self.subcategory = ""
         self.owner = ""
         self.images = []
     }
@@ -35,6 +40,7 @@ class Item {
             self.id = itemData["ID"] as! String
             self.name = itemData["Name"] as! String
             self.category = itemData["Category"] as! String
+            self.subcategory = itemData["Subcategory"] as! String
             self.owner = itemData["Owner"] as! String
         } else {
             fatalError("Missing data. Should have complete item data.")
