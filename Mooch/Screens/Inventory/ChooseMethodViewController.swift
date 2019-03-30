@@ -49,7 +49,7 @@ class ChooseMethodViewController: UIViewController, Storyboarded {
     
     func proceedWithPhotos(images: [UIImage]) {
         print("proceeding with \(images.count) photos")
-        coordinator.showItemDetail(with: images)
+        coordinator.createItem(with: images)
     }
     
 }

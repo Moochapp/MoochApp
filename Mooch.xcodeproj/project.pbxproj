@@ -37,6 +37,9 @@
 		732B4B12224EA159009E8FF5 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		732B4B15224EB403009E8FF5 /* ImagePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */; };
 		732B4B19224EC8A6009E8FF5 /* Photographer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B18224EC8A5009E8FF5 /* Photographer.swift */; };
+		732B4B1B224ECD5D009E8FF5 /* CreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B1A224ECD5D009E8FF5 /* CreateItemViewController.swift */; };
+		732B4B1D224EDDF3009E8FF5 /* Checkbox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732B4B1C224EDDF3009E8FF5 /* Checkbox.xib */; };
+		732B4B1F224EDE0A009E8FF5 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B1E224EDE0A009E8FF5 /* Checkbox.swift */; };
 		73318A0A2249CD8A00BB1443 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */; };
 		733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */; };
 		733B9E61224C2F0A00D702DA /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */; };
@@ -132,6 +135,9 @@
 		732B4B0F224E9ED3009E8FF5 /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = "<group>"; };
 		732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewer.swift; sourceTree = "<group>"; };
 		732B4B18224EC8A5009E8FF5 /* Photographer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photographer.swift; sourceTree = "<group>"; };
+		732B4B1A224ECD5D009E8FF5 /* CreateItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemViewController.swift; sourceTree = "<group>"; };
+		732B4B1C224EDDF3009E8FF5 /* Checkbox.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Checkbox.xib; sourceTree = "<group>"; };
+		732B4B1E224EDE0A009E8FF5 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
 		733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +304,7 @@
 			children = (
 				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
 				732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */,
+				732B4B1A224ECD5D009E8FF5 /* CreateItemViewController.swift */,
 				733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */,
 			);
 			path = Inventory;
@@ -377,6 +384,8 @@
 				732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */,
 				732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */,
 				732B4B18224EC8A5009E8FF5 /* Photographer.swift */,
+				732B4B1C224EDDF3009E8FF5 /* Checkbox.xib */,
+				732B4B1E224EDE0A009E8FF5 /* Checkbox.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -592,6 +601,7 @@
 				73417F87222DC171005A6714 /* MainApp.storyboard in Resources */,
 				730CE8DF21FA498000350C40 /* LaunchScreen.storyboard in Resources */,
 				730CE8DC21FA498000350C40 /* Assets.xcassets in Resources */,
+				732B4B1D224EDDF3009E8FF5 /* Checkbox.xib in Resources */,
 				73CEBEA822010D96007B8620 /* Search.storyboard in Resources */,
 				73CEBEA022010D5C007B8620 /* Onboarding.storyboard in Resources */,
 			);
@@ -760,6 +770,7 @@
 				73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */,
 				73026A5722021BAE00CC767E /* SignUpViewController.swift in Sources */,
 				735E28BE21FCD7310035AD82 /* Firebase.swift in Sources */,
+				732B4B1B224ECD5D009E8FF5 /* CreateItemViewController.swift in Sources */,
 				737C87D221FFDA79006B5F18 /* MainCoordinator.swift in Sources */,
 				73782E1E220B846C00145B92 /* PhoneNumberExtension.swift in Sources */,
 				731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */,
@@ -787,6 +798,7 @@
 				737927DD223304B900E33A35 /* LoginViewController.swift in Sources */,
 				731B07452210CB0F0079E45A /* Font.swift in Sources */,
 				73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */,
+				732B4B1F224EDE0A009E8FF5 /* Checkbox.swift in Sources */,
 				73026A5F2202209700CC767E /* SearchViewController.swift in Sources */,
 				731B07412210CB0F0079E45A /* UIColor+Utils.swift in Sources */,
 				731465BB2206341D0092FBE0 /* Moocher.swift in Sources */,

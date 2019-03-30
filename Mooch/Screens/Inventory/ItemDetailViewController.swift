@@ -185,7 +185,7 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemImage", for: indexPath)
             
-            cell.backgroundColor = .orange
+            cell.backgroundColor = .clear
             let imageView = UIImageView(image: self.item.images[indexPath.row])
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true

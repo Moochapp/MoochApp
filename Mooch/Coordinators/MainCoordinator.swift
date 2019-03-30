@@ -118,6 +118,18 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func createItem(with item: Item) {
+        
+    }
+    
+    func createItem(with images: [UIImage]) {
+        let vc = CreateItemViewController()
+        vc.item = Item()
+        vc.item.images = images
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func showItemDetail(with images: [UIImage]) {
         let vc = ItemDetailViewController()
         vc.item = Item()

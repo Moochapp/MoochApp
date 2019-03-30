@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>396</string>
+	<string>457</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -37,6 +37,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Take photos of your items, add profile pictures and more!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Connect with your friends around you!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Add photos of your items!</string>
 	<key>UILaunchStoryboardName</key>
