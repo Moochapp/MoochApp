@@ -66,22 +66,25 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
             
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-            cell.addSubview(collectionView)
-            collectionView.backgroundColor = .clear
-            if let layout = collectionView.collectionViewLayout as?  UICollectionViewFlowLayout {
-                layout.scrollDirection = .horizontal
+            var collectionView: UICollectionView
+            if let cv = view.viewWithTag(1) as? UICollectionView {
+                collectionView = cv
+            } else {
+                collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+                cell.addSubview(collectionView)
+                collectionView.tag = 1
+                collectionView.backgroundColor = .clear
+                if let layout = collectionView.collectionViewLayout as?  UICollectionViewFlowLayout {
+                    layout.scrollDirection = .horizontal
+                }
+                collectionView.register(FeaturedCollectionViewCell.self, forCellWithReuseIdentifier: "featuredCell")
+                collectionView.dataSource = viewModel.featuredData
+                collectionView.delegate = viewModel.featuredData
+                collectionView.snp.makeConstraints { (make) in
+                    make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+                }
+                cell.sizeToFit()
             }
-            collectionView.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
-            }
-            
-            collectionView.register(FeaturedCollectionViewCell.self, forCellWithReuseIdentifier: "featuredCell")
-            
-            collectionView.dataSource = viewModel.featuredData
-            collectionView.delegate = viewModel.featuredData
-            
-            cell.sizeToFit()
             
             return cell
         } else if indexPath.section == 1 {
@@ -89,15 +92,21 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
             
-            let image = UIImageView(image: viewModel.images[indexPath.row])
-            cell.addSubview(image)
-            image.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
-                make.height.equalTo(150)
+            var image: UIImageView
+            if let img = view.viewWithTag(11) as? UIImageView {
+                image = img
+            } else {
+                image = UIImageView(image: viewModel.images[indexPath.row])
+                image.tag = 11
+                cell.addSubview(image)
+                image.snp.makeConstraints { (make) in
+                    make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+                    make.height.equalTo(150)
+                }
+                image.contentMode = .scaleAspectFill
+                image.layer.cornerRadius = 5
+                image.clipsToBounds = true
             }
-            image.contentMode = .scaleAspectFill
-            image.layer.cornerRadius = 5
-            image.clipsToBounds = true
             
             return cell
         } else {
@@ -105,19 +114,25 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
             
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-            cell.addSubview(collectionView)
-            
-            collectionView.backgroundColor = .clear
-            collectionView.snp.makeConstraints { (make) in
-                make.top.bottom.equalToSuperview().inset(8)
-                make.left.right.equalToSuperview().inset(8)
+            var collectionView: UICollectionView
+            if let cv = view.viewWithTag(21) as? UICollectionView {
+                collectionView = cv
+            } else {
+                let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+                collectionView.tag = 21
+                cell.addSubview(collectionView)
+                
+                collectionView.backgroundColor = .clear
+                collectionView.snp.makeConstraints { (make) in
+                    make.top.bottom.equalToSuperview().inset(8)
+                    make.left.right.equalToSuperview().inset(8)
+                }
+                collectionView.isScrollEnabled = false
+                collectionView.register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: "categoriesCell")
+                
+                collectionView.dataSource = viewModel.categoryData
+                collectionView.delegate = viewModel.categoryData
             }
-            collectionView.isScrollEnabled = false
-            collectionView.register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: "categoriesCell")
-            
-            collectionView.dataSource = viewModel.categoryData
-            collectionView.delegate = viewModel.categoryData
 
             return cell
         }
