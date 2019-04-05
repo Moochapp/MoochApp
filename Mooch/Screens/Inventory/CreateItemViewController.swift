@@ -27,6 +27,7 @@ class CreateItemViewController: UIViewController {
         setupPickerView()
         setupToolbar()
         setupDoneButton()
+        
     }
     
     var tableView: UITableView!
@@ -168,7 +169,18 @@ class CreateItemViewController: UIViewController {
             item.price = Double(price) ?? 0.0
         }
         
+        self.item.owner = Session.moocher.id
         print(self.item)
+        self.item.upload(progress: { (index, progress) in
+            print(index, progress)
+        }) { (error) in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            print("DONE!!!")
+        }
+//        coordinator.navigationController.popToRootViewController(animated: true)
         
     }
     

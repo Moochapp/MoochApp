@@ -11,6 +11,7 @@ pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Messaging'
 pod 'Firebase/Firestore'
+pod 'Firebase/Storage'
 pod 'FirebaseUI/Phone'
 pod 'FirebaseUI/Auth'
 
@@ -22,6 +23,7 @@ pod 'FCAlertView'
 pod 'SwiftyOnboard'
 pod 'LDLogger'
 pod 'IHKeyboardAvoiding'
+pod 'lottie-ios'
 
 
   target 'MoochTests' do

@@ -20,6 +20,9 @@ PODS:
   - Firebase/Messaging (5.19.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (= 3.4.0)
+  - Firebase/Storage (5.19.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.1.1)
   - FirebaseAnalytics (5.8.0):
     - FirebaseCore (~> 5.4)
     - FirebaseInstanceID (~> 3.8)
@@ -66,6 +69,10 @@ PODS:
     - GoogleUtilities/Reachability (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
     - Protobuf (~> 3.1)
+  - FirebaseStorage (3.1.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseUI/Auth (6.2.1):
     - Firebase/Auth (~> 5.0)
     - GoogleUtilities/UserDefaults
@@ -115,6 +122,7 @@ PODS:
   - IHKeyboardAvoiding (4.6)
   - LDLogger (1.0.0)
   - leveldb-library (1.20)
+  - lottie-ios (3.0.3)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -144,10 +152,12 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Messaging
+  - Firebase/Storage
   - FirebaseUI/Auth
   - FirebaseUI/Phone
   - IHKeyboardAvoiding
   - LDLogger
+  - lottie-ios
   - PhoneNumberKit
   - RealmSwift
   - SnapKit
@@ -167,6 +177,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseInstanceID
     - FirebaseMessaging
+    - FirebaseStorage
     - FirebaseUI
     - GoogleAppMeasurement
     - GoogleUtilities
@@ -176,6 +187,7 @@ SPEC REPOS:
     - IHKeyboardAvoiding
     - LDLogger
     - leveldb-library
+    - lottie-ios
     - nanopb
     - PhoneNumberKit
     - Protobuf
@@ -198,6 +210,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 1531eefe02da66be6860966ac4e2cdac635706e2
   FirebaseInstanceID: cf488df2f4b79782f0e430b04a0e17c0aa7979b2
   FirebaseMessaging: 2d53d08d752fbe63ce0820428d70be5ab87c11fb
+  FirebaseStorage: 6162ef4322502b818d9de0ec552f5226d283de43
   FirebaseUI: c9e227a7d44e2e422a461cb3f4ead8dc5c7326e6
   GoogleAppMeasurement: 1624046ab1bcc5e170061a56ef5679000b079c8e
   GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
@@ -207,6 +220,7 @@ SPEC CHECKSUMS:
   IHKeyboardAvoiding: 2a664fdb5f964359fa7ec8fc5c9aebb447583ff8
   LDLogger: 3d5cf7174b32eb73e14c17888d209252fd672489
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   PhoneNumberKit: 167ee1f0bbb6efce7c62559e620eae745595532f
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
@@ -217,6 +231,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 53409114a9216f93991b88e3817260bed0148811
   SwiftyOnboard: de60e90c2af23dd61b01ec0c6a8d0be3370f857b
 
-PODFILE CHECKSUM: 289680ef59cfffb47fc1874bdde31fd7203eccf3
+PODFILE CHECKSUM: 699f7d17bf66c47d2b34ea0cda52cb67727423a1
 
 COCOAPODS: 1.5.3

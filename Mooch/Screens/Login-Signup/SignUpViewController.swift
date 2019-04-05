@@ -219,7 +219,6 @@ class SignUpViewController: UIViewController, Storyboarded {
             completion(false, nil)
             return
         }
-        guard phoneNumberField.isValidNumber else { return }
         
         guard let password = password.text else { return }
         guard password.isEmpty == false else {

@@ -28,9 +28,13 @@ class SubcategoryViewController: UIViewController {
         guard let subcategories = ExploreViewModel.categoryData.data[category] else {
             fatalError("An array must be returned from the the category data object to initialize the page")
         }
-        return subcategories
+        
+        var sorted = subcategories.sorted()
+        
+        return sorted
     }()
-    var collectionViewDataSources: [SubcategoryCollectionViewDelegate] = []
+    var collectionViewDataSources: [String: SubcategoryCollectionViewDelegate] = [:]
+    var dataSourceForCollectionViews: [String: [Item]] = [:]
     
     // MARK: - Outlets
     var tableView: UITableView = {
@@ -46,6 +50,14 @@ class SubcategoryViewController: UIViewController {
     }
     
     // MARK: - Setup
+    
+    func downloadItems(test: String, completion: ([Item])->()) {
+        // Item.getResults(for: self.category) { (results) in {
+        //                                        results = ["subcategory": [Item]]
+        //     self.dataSourceForCollectionViews = results
+        // }
+//        #error("Start planning the item Implimentation phase") 
+    }
     func setupTable() {
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -92,44 +104,58 @@ extension SubcategoryViewController: UITableViewDataSource, UITableViewDelegate 
             let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
             cell.backgroundColor = .clear
             
-            // Segmented Control
-            let segmentedControl = configureSegmentedControl()
-            cell.addSubview(segmentedControl)
-            segmentedControl.snp.makeConstraints { (make) in
-                make.left.right.bottom.top.equalToSuperview().inset(8)
+            var segmentedControl: UISegmentedControl
+            if let view = cell.viewWithTag(111) as? UISegmentedControl {
+                segmentedControl = view
+            } else {
+                // Segmented Control
+                segmentedControl = configureSegmentedControl()
+                cell.addSubview(segmentedControl)
+                segmentedControl.snp.makeConstraints { (make) in
+                    make.left.right.bottom.top.equalToSuperview().inset(8)
+                }
+                segmentedControl.selectedSegmentIndex = 3
+                segmentedControl.tag = 111
             }
-            segmentedControl.selectedSegmentIndex = 3
             
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
-            cell.backgroundColor = .clear
+            let title = self.subcategories[indexPath.row]
+            let tag = Int("12\(indexPath.row + 1)")!
             
-            // CollectionView Setup
-            let flow = UICollectionViewFlowLayout()
-            flow.scrollDirection = .horizontal
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flow)
-            collectionView.backgroundColor = .clear
-            cell.addSubview(collectionView)
-            collectionView.snp.makeConstraints { (make) in
-                make.left.right.top.bottom.equalToSuperview().inset(8)
+            var cell: UITableViewCell
+            if let c = tableView.viewWithTag(tag) as? UITableViewCell {
+                cell = c
+                return cell
+            } else {
+                // CollectionView Setup
+                cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+                cell.backgroundColor = .clear
+                cell.tag = tag
+                
+                let flow = UICollectionViewFlowLayout()
+                flow.scrollDirection = .horizontal
+                
+                let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flow)
+                collectionView.backgroundColor = .clear
+                cell.addSubview(collectionView)
+                collectionView.snp.makeConstraints { (make) in
+                    make.left.right.top.bottom.equalToSuperview().inset(8)
+                }
+                let random = Int.random(in: 0...11)
+                let img = ExploreViewModel.categoryData.demoImages[random]
+                let delegate = SubcategoryCollectionViewDelegate(subcategory: title, subcategoryImage: img,
+                                                                 items: ["testing", "testing", "testing 234"])
+                collectionViewDataSources[title] = delegate
+                
+                collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "subcategoryCell")
+                collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
+                collectionView.delegate = delegate
+                collectionView.dataSource = delegate
+                collectionView.reloadData()
+                
+                return cell
             }
-            
-            let random = Int.random(in: 0...11)
-            let img = ExploreViewModel.categoryData.demoImages[random]
-            
-            let delegate = SubcategoryCollectionViewDelegate(subcategory: self.subcategories[indexPath.row],
-                                                             subcategoryImage: img,
-                                                             items: ["testing", "testing", "testing 234"])
-            collectionViewDataSources.append(delegate)
-            
-            collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "subcategoryCell")
-            collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
-            collectionView.delegate = collectionViewDataSources[indexPath.row]
-            collectionView.dataSource = collectionViewDataSources[indexPath.row]
-            collectionView.reloadData()
-            
-            return cell
         }
     }
     

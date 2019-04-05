@@ -93,11 +93,12 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = .clear
             
             var image: UIImageView
-            if let img = view.viewWithTag(11) as? UIImageView {
+            var tag = "11\(indexPath.row + 1)"
+            if let img = view.viewWithTag(Int(tag)!) as? UIImageView {
                 image = img
             } else {
                 image = UIImageView(image: viewModel.images[indexPath.row])
-                image.tag = 11
+                image.tag = Int(tag)!
                 cell.addSubview(image)
                 image.snp.makeConstraints { (make) in
                     make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
