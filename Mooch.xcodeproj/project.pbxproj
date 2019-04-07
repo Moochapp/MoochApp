@@ -71,6 +71,7 @@
 		73CEBEA422010D85007B8620 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73CEBEA322010D85007B8620 /* Profile.storyboard */; };
 		73CEBEA622010D8D007B8620 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73CEBEA522010D8D007B8620 /* Social.storyboard */; };
 		73CEBEA822010D96007B8620 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73CEBEA722010D96007B8620 /* Search.storyboard */; };
+		73E5A4322257EF6D002093F4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E5A4312257EF6D002093F4 /* LoadingView.swift */; };
 		73F3F9B8224FF1AF00CCE4F6 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; };
 		73F3F9B9224FF1AF00CCE4F6 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCFD5C221F7F6900C350AC /* UIViewControllerExtension.swift */; };
@@ -188,6 +189,7 @@
 		73CEBEA322010D85007B8620 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		73CEBEA522010D8D007B8620 /* Social.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
 		73CEBEA722010D96007B8620 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		73E5A4312257EF6D002093F4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		73F3F987224FF0CA00CCE4F6 /* selectedImageGallery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedImageGallery@3x.png"; sourceTree = "<group>"; };
 		73F3F988224FF0CA00CCE4F6 /* focusIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "focusIcon@3x.png"; sourceTree = "<group>"; };
 		73F3F989224FF0CA00CCE4F6 /* ON@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ON@3x.png"; sourceTree = "<group>"; };
@@ -435,7 +437,7 @@
 				732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */,
 				732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */,
 				732B4B18224EC8A5009E8FF5 /* Photographer.swift */,
-				738DA2892256EBE7006AE796 /* Loading.xib */,
+				73E5A4332257EF73002093F4 /* Loading View */,
 				73B33FB32251910600452698 /* Profile Picture */,
 				73B33FB0225190BF00452698 /* Checkbox */,
 			);
@@ -566,6 +568,15 @@
 				73026A5E2202209700CC767E /* SearchViewController.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		73E5A4332257EF73002093F4 /* Loading View */ = {
+			isa = PBXGroup;
+			children = (
+				738DA2892256EBE7006AE796 /* Loading.xib */,
+				73E5A4312257EF6D002093F4 /* LoadingView.swift */,
+			);
+			path = "Loading View";
 			sourceTree = "<group>";
 		};
 		73F3F972224FF0C900CCE4F6 /* ImagePicker */ = {
@@ -1009,6 +1020,7 @@
 				731B07412210CB0F0079E45A /* UIColor+Utils.swift in Sources */,
 				731465BB2206341D0092FBE0 /* Moocher.swift in Sources */,
 				73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */,
+				73E5A4322257EF6D002093F4 /* LoadingView.swift in Sources */,
 				73026A512202108000CC767E /* LandingViewModel.swift in Sources */,
 				731B07382210CAAB0079E45A /* EntryManager.swift in Sources */,
 				737C87D421FFDA9E006B5F18 /* Coordinator.swift in Sources */,

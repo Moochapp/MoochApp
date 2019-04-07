@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 class Item {
     var id: String
+    var timestamp: TimeInterval
     var name: String
     var category: String
     var subcategory: String
@@ -35,6 +36,7 @@ class Item {
     
     public init() {
         self.id = ""
+        self.timestamp = Date().timeIntervalSince1970
         self.name = ""
         self.category = ""
         self.subcategory = ""
@@ -45,26 +47,35 @@ class Item {
     public convenience init(document: DocumentSnapshot) {
         self.init()
         if let itemData = document.data() {
+            print(itemData)
             self.id = itemData["ID"] as! String
+            self.timestamp = itemData["Timestamp"] as? Double ?? 0.0
             self.name = itemData["Name"] as! String
             self.category = itemData["Category"] as! String
             self.subcategory = itemData["Subcategory"] as! String
             self.owner = itemData["Owner"] as! String
-            self.id = itemData["ID"] as! String
-            self.name = itemData["Name"] as! String
-            self.category = itemData["Category"] as! String
-            self.subcategory = itemData["Subcategory"] as! String
-            self.owner = itemData["Owner"] as! String
-            self.imageRefs = itemData["Images"] as! [String]
-            self.rentalFee = itemData["RentalFee"] as! Double
-            self.price = itemData["Price"] as! Double
+            self.imageRefs = itemData["ImageRefs"] as? [String] ?? []
+            self.rentalFee = itemData["RentalFee"] as? Double
+            self.rentalInterval = itemData["RentalInterval"] as? String
+            self.price = itemData["Price"] as? Double
             self.likes = itemData["Likes"] as! Int
             
             if let status = Status(rawValue: itemData["Status"] as! String) {
                 self.status =  status
             }
             
-            self.rentalInterval = itemData["RentalInterval"] as! String
+            if let availableForSet = itemData["AvailableFor"] as? [String: Bool] {
+                for item in availableForSet {
+                    if item.key == Availability.buy.rawValue {
+                        self.availableFor[.buy] = item.value
+                    } else if item.key == Availability.mooch.rawValue {
+                        self.availableFor[.mooch] = item.value
+                    } else if item.key == Availability.rent.rawValue {
+                        self.availableFor[.rent] = item.value
+                    }
+                }
+            }
+            
         } else {
             fatalError("Missing data. Should have complete item data.")
         }

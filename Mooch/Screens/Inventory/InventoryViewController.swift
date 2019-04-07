@@ -15,6 +15,8 @@ class InventoryViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Inventory"
+        
         setupView()
         setupCollectionView()
         
@@ -24,7 +26,7 @@ class InventoryViewController: UIViewController, Storyboarded {
         coordinator.navigationController.isNavigationBarHidden = true
     }
     
-    func setupView() {
+    private func setupView() {
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem(sender:)))
         self.navigationItem.rightBarButtonItem = add
@@ -33,7 +35,7 @@ class InventoryViewController: UIViewController, Storyboarded {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
@@ -50,6 +52,10 @@ class InventoryViewController: UIViewController, Storyboarded {
 //            make.top.bottom.equalToSuperview().inset(16)
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges).inset(8)
         }
+        
+    }
+    
+    private func getInventoryData() {
         
     }
     

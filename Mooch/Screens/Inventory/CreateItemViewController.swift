@@ -170,17 +170,20 @@ class CreateItemViewController: UIViewController {
         }
         
         self.item.owner = Session.moocher.id
-        print(self.item)
-        self.item.upload(progress: { (index, progress) in
-            print(index, progress)
-        }) { (error) in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
+        self.showProgressIndicator(completion: { (view) in
+            self.item.upload(progress: { (index, progress) in
+                print(index, progress)
+            }) { (error) in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    view.stopAnimating()
+                    return
+                }
+                view.stopAnimating()
+                self.finishCreate()
+                print("DONE!!!")
             }
-            print("DONE!!!")
-        }
-//        coordinator.navigationController.popToRootViewController(animated: true)
+        })
         
     }
     
@@ -193,7 +196,20 @@ class CreateItemViewController: UIViewController {
                                    textColor: UIColor.white, imageName: nil, backgroundColor: EKColor.Mooch.darkGray,
                                    haptic: .error)
     }
-    
+    func showProgressIndicator(completion: (UIActivityIndicatorView)->()) {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = EKColor.Mooch.lightBlue
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        completion(indicator)
+    }
+    func finishCreate() {
+        coordinator.navigationController.popToRootViewController(animated: true)
+    }
 }
 
 extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {

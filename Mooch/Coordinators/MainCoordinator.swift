@@ -48,22 +48,10 @@ class MainCoordinator: Coordinator {
     }
     
     func mainApp() {
+        
+        Session.updateDataForCurrentUser()
+        
         let tabbar = UITabBarController()
-        
-        let nav1 = UINavigationController()
-        nav1.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-        nav1.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        let search = SearchViewController.instantiate(from: "Search")
-        search.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        nav1.viewControllers = [search]
-        
-        let nav2 = UINavigationController()
-        nav2.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-        nav2.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        let mooch = SocialViewController.instantiate(from: "Social")
-        mooch.coordinator = self
-        mooch.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
-        nav2.viewControllers = [mooch]
         
         let nav3 = UINavigationController()
         nav3.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
@@ -93,12 +81,12 @@ class MainCoordinator: Coordinator {
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
         
-        setupNavs(nav: nav2)
         setupNavs(nav: nav3)
         setupNavs(nav: nav4)
         setupNavs(nav: nav5)
         
         tabbar.viewControllers = [nav5, nav4, nav3]
+        tabbar.selectedIndex = 1
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(tabbar, animated: true)
     }
@@ -124,6 +112,7 @@ class MainCoordinator: Coordinator {
     
     func createItem(with images: [UIImage]) {
         let vc = CreateItemViewController()
+        vc.coordinator = self
         vc.item = Item()
         vc.item.images = images
         navigationController.isNavigationBarHidden = false
@@ -132,6 +121,7 @@ class MainCoordinator: Coordinator {
     
     func showItemDetail(with images: [UIImage]) {
         let vc = ItemDetailViewController()
+        vc.coordinator = self
         vc.item = Item()
         vc.item.images = images
         navigationController.isNavigationBarHidden = false
