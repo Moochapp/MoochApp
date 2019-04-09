@@ -11,6 +11,8 @@ import UIKit
 class InventoryViewController: UIViewController, Storyboarded {
 
     var coordinator: MainCoordinator!
+    var inventoryItems: [Item] = []
+    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +21,11 @@ class InventoryViewController: UIViewController, Storyboarded {
         
         setupView()
         setupCollectionView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         coordinator.navigationController.isNavigationBarHidden = true
+        getInventoryData()
     }
     
     private func setupView() {
@@ -39,6 +41,7 @@ class InventoryViewController: UIViewController, Storyboarded {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        self.collectionView = collectionView
         
         // Create colelctionview, set delegates, register cells
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ItemCell")
@@ -56,7 +59,22 @@ class InventoryViewController: UIViewController, Storyboarded {
     }
     
     private func getInventoryData() {
-        
+        Session.updateDataForCurrentUser { (items) in
+            DispatchQueue.main.async {
+                self.inventoryItems = items
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    private func loading(completion: (UIActivityIndicatorView)->()) {
+        let view = UIActivityIndicatorView(style: .whiteLarge)
+        view.center = self.view.center
+        view.color = EKColor.Mooch.lightBlue
+        view.hidesWhenStopped = true
+        view.startAnimating()
+        self.view.addSubview(view)
+        completion(view)
     }
     
     @objc func addItem(sender: UIBarButtonItem) {
@@ -66,7 +84,7 @@ class InventoryViewController: UIViewController, Storyboarded {
 
 extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 19
+        return inventoryItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,6 +92,25 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 5
+        
+        let item = inventoryItems[indexPath.row]
+        
+        if item.numberOfImages > 0 {
+            item.downloadImages { (done) in
+                DispatchQueue.main.async {
+                    if let img = item.images.first {
+                        let imgView = UIImageView(image: img)
+                        imgView.layer.cornerRadius = 5
+                        imgView.clipsToBounds = true
+                        imgView.contentMode = .scaleAspectFill
+                        cell.addSubview(imgView)
+                        imgView.snp.makeConstraints { (make) in
+                            make.edges.equalToSuperview()
+                        }
+                    }
+                }
+            }
+        }
         
         return cell
     }
@@ -93,6 +130,12 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        let item = self.inventoryItems[indexPath.row]
+        coordinator.showItemDetail(for: item)
     }
     
 }

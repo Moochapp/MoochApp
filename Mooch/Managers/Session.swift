@@ -8,13 +8,15 @@
 
 import Foundation
 import FirebaseAuth
+import LDLogger
 
 class Session {
 
     static var moocher: Moocher!
     static var currentDeviceToken: String?
     
-    static func updateDataForCurrentUser() {
+    typealias ItemCompletion = ([Item])->()
+    static func updateDataForCurrentUser(completion: ItemCompletion?) {
         DispatchQueue.global(qos: .userInitiated).async {
             let query = FirebaseManager.items.whereField("Owner", isEqualTo: moocher.id)
             query.getDocuments(completion: { (snap, error) in
@@ -22,14 +24,15 @@ class Session {
                     print(error?.localizedDescription)
                     return
                 }
-                
                 guard let snap = snap else { return }
                 
                 var items: [Item] = []
                 for item in snap.documents {
                     items.append(Item(document: item))
                 }
+                
                 moocher.items = items
+                completion?(items)
             })
         }
     }

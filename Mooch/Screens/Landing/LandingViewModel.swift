@@ -20,11 +20,11 @@ class LandingViewModel: NSObject {
     }
     
     // MARK: - Public
-    public func initializeApp() {
+    public func initializeApp(user exists: (Bool)->()) {
         if shouldNavigateToMain() {
-            coordinator.mainApp()
+            exists(true)
         } else {
-            coordinator.onboarding()
+            exists(false)
         }
     }
     

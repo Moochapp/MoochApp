@@ -39,11 +39,11 @@
 		732B4B1F224EDE0A009E8FF5 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B1E224EDE0A009E8FF5 /* Checkbox.swift */; };
 		73318A0A2249CD8A00BB1443 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */; };
 		733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */; };
-		733B9E61224C2F0A00D702DA /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */; };
 		733DFBE22229D65200A16995 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733DFBE12229D65100A16995 /* ExploreViewController.swift */; };
 		73417F87222DC171005A6714 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73417F86222DC171005A6714 /* MainApp.storyboard */; };
 		73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73417F89222DD55B005A6714 /* ExploreViewModel.swift */; };
 		734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C6E51220BF0F1000DC1F4 /* BasicInformationViewController.swift */; };
+		735CEA06225D37DD00C06ECF /* ItemDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735CEA05225D37DD00C06ECF /* ItemDetailTableViewController.swift */; };
 		735E28BD21FCD7310035AD82 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E28B021FCD7310035AD82 /* Session.swift */; };
 		735E28BE21FCD7310035AD82 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E28B121FCD7310035AD82 /* Firebase.swift */; };
 		735E28C021FCD7310035AD82 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735E28B921FCD7310035AD82 /* Constants.swift */; };
@@ -62,7 +62,6 @@
 		73B2DDDD222F5DDE0011E03F /* FeaturedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2DDDC222F5DDE0011E03F /* FeaturedCollectionViewCell.swift */; };
 		73B33FB22251910100452698 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B33FB12251910100452698 /* ProfilePicture.swift */; };
 		73B33FB52251911E00452698 /* ProfilePicture.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33FB42251911E00452698 /* ProfilePicture.xib */; };
-		73B33FB72251975800452698 /* ItemDetailDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B33FB62251975800452698 /* ItemDetailDataSourceDelegate.swift */; };
 		73BE4249220CD6F700909F82 /* MainCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BE4248220CD6F700909F82 /* MainCoordinatorTests.swift */; };
 		73CA25A02241466E006A8087 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA259F2241466E006A8087 /* InventoryViewController.swift */; };
 		73CEBE992200DE04007B8620 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CEBE982200DE04007B8620 /* LandingViewController.swift */; };
@@ -157,11 +156,11 @@
 		732B4B1E224EDE0A009E8FF5 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
-		733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		733DFBE12229D65100A16995 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		73417F86222DC171005A6714 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		73417F89222DD55B005A6714 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		734C6E51220BF0F1000DC1F4 /* BasicInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInformationViewController.swift; sourceTree = "<group>"; };
+		735CEA05225D37DD00C06ECF /* ItemDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailTableViewController.swift; sourceTree = "<group>"; };
 		735E28B021FCD7310035AD82 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		735E28B121FCD7310035AD82 /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		735E28B921FCD7310035AD82 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -180,7 +179,6 @@
 		73B2DDDC222F5DDE0011E03F /* FeaturedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionViewCell.swift; sourceTree = "<group>"; };
 		73B33FB12251910100452698 /* ProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		73B33FB42251911E00452698 /* ProfilePicture.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePicture.xib; sourceTree = "<group>"; };
-		73B33FB62251975800452698 /* ItemDetailDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailDataSourceDelegate.swift; sourceTree = "<group>"; };
 		73BE4248220CD6F700909F82 /* MainCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTests.swift; sourceTree = "<group>"; };
 		73CA259F2241466E006A8087 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
 		73CEBE982200DE04007B8620 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +303,7 @@
 				73026A552202184E00CC767E /* Coordinators */,
 				735E28B321FCD7310035AD82 /* Storyboards */,
 				735E28B221FCD7310035AD82 /* Screens */,
+				735CEA05225D37DD00C06ECF /* ItemDetailTableViewController.swift */,
 				735E28B521FCD7310035AD82 /* CustomClasses */,
 				735E28B621FCD7310035AD82 /* Models */,
 				735E28BB21FCD7310035AD82 /* Extensions */,
@@ -357,8 +356,6 @@
 				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
 				732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */,
 				732B4B1A224ECD5D009E8FF5 /* CreateItemViewController.swift */,
-				733B9E60224C2F0A00D702DA /* ItemDetailViewController.swift */,
-				73B33FB62251975800452698 /* ItemDetailDataSourceDelegate.swift */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -985,6 +982,7 @@
 				73FCFD5F221F80B000C350AC /* GetStartedViewController.swift in Sources */,
 				73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */,
 				73026A5722021BAE00CC767E /* SignUpViewController.swift in Sources */,
+				735CEA06225D37DD00C06ECF /* ItemDetailTableViewController.swift in Sources */,
 				735E28BE21FCD7310035AD82 /* Firebase.swift in Sources */,
 				732B4B1B224ECD5D009E8FF5 /* CreateItemViewController.swift in Sources */,
 				737C87D221FFDA79006B5F18 /* MainCoordinator.swift in Sources */,
@@ -992,7 +990,6 @@
 				731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */,
 				731B074C221240A40079E45A /* Item.swift in Sources */,
 				732B4B19224EC8A6009E8FF5 /* Photographer.swift in Sources */,
-				733B9E61224C2F0A00D702DA /* ItemDetailViewController.swift in Sources */,
 				73782E24220BB89900145B92 /* AlertManager.swift in Sources */,
 				734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */,
 				73026A5922021DC100CC767E /* MoochCoordinator.swift in Sources */,
@@ -1001,7 +998,6 @@
 				731B07462210CB0F0079E45A /* UIView+Nib.swift in Sources */,
 				731B07442210CB0F0079E45A /* Object+ClassName.swift in Sources */,
 				73026A5B2202206B00CC767E /* ProfileViewController.swift in Sources */,
-				73B33FB72251975800452698 /* ItemDetailDataSourceDelegate.swift in Sources */,
 				733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */,
 				731B07432210CB0F0079E45A /* UIScreen+Utils.swift in Sources */,
 				735E28BD21FCD7310035AD82 /* Session.swift in Sources */,

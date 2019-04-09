@@ -49,8 +49,6 @@ class MainCoordinator: Coordinator {
     
     func mainApp() {
         
-        Session.updateDataForCurrentUser()
-        
         let tabbar = UITabBarController()
         
         let nav3 = UINavigationController()
@@ -120,7 +118,7 @@ class MainCoordinator: Coordinator {
     }
     
     func showItemDetail(with images: [UIImage]) {
-        let vc = ItemDetailViewController()
+        let vc = ItemDetailTableViewController()
         vc.coordinator = self
         vc.item = Item()
         vc.item.images = images
@@ -129,8 +127,11 @@ class MainCoordinator: Coordinator {
     }
     
     func showItemDetail(for item: Item) {
-        let vc = ItemDetailViewController()
+        let vc = ItemDetailTableViewController()
+        vc.coordinator = self
         vc.item = item
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func finish() {

@@ -24,7 +24,13 @@ class LandingViewController: UIViewController, Storyboarded {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.initializeApp()
+        self.viewModel.initializeApp { (exists) in
+            if exists {
+                self.coordinator.mainApp()
+            } else {
+                coordinator.onboarding()
+            }
+        }
     }
 
 }
