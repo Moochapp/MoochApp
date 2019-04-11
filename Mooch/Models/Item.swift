@@ -11,7 +11,7 @@ import LDLogger
 
 class Item {
     var id: String
-    var timestamp: TimeInterval
+    var timestamp: Timestamp
     var name: String
     var category: String
     var subcategory: String
@@ -37,7 +37,7 @@ class Item {
     
     public init() {
         self.id = ""
-        self.timestamp = Date().timeIntervalSince1970
+        self.timestamp = Date().getFirebaseDate()
         self.name = ""
         self.category = ""
         self.subcategory = ""
@@ -49,7 +49,7 @@ class Item {
         self.init()
         if let itemData = document.data() {
             self.id = itemData["ID"] as! String
-            self.timestamp = itemData["Timestamp"] as? Double ?? 0.0
+            self.timestamp = itemData["Timestamp"] as! Timestamp
             self.name = itemData["Name"] as! String
             self.category = itemData["Category"] as! String
             self.subcategory = itemData["Subcategory"] as! String
@@ -121,19 +121,21 @@ class Item {
         DispatchQueue.global(qos: .userInitiated).async {
             let group = DispatchGroup()
             for index in 0...self.numberOfImages - 1 {
-//                Log.d("Entering group for download at \(index)")
                 group.enter()
                 let name = "img-\(index).png"
                 self.download(ID: self.id, name: name, completion: { (image) in
                     self.images.append(image)
-//                    Log.d("Added image. Total count: \(self.images.count)")
                     group.leave()
-//                    Log.d("Left group for download at \(index)")
+                    DispatchQueue.global(qos: .utility).async {
+                        do {
+                            try Session.shared.cache.addToCache(image: image, itemID: self.id, imageID: "img-\(index)")
+                        } catch {
+                            Log.e(error)
+                        }
+                    }
                 })
             }
-//            Log.d("Waiting for downloadImages.")
             group.wait()
-//            Log.d("Done waiting for downloadImages")
             completion(true)
         }
         
@@ -190,7 +192,8 @@ class Item {
                                     "RentalInterval": self.rentalInterval as Any,
                                     "Price": self.price as Any,
                                     "Status": self.status.rawValue,
-                                    "Likes": self.likes]
+                                    "Likes": self.likes,
+                                    "Timestamp": self.timestamp]
         
         return data
     }

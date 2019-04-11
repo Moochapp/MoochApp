@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 return
             }
             
-            Session.currentDeviceToken = result.token
+            Session.shared.currentDeviceToken = result.token
             Auth.auth().setAPNSToken(deviceToken, type: .prod)
         }
     }

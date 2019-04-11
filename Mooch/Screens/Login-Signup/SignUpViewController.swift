@@ -153,7 +153,7 @@ class SignUpViewController: UIViewController, Storyboarded {
                                         }
                                         
                                         let moocher = Moocher(user: user)
-                                        Session.moocher = moocher
+                                        Session.shared.moocher = moocher
                                         moocher.syncToLocal(result: { (error) in
                                             guard error == nil else {
                                                 self.showError(title: "Hmm...", description: error!.localizedDescription)

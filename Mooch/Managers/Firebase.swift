@@ -17,4 +17,5 @@ class FirebaseManager {
     
     public static var users = db.collection("Users")
     public static var items = db.collection("Items")
+       
 }

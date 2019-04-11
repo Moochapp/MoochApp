@@ -169,7 +169,7 @@ class CreateItemViewController: UIViewController {
             item.price = Double(price) ?? 0.0
         }
         
-        self.item.owner = Session.moocher.id
+        self.item.owner = Session.shared.moocher.id
         self.showProgressIndicator(completion: { (view) in
             self.item.upload(progress: { (index, progress) in
                 print(index, progress)
@@ -196,17 +196,7 @@ class CreateItemViewController: UIViewController {
                                    textColor: UIColor.white, imageName: nil, backgroundColor: EKColor.Mooch.darkGray,
                                    haptic: .error)
     }
-    func showProgressIndicator(completion: (UIActivityIndicatorView)->()) {
-        let indicator = UIActivityIndicatorView(style: .whiteLarge)
-        indicator.color = EKColor.Mooch.lightBlue
-        indicator.startAnimating()
-        indicator.hidesWhenStopped = true
-        self.view.addSubview(indicator)
-        indicator.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
-        completion(indicator)
-    }
+    
     func finishCreate() {
         coordinator.navigationController.popToRootViewController(animated: true)
     }
@@ -249,7 +239,6 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
                     imageGallaryCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ItemImage")
                     imageGallaryCollectionView?.delegate = self
                     imageGallaryCollectionView?.dataSource = self
-                    imageGallaryCollectionView?.backgroundColor = .clear
                     imageGallaryCollectionView?.tag = 01
                     
                     cell.addSubview(imageGallaryCollectionView!)

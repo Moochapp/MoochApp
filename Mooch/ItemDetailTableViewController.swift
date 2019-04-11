@@ -29,24 +29,37 @@ class ItemDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTableView()
         createCollections()
         createCollectionDelegates()
       
     }
     
     // MARK: - Setup
+    private func setupTableView() {
+        for i in 0...3 {
+            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell-\(i)")
+        }
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
     private func createCollections() {
-        let layout1 = UICollectionViewFlowLayout()
+        let layout1 = SnappingCollectionViewLayout()
         layout1.scrollDirection = .horizontal
         IDImageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout1)
+        IDImageCollectionView.decelerationRate = .fast
+        IDImageCollectionView.backgroundColor = .clear
         
         let layout2 = UICollectionViewFlowLayout()
         layout2.scrollDirection = .horizontal
         IDRelatedCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout2)
+        IDRelatedCollectionView.decelerationRate = .fast
+        IDRelatedCollectionView.backgroundColor = .clear
         
         let layout3 = UICollectionViewFlowLayout()
         layout3.scrollDirection = .vertical
         IDOwnerItemsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout3)
+        IDOwnerItemsCollectionView.decelerationRate = .fast
+        IDOwnerItemsCollectionView.backgroundColor = .clear
     }
     private func createCollectionDelegates() {
         IDImageCollectionViewDelegate = ItemDetailImageCollectionViewDelegate(images: item.images, collectionView: IDImageCollectionView)
@@ -102,6 +115,7 @@ class ItemDetailTableViewController: UITableViewController {
                 }
             })
         }
+        
     }
     
     // MARK: - Table view data source
@@ -117,13 +131,58 @@ class ItemDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        let id = "cell-\(indexPath.section)"
+        
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+            
+            cell.addSubview(IDImageCollectionView)
+            IDImageCollectionView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+                cell.sizeToFit()
+            }
+            
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+            cell.backgroundColor = EKColor.Mooch.darkGray
+            
+            
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+            cell.backgroundColor = EKColor.Mooch.darkGray
+            
+            
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+            cell.backgroundColor = EKColor.Mooch.darkGray
+            
+            
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.backgroundColor = EKColor.Mooch.darkGray
+            return cell
+        }
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 200
+        case 1:
+            return 150
+        case 2:
+            return 100
+        case 3:
+            return 250
+        default:
+            return 0
+        }
+    }
 }
 
 class ItemDetailImageCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -133,6 +192,7 @@ class ItemDetailImageCollectionViewDelegate: NSObject, UICollectionViewDelegate,
     
     init(images: [UIImage], collectionView: UICollectionView) {
         self.images = images
+        Log.d(ItemDetailImageCollectionViewDelegate.identifier, images.count)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailImageCollectionViewDelegate.identifier)
     }
     
@@ -146,6 +206,14 @@ class ItemDetailImageCollectionViewDelegate: NSObject, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemDetailImageCollectionViewDelegate.identifier, for: indexPath)
+        
+        let imageView = UIImageView(image: images[indexPath.row])
+        imageView.contentMode = .scaleAspectFill
+        cell.addSubview(imageView)
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
         
         return cell
     }

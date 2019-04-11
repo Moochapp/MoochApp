@@ -38,7 +38,7 @@ class BasicInformationViewController: UIViewController, Storyboarded {
             }
             
             let moocher = Moocher(user: self.newUser)
-            Session.moocher = moocher
+            Session.shared.moocher = moocher
             
             self.coordinator.mainApp()
         }

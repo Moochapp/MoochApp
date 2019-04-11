@@ -42,7 +42,7 @@ class LandingViewModel: NSObject {
     private func checkForUser() -> Bool {
         if Auth.auth().currentUser != nil {
             let moocher = Moocher(user: Auth.auth().currentUser!)
-            Session.moocher = moocher
+            Session.shared.moocher = moocher
             return true
         } else {
             return false

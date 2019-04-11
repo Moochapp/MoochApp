@@ -32,5 +32,17 @@ extension UIViewController {
         view.removeFromSuperview()
         removeFromParent()
     }
+ 
+    func showProgressIndicator(completion: (UIActivityIndicatorView)->()) {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = EKColor.Mooch.lightBlue
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        completion(indicator)
+    }
     
 }

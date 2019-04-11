@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LDLogger
 
 class InventoryViewController: UIViewController, Storyboarded {
 
@@ -26,6 +27,21 @@ class InventoryViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         coordinator.navigationController.isNavigationBarHidden = true
         getInventoryData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if loadedImageCounter == self.inventoryItems.count {
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
+            self.indicator = indicator
+            indicator.color = EKColor.Mooch.lightBlue
+            indicator.startAnimating()
+            indicator.hidesWhenStopped = true
+            self.view.addSubview(indicator)
+            self.view.bringSubviewToFront(indicator)
+            indicator.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+            }
+        }
     }
     
     private func setupView() {
@@ -58,23 +74,15 @@ class InventoryViewController: UIViewController, Storyboarded {
         
     }
     
+    private var loadedImageCounter = 0
+    private var indicator: UIActivityIndicatorView?
     private func getInventoryData() {
-        Session.updateDataForCurrentUser { (items) in
+        Session.shared.updateDataForCurrentUser { (items) in
             DispatchQueue.main.async {
                 self.inventoryItems = items
                 self.collectionView.reloadData()
             }
         }
-    }
-    
-    private func loading(completion: (UIActivityIndicatorView)->()) {
-        let view = UIActivityIndicatorView(style: .whiteLarge)
-        view.center = self.view.center
-        view.color = EKColor.Mooch.lightBlue
-        view.hidesWhenStopped = true
-        view.startAnimating()
-        self.view.addSubview(view)
-        completion(view)
     }
     
     @objc func addItem(sender: UIBarButtonItem) {
@@ -94,18 +102,37 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.layer.cornerRadius = 5
         
         let item = inventoryItems[indexPath.row]
+        let imgView = UIImageView()
+        imgView.layer.cornerRadius = 5
+        imgView.clipsToBounds = true
+        imgView.contentMode = .scaleAspectFill
         
         if item.numberOfImages > 0 {
-            item.downloadImages { (done) in
+            if item.images.count > 0 {
                 DispatchQueue.main.async {
                     if let img = item.images.first {
-                        let imgView = UIImageView(image: img)
-                        imgView.layer.cornerRadius = 5
-                        imgView.clipsToBounds = true
-                        imgView.contentMode = .scaleAspectFill
+                        imgView.image = img
                         cell.addSubview(imgView)
                         imgView.snp.makeConstraints { (make) in
                             make.edges.equalToSuperview()
+                        }
+                        self.loadedImageCounter += 1
+                        Log.d("Loaded Images: \(self.loadedImageCounter) of \(self.inventoryItems.count)")
+                        self.collectionViewCell(didFinishLoadingAt: indexPath)
+                    }
+                }
+            } else {
+                item.downloadImages { (done) in
+                    DispatchQueue.main.async {
+                        if let img = item.images.first {
+                            imgView.image = img
+                            cell.addSubview(imgView)
+                            imgView.snp.makeConstraints { (make) in
+                                make.edges.equalToSuperview()
+                            }
+                            self.loadedImageCounter += 1
+                            Log.d("Loaded Images: \(self.loadedImageCounter) of \(self.inventoryItems.count)")
+                            self.collectionViewCell(didFinishLoadingAt: indexPath)
                         }
                     }
                 }
@@ -136,6 +163,15 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         print(indexPath.row)
         let item = self.inventoryItems[indexPath.row]
         coordinator.showItemDetail(for: item)
+    }
+    
+    func collectionViewCell(didFinishLoadingAt indexPath: IndexPath) {
+        if self.loadedImageCounter == inventoryItems.count {
+            guard let view = self.indicator else { return }
+            DispatchQueue.main.async {
+                view.stopAnimating()
+            }
+        }
     }
     
 }
