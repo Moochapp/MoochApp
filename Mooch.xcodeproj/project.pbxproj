@@ -74,6 +74,9 @@
 		73D35FA7225EA07900C8F00C /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D35FA6225EA07900C8F00C /* DataExtension.swift */; };
 		73D35FA9225EA08B00C8F00C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D35FA8225EA08B00C8F00C /* StringExtension.swift */; };
 		73D35FAB225EA09F00C8F00C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D35FAA225EA09F00C8F00C /* ImageExtension.swift */; };
+		73D35FAD225ED3D300C8F00C /* ItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D35FAC225ED3D300C8F00C /* ItemDetailsView.swift */; };
+		73D35FAF225ED3E600C8F00C /* ItemDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D35FAE225ED3E600C8F00C /* ItemDetailsView.xib */; };
+		73D35FB222613D6300C8F00C /* DeveloperPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D35FB122613D6300C8F00C /* DeveloperPanel.swift */; };
 		73E5A4322257EF6D002093F4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E5A4312257EF6D002093F4 /* LoadingView.swift */; };
 		73F3F9B8224FF1AF00CCE4F6 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; };
 		73F3F9B9224FF1AF00CCE4F6 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -195,6 +198,9 @@
 		73D35FA6225EA07900C8F00C /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		73D35FA8225EA08B00C8F00C /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		73D35FAA225EA09F00C8F00C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		73D35FAC225ED3D300C8F00C /* ItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsView.swift; sourceTree = "<group>"; };
+		73D35FAE225ED3E600C8F00C /* ItemDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemDetailsView.xib; sourceTree = "<group>"; };
+		73D35FB122613D6300C8F00C /* DeveloperPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperPanel.swift; sourceTree = "<group>"; };
 		73E5A4312257EF6D002093F4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		73F3F987224FF0CA00CCE4F6 /* selectedImageGallery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedImageGallery@3x.png"; sourceTree = "<group>"; };
 		73F3F988224FF0CA00CCE4F6 /* focusIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "focusIcon@3x.png"; sourceTree = "<group>"; };
@@ -307,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				731465BD220646CA0092FBE0 /* Mooch.entitlements */,
+				73D35FB122613D6300C8F00C /* DeveloperPanel.swift */,
 				730CE8D421FA497F00350C40 /* AppDelegate.swift */,
 				73026A552202184E00CC767E /* Coordinators */,
 				735E28B321FCD7310035AD82 /* Storyboards */,
@@ -442,6 +449,7 @@
 				732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */,
 				732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */,
 				732B4B18224EC8A5009E8FF5 /* Photographer.swift */,
+				73D35FB0225ED3ED00C8F00C /* Item Details View */,
 				73E5A4332257EF73002093F4 /* Loading View */,
 				73B33FB32251910600452698 /* Profile Picture */,
 				73B33FB0225190BF00452698 /* Checkbox */,
@@ -577,6 +585,15 @@
 				73026A5E2202209700CC767E /* SearchViewController.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		73D35FB0225ED3ED00C8F00C /* Item Details View */ = {
+			isa = PBXGroup;
+			children = (
+				73D35FAC225ED3D300C8F00C /* ItemDetailsView.swift */,
+				73D35FAE225ED3E600C8F00C /* ItemDetailsView.xib */,
+			);
+			path = "Item Details View";
 			sourceTree = "<group>";
 		};
 		73E5A4332257EF73002093F4 /* Loading View */ = {
@@ -820,6 +837,7 @@
 				73CEBEA222010D6D007B8620 /* LoginSignup.storyboard in Resources */,
 				738DA28A2256EBE7006AE796 /* Loading.xib in Resources */,
 				737C87D021FFDA3E006B5F18 /* Landing.storyboard in Resources */,
+				73D35FAF225ED3E600C8F00C /* ItemDetailsView.xib in Resources */,
 				731465BF220649540092FBE0 /* GoogleService-Info.plist in Resources */,
 				73417F87222DC171005A6714 /* MainApp.storyboard in Resources */,
 				730CE8DF21FA498000350C40 /* LaunchScreen.storyboard in Resources */,
@@ -1024,9 +1042,11 @@
 				737927DD223304B900E33A35 /* LoginViewController.swift in Sources */,
 				731B07452210CB0F0079E45A /* Font.swift in Sources */,
 				73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */,
+				73D35FAD225ED3D300C8F00C /* ItemDetailsView.swift in Sources */,
 				732B4B1F224EDE0A009E8FF5 /* Checkbox.swift in Sources */,
 				73026A5F2202209700CC767E /* SearchViewController.swift in Sources */,
 				731B07412210CB0F0079E45A /* UIColor+Utils.swift in Sources */,
+				73D35FB222613D6300C8F00C /* DeveloperPanel.swift in Sources */,
 				731465BB2206341D0092FBE0 /* Moocher.swift in Sources */,
 				73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */,
 				73E5A4322257EF6D002093F4 /* LoadingView.swift in Sources */,

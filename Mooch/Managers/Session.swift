@@ -66,7 +66,7 @@ class SessionCache {
             throw ImageCacheError.noImageForID
         }
         
-        let data = Data(nsdata)
+        let data = nsdata as Data
         
         guard let image = data.getImage() else {
             throw ImageCacheError.failedImageFromData

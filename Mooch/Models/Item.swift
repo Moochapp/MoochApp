@@ -123,15 +123,17 @@ class Item {
             for index in 0...self.numberOfImages - 1 {
                 group.enter()
                 let name = "img-\(index).png"
+                Log.i("Starting download for:", self.id, name)
                 self.download(ID: self.id, name: name, completion: { (image) in
                     self.images.append(image)
-                    group.leave()
-                    DispatchQueue.global(qos: .utility).async {
-                        do {
-                            try Session.shared.cache.addToCache(image: image, itemID: self.id, imageID: "img-\(index)")
-                        } catch {
-                            Log.e(error)
-                        }
+                    Log.d("Downloaded image:", self.id, name)
+                    do {
+                        Log.d("Attempting cache for", self.id, name)
+                        try Session.shared.cache.addToCache(image: image, itemID: self.id, imageID: "img-\(index)")
+                        group.leave()
+                    } catch {
+                        Log.e(error)
+                        group.leave()
                     }
                 })
             }
@@ -143,8 +145,9 @@ class Item {
     
     private func download(ID: String, name: String, completion: @escaping (UIImage)->()) {
         
-        FirebaseManager.storage.reference().child("Items").child(ID).child(name).getData(maxSize: 1024 * 1024 * 10) { (data, error) in
+        FirebaseManager.storage.reference().child("Items").child(ID).child(name).getData(maxSize: 1024 * 1024 * 20) { (data, error) in
             guard error == nil else {
+                Log.e(error!.localizedDescription)
                 return
             }
             guard let data = data else {
@@ -196,5 +199,20 @@ class Item {
                                     "Timestamp": self.timestamp]
         
         return data
+    }
+    
+    public func checkForImagesInCache() -> [UIImage] {
+        var images: [UIImage] = []
+        for i in 0...numberOfImages - 1 {
+            let name  = "img-\(i)"
+            do {
+                let image = try Session.shared.cache.getImageFrom(itemID: id, imageID: name)
+                images.append(image)
+            } catch {
+                Log.e(error)
+                return images
+            }
+        }
+        return images
     }
 }

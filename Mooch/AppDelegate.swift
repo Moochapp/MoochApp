@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     var mainCoordinator: MainCoordinator?
     
     // MARK: - Developer
-    var devMode = false
-    var shouldStartOnTabbar = false
+    var devMode = DeveloperPanel.shared.devMode
+    var shouldStartOnTabbar = DeveloperPanel.shared.shouldStartOnTabbar
 
     // MARK: - Application
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import LDLogger
 
 enum MoocherError: Error {
     case MoocherDataDocumentDoesNotExist(String)
@@ -89,4 +90,32 @@ class Moocher: FirebaseUser {
         }
     }
     
+}
+
+extension Moocher {
+    static func nameFrom(id: String, completion: @escaping (String?)->()) {
+        FirebaseManager.users.document(id).getDocument { (snapshot, error) in
+            guard error == nil else {
+                Log.e(error?.localizedDescription)
+                completion(nil)
+                return
+            }
+            
+            guard let snap = snapshot else {
+                completion(nil)
+                return
+            }
+            guard let data = snap.data() else {
+                completion(nil)
+                return
+            }
+            
+            let name = data["FullName"] as! String
+            completion(name)
+        }
+    }
+    
+    private static func getDataFromMap(document: DocumentSnapshot) {
+        
+    }
 }

@@ -24,24 +24,18 @@ class InventoryViewController: UIViewController, Storyboarded {
         setupCollectionView()
     }
     
+    var firstLoad = true
     override func viewWillAppear(_ animated: Bool) {
         coordinator.navigationController.isNavigationBarHidden = true
-        getInventoryData()
+        if firstLoad {
+            setupIndicator()
+            getInventoryData()
+            firstLoad = false
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if loadedImageCounter == self.inventoryItems.count {
-            let indicator = UIActivityIndicatorView(style: .whiteLarge)
-            self.indicator = indicator
-            indicator.color = EKColor.Mooch.lightBlue
-            indicator.startAnimating()
-            indicator.hidesWhenStopped = true
-            self.view.addSubview(indicator)
-            self.view.bringSubviewToFront(indicator)
-            indicator.snp.makeConstraints { (make) in
-                make.center.equalToSuperview()
-            }
-        }
+    override func viewDidDisappear(_ animated: Bool) {
+        loadedImageCounter = 0
     }
     
     private func setupView() {
@@ -74,7 +68,14 @@ class InventoryViewController: UIViewController, Storyboarded {
         
     }
     
-    private var loadedImageCounter = 0
+    private var loadedImageCounter = 0 {
+        didSet {
+            if self.loadedImageCounter == self.inventoryItems.count {
+                self.indicator?.stopAnimating()
+            }
+        }
+    }
+    
     private var indicator: UIActivityIndicatorView?
     private func getInventoryData() {
         Session.shared.updateDataForCurrentUser { (items) in
@@ -82,6 +83,18 @@ class InventoryViewController: UIViewController, Storyboarded {
                 self.inventoryItems = items
                 self.collectionView.reloadData()
             }
+        }
+    }
+    private func setupIndicator() {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = EKColor.Mooch.lightBlue
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        self.indicator = indicator
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
+        indicator.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
         }
     }
     
@@ -107,10 +120,27 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         imgView.clipsToBounds = true
         imgView.contentMode = .scaleAspectFill
         
-        if item.numberOfImages > 0 {
-            if item.images.count > 0 {
+        if item.checkForImagesInCache().count > 0 {
+            DispatchQueue.main.async {
+                do {
+                    let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
+                    imgView.image = img
+                    cell.addSubview(imgView)
+                    imgView.snp.makeConstraints { (make) in
+                        make.edges.equalToSuperview()
+                    }
+                    self.loadedImageCounter += 1
+                    Log.d("Loaded Images: \(self.loadedImageCounter) of \(self.inventoryItems.count)")
+                    self.collectionViewCell(didFinishLoadingAt: indexPath)
+                } catch {
+                    Log.e(error)
+                }
+            }
+        } else {
+            item.downloadImages { (done) in
                 DispatchQueue.main.async {
-                    if let img = item.images.first {
+                    do {
+                        let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
                         imgView.image = img
                         cell.addSubview(imgView)
                         imgView.snp.makeConstraints { (make) in
@@ -119,21 +149,8 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
                         self.loadedImageCounter += 1
                         Log.d("Loaded Images: \(self.loadedImageCounter) of \(self.inventoryItems.count)")
                         self.collectionViewCell(didFinishLoadingAt: indexPath)
-                    }
-                }
-            } else {
-                item.downloadImages { (done) in
-                    DispatchQueue.main.async {
-                        if let img = item.images.first {
-                            imgView.image = img
-                            cell.addSubview(imgView)
-                            imgView.snp.makeConstraints { (make) in
-                                make.edges.equalToSuperview()
-                            }
-                            self.loadedImageCounter += 1
-                            Log.d("Loaded Images: \(self.loadedImageCounter) of \(self.inventoryItems.count)")
-                            self.collectionViewCell(didFinishLoadingAt: indexPath)
-                        }
+                    } catch {
+                        Log.e(error)
                     }
                 }
             }

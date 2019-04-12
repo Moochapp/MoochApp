@@ -29,14 +29,20 @@ class ItemDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = item.name
         setupTableView()
         createCollections()
         createCollectionDelegates()
       
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
     // MARK: - Setup
     private func setupTableView() {
+        tableView.separatorStyle = .none
         for i in 0...3 {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell-\(i)")
         }
@@ -62,6 +68,17 @@ class ItemDetailTableViewController: UITableViewController {
         IDOwnerItemsCollectionView.backgroundColor = .clear
     }
     private func createCollectionDelegates() {
+        var orderedImages: [UIImage] = []
+        for i in 0...item.numberOfImages - 1 {
+            let name = "img-\(i)"
+            do {
+                let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: name)
+                orderedImages.append(img)
+            } catch {
+                Log.e(error)
+            }
+        }
+        item.images = orderedImages
         IDImageCollectionViewDelegate = ItemDetailImageCollectionViewDelegate(images: item.images, collectionView: IDImageCollectionView)
         IDImageCollectionView.delegate = IDImageCollectionViewDelegate
         IDImageCollectionView.dataSource = IDImageCollectionViewDelegate
@@ -108,6 +125,8 @@ class ItemDetailTableViewController: UITableViewController {
                     related.append(Item(document: doc))
                 }
                 
+                self?.IDOwnerItemsCollectionViewDelegate.ownerItems = related
+                
                 DispatchQueue.main.async {
                     self?.IDOwnerItemsCollectionView.delegate = self?.IDOwnerItemsCollectionViewDelegate
                     self?.IDOwnerItemsCollectionView.dataSource = self?.IDOwnerItemsCollectionViewDelegate
@@ -135,7 +154,10 @@ class ItemDetailTableViewController: UITableViewController {
         
         switch indexPath.section {
         case 0:
+            // IMAGES
             let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+            cell.backgroundColor = EKColor.Mooch.darkGray
+            cell.selectionStyle = .none
             
             cell.addSubview(IDImageCollectionView)
             IDImageCollectionView.snp.makeConstraints { (make) in
@@ -145,26 +167,84 @@ class ItemDetailTableViewController: UITableViewController {
             
             return cell
         case 1:
+            // DETAILS
             let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
             cell.backgroundColor = EKColor.Mooch.darkGray
+            cell.selectionStyle = .none
             
+            let contentView = ItemDetailsView(item: self.item, frame: CGRect(x: 16, y: 16, width: cell.frame.width, height: cell.frame.height))
+            cell.addSubview(contentView)
+            contentView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview().inset(16)
+                cell.sizeToFit()
+            }
             
             return cell
         case 2:
+            // RELATED
             let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
             cell.backgroundColor = EKColor.Mooch.darkGray
+            cell.selectionStyle = .none
             
+            let label = UILabel(frame: .zero)
+            label.textColor = UIColor.lightGray
+            label.text = "More like this"
+            
+            cell.addSubview(label)
+            label.snp.makeConstraints { (make) in
+                make.top.equalToSuperview().offset(8)
+                make.left.right.equalToSuperview().inset(16)
+            }
+            
+            cell.addSubview(IDRelatedCollectionView)
+            IDRelatedCollectionView.snp.makeConstraints { (make) in
+                make.top.equalTo(label.snp.bottom).offset(8)
+                make.left.right.bottom.equalToSuperview().inset(16)
+                cell.sizeToFit()
+            }
             
             return cell
         case 3:
+            // OWNER
             let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
             cell.backgroundColor = EKColor.Mooch.darkGray
+            cell.selectionStyle = .none
+            
+            let label = UILabel(frame: .zero)
+            label.textColor = UIColor.lightGray
+            Moocher.nameFrom(id: item.owner) { (name) in
+                if let name = name {
+                    DispatchQueue.main.async {
+                        label.text = "More by \(name)"
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        label.text = "More by owner"
+                    }
+                }
+        
+            }
+            
+            cell.addSubview(label)
+            label.snp.makeConstraints { (make) in
+                make.top.equalToSuperview().offset(8)
+                make.left.right.equalToSuperview().inset(16)
+            }
+            
+            cell.addSubview(IDOwnerItemsCollectionView)
+            IDOwnerItemsCollectionView.isScrollEnabled = false
+            IDOwnerItemsCollectionView.snp.makeConstraints { (make) in
+                make.top.equalTo(label.snp.bottom).offset(8)
+                make.left.right.bottom.equalToSuperview().inset(16)
+                cell.sizeToFit()
+            }
             
             
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.backgroundColor = EKColor.Mooch.darkGray
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -172,13 +252,13 @@ class ItemDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 200
-        case 1:
-            return 150
-        case 2:
-            return 100
-        case 3:
             return 250
+        case 1:
+            return 200
+        case 2:
+            return 150
+        case 3:
+            return 300
         default:
             return 0
         }
@@ -245,11 +325,22 @@ class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return relatedItems.count
+        if relatedItems.count == 0 {
+            if DeveloperPanel.shared.shouldLoadDummyData {
+                return 7
+            } else {
+                return 0
+            }
+        } else {
+            return relatedItems.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemDetailRelatedCollectionViewDelegate.identifier, for: indexPath)
+        
+        cell.backgroundColor = .lightGray
+        cell.layer.cornerRadius = 5
         
         return cell
     }
@@ -257,7 +348,7 @@ class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
         let space = 8.0
-        let itemPerRow = 5.5
+        let itemPerRow = 4.5
         
         let size = (Double(width) - (space * itemPerRow)) / itemPerRow
         
@@ -284,11 +375,22 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ownerItems.count
+        if ownerItems.count == 0 {
+            if DeveloperPanel.shared.shouldLoadDummyData {
+                return 7
+            } else {
+                return 0
+            }
+        } else {
+            return ownerItems.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemDetailOwnerItemsCollectionViewDelegate.identifier, for: indexPath)
+        
+        cell.backgroundColor = .lightGray
+        cell.layer.cornerRadius = 5
         
         return cell
     }
