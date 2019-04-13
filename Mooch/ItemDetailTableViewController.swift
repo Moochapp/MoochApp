@@ -30,6 +30,7 @@ class ItemDetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
         title = item.name
+        self.view.backgroundColor = EKColor.Mooch.darkGray
         setupTableView()
         createCollections()
         createCollectionDelegates()
@@ -83,7 +84,7 @@ class ItemDetailTableViewController: UITableViewController {
         IDImageCollectionView.delegate = IDImageCollectionViewDelegate
         IDImageCollectionView.dataSource = IDImageCollectionViewDelegate
         
-        IDRelatedCollectionViewDelegate = ItemDetailRelatedCollectionViewDelegate(items: [], collectionView: IDRelatedCollectionView)
+        IDRelatedCollectionViewDelegate = ItemDetailRelatedCollectionViewDelegate(items: [], collectionView: IDRelatedCollectionView, coordinator: self.coordinator)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirebaseManager.items.whereField("Category", isEqualTo: self?.item.category).order(by: "Timestamp", descending: true).limit(to: 10).getDocuments { (snapshot, error) in
                 guard error == nil else {
@@ -108,7 +109,7 @@ class ItemDetailTableViewController: UITableViewController {
             }
         }
         
-        IDOwnerItemsCollectionViewDelegate = ItemDetailOwnerItemsCollectionViewDelegate(items: [], collectionView: IDOwnerItemsCollectionView)
+        IDOwnerItemsCollectionViewDelegate = ItemDetailOwnerItemsCollectionViewDelegate(items: [], collectionView: IDOwnerItemsCollectionView, coordinator: self.coordinator)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirebaseManager.items.whereField("Owner", isEqualTo: self?.item.owner).order(by: "Timestamp", descending: true).limit(to: 12).getDocuments(completion: { (snapshot, error) in
                 guard error == nil else {
@@ -314,9 +315,11 @@ class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegat
     static var identifier = "IDRelatedCVCell"
     
     var relatedItems: [Item]
+    var coordinator: MainCoordinator
     
-    init(items: [Item], collectionView: UICollectionView) {
+    init(items: [Item], collectionView: UICollectionView, coordinator: MainCoordinator) {
         self.relatedItems = items
+        self.coordinator = coordinator
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailRelatedCollectionViewDelegate.identifier)
     }
     
@@ -364,9 +367,11 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
     static var identifier = "IDOwnerItemsCVCell"
     
     var ownerItems: [Item]
+    var coordinator: MainCoordinator
     
-    init(items: [Item], collectionView: UICollectionView) {
+    init(items: [Item], collectionView: UICollectionView, coordinator: MainCoordinator) {
         self.ownerItems = items
+        self.coordinator = coordinator
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailOwnerItemsCollectionViewDelegate.identifier)
     }
     
@@ -392,6 +397,36 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 5
         
+        let item = ownerItems[indexPath.row]
+        
+        let imgView = UIImageView()
+        imgView.contentMode = .scaleAspectFill
+        imgView.layer.cornerRadius = 5
+        imgView.clipsToBounds = true
+        cell.addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        do {
+            let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
+            DispatchQueue.main.async {
+                imgView.image = img
+            }
+        } catch {
+            Log.e(error)
+            item.downloadImages { (done) in
+                do {
+                    let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
+                    DispatchQueue.main.async {
+                        imgView.image = img
+                    }
+                } catch {
+                    Log.e(error)
+                }
+            }
+        }
+        
         return cell
     }
     
@@ -406,7 +441,8 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Log.d(indexPath.row)
+        let item = ownerItems[indexPath.row]
+        coordinator.showItemDetail(for: item)
     }
 }
 

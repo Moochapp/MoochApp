@@ -19,7 +19,7 @@ class InventoryViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
 
         title = "Inventory"
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setupView()
         setupCollectionView()
     }

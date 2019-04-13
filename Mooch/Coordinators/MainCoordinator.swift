@@ -70,7 +70,7 @@ class MainCoordinator: Coordinator {
         
         let nav5 = UINavigationController()
         nav5.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-        nav5.navigationBar.backgroundColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+//        nav5.navigationBar.backgroundColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
         nav5.navigationBar.isTranslucent = false
         nav5.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let inventory = InventoryViewController.instantiate(from: "MainApp")
