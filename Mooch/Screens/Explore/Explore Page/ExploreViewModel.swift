@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import LDLogger
 
 class ExploreViewModel: ExploreDataObjectDelegate {
     
@@ -56,7 +57,29 @@ class ExploreViewModel: ExploreDataObjectDelegate {
     }
     
     func didSelectItem(category: String, image: UIImage) {
-        vc?.coordinator.showSubCategories(with: category, image: image)
+        let subcategories = StockImageLoader.shared.getSubcategories(for: category)
+        var subData: [String: UIImage] = [:]
+        for sub in subcategories {
+            if let image = StockImageLoader.shared.getImage(category: category, subcategory: sub) {
+                subData[sub] = image
+            }
+        }
+        vc?.showProgressIndicator(completion: { (activity) in
+            Item.getResults(for: category) { (error, subCategoryItems) in
+                DispatchQueue.main.async {
+                    activity.stopAnimating()
+                    guard error == nil else {
+                        Log.d(error!.localizedDescription)
+                        return
+                    }
+                    guard let subCategoryItems = subCategoryItems else {
+                        Log.d("Couldn't get items")
+                        return
+                    }
+                    self.vc?.coordinator.showSubCategories(forCategory: category, withData: subData, andItems: subCategoryItems)
+                }
+            }
+        })
     }
     
 }

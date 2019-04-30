@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/AppDelegate.swift"
-            timestampString = "578011892.41563"
+            timestampString = "578341456.289021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Moocher.swift"
-            timestampString = "578333407.883691"
+            timestampString = "578349898.003098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Moocher.swift"
-            timestampString = "578333407.8837579"
+            timestampString = "578349898.00341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.883863"
+            timestampString = "578349898.003529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "135"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.884063"
+            timestampString = "578349898.003909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.884115"
+            timestampString = "578349898.003974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.88416"
+            timestampString = "578349898.0040261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.884205"
+            timestampString = "578349898.004076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
@@ -314,7 +314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.8842469"
+            timestampString = "578349898.004125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "151"
@@ -330,7 +330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Login-Signup/SignUpViewController.swift"
-            timestampString = "578333407.884288"
+            timestampString = "578349898.004179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "167"
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Explore/Explore Page/ExploreViewController.swift"
-            timestampString = "578333407.884333"
+            timestampString = "578349898.00423"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Explore/Explore Page/ExploreViewController.swift"
-            timestampString = "578333407.884391"
+            timestampString = "578349898.004467"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,60 +378,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Explore/Explore Page/ExploreViewController.swift"
-            timestampString = "578333407.884445"
+            timestampString = "578349898.004541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-            timestampString = "578333407.884503"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "subcategories"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-            timestampString = "578333407.88485"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "SubcategoryCollectionViewDelegate"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-            timestampString = "578333407.8851089"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
-            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -442,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.885358"
+            timestampString = "578349898.0046231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -458,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.885408"
+            timestampString = "578349898.004842"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
@@ -474,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.88545"
+            timestampString = "578349898.004898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -490,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Inventory/InventoryViewController.swift"
-            timestampString = "578333407.885493"
+            timestampString = "578349456.09561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
@@ -502,59 +454,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.885535"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "downloadImages(completion:thumbnail:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.8855751"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "downloadImages(completion:thumbnail:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.885615"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "downloadImages(completion:thumbnail:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.885655"
+            timestampString = "578349898.004993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
@@ -570,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/ItemDetailTableViewController.swift"
-            timestampString = "577646828.92647"
+            timestampString = "578349898.005052"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "createCollectionDelegates()"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/ItemDetailTableViewController.swift"
-            timestampString = "577646828.9268301"
+            timestampString = "578349898.005663"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "createCollectionDelegates()"
             landmarkType = "7">
          </BreakpointContent>
@@ -602,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/ItemDetailTableViewController.swift"
-            timestampString = "577646828.927103"
+            timestampString = "578349898.005949"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "createCollectionDelegates()"
             landmarkType = "7">
             <Locations>
@@ -730,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Explore/Explore Page/ExploreViewModel.swift"
-            timestampString = "578333407.885908"
+            timestampString = "578349898.006364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "init(viewController:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Explore/Explore Page/ExploreViewModel.swift"
-            timestampString = "578333407.885964"
+            timestampString = "578349898.006617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "init(viewController:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -762,7 +666,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Moocher.swift"
-            timestampString = "578333407.8860101"
+            timestampString = "578349898.006685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -810,7 +714,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Moocher.swift"
-            timestampString = "578333407.886101"
+            timestampString = "578349898.0067821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -826,77 +730,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Screens/Explore/Explore Page/ExploreViewController.swift"
-            timestampString = "578333407.886144"
+            timestampString = "578349898.006833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-            timestampString = "578333407.886192"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-            timestampString = "578333407.886447"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "downloadItems(category:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Mooch.SubcategoryViewController.downloadItems(category: Swift.String, completion: (Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Mooch.Item&gt;&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Mooch"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/appcenter/Documents/Work/Mooch/Repos/MoochApp-iOS/Mooch/Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-                  timestampString = "578333113.6645941"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "168">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;, Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Mooch.Item&gt;&gt;&gt;) -&gt; () in Mooch.SubcategoryViewController.downloadItems(category: Swift.String, completion: (Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Mooch.Item&gt;&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Mooch"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/appcenter/Documents/Work/Mooch/Repos/MoochApp-iOS/Mooch/Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-                  timestampString = "578333113.666479"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "176">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -906,7 +746,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.8866791"
+            timestampString = "578349898.006891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "236"
@@ -922,7 +762,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.886727"
+            timestampString = "578349898.0069439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "241"
@@ -938,7 +778,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.88677"
+            timestampString = "578349898.006992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "230"
@@ -954,7 +794,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mooch/Models/Item.swift"
-            timestampString = "578333407.886813"
+            timestampString = "578349898.00704"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "260"
@@ -964,18 +804,28 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mooch/Screens/Explore/Subcategory/SubcategoryViewController.swift"
-            timestampString = "578333416.8546979"
+            filePath = "Mooch/Coordinators/MainCoordinator.swift"
+            timestampString = "578349898.007095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "showSubCategories(forCategory:withData:andItems:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

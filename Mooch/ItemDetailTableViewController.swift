@@ -86,7 +86,9 @@ class ItemDetailTableViewController: UITableViewController {
         
         IDRelatedCollectionViewDelegate = ItemDetailRelatedCollectionViewDelegate(items: [], collectionView: IDRelatedCollectionView, coordinator: self.coordinator)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            FirebaseManager.items.whereField("Category", isEqualTo: self?.item.category).order(by: "Timestamp", descending: true).limit(to: 10).getDocuments { (snapshot, error) in
+            FirebaseManager.items
+                .whereField("Category", isEqualTo: self?.item.category)
+                .order(by: "Timestamp", descending: true).limit(to: 10).getDocuments { (snapshot, error) in
                 guard error == nil else {
                     Log.e(error!.localizedDescription)
                     return
@@ -101,6 +103,8 @@ class ItemDetailTableViewController: UITableViewController {
                     related.append(Item(document: doc))
                 }
                 
+                self?.IDRelatedCollectionViewDelegate.relatedItems = related
+                    
                 DispatchQueue.main.async {
                     self?.IDRelatedCollectionView.delegate = self?.IDRelatedCollectionViewDelegate
                     self?.IDRelatedCollectionView.dataSource = self?.IDRelatedCollectionViewDelegate

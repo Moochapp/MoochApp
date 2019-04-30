@@ -24,6 +24,7 @@ pod 'SwiftyOnboard'
 pod 'LDLogger'
 pod 'IHKeyboardAvoiding'
 pod 'lottie-ios'
+pod 'DZNEmptyDataSet'
 
 
   target 'MoochTests' do

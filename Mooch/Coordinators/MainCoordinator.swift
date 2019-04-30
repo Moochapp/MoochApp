@@ -108,9 +108,22 @@ class MainCoordinator: Coordinator {
     }
     
     func showSubCategories(with category: String, image: UIImage) {
-        let vc = SubcategoryViewController()
+        let vc = SubcategoryViewController(collectionViewLayout: UICollectionViewFlowLayout())
         vc.coordinator = self
         vc.category = category
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showSubCategories(forCategory category: String, withData categoryData: [String: UIImage], andItems items: [String: [Item]]) {
+        let vc = SubcategoryViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.coordinator = self
+        vc.category = category
+        vc.subcategories = Array(categoryData.keys)
+        let over0 = items.filter { (dict) -> Bool in
+            return dict.value.count > 0
+        }
+        vc.itemsForSubcategories = over0
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(vc, animated: true)
     }

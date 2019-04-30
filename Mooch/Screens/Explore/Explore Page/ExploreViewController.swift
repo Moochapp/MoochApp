@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import LDLogger
 
 class ExploreViewController: UIViewController, Storyboarded {
 
@@ -43,8 +44,6 @@ class ExploreViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         coordinator.navigationController.isNavigationBarHidden = true
     }
-    
-    
 }
 
 extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
@@ -171,6 +170,35 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let category = Array(viewModel.favorites.keys)[indexPath.row]
+            
+            let subcategories = StockImageLoader.shared.getSubcategories(for: category)
+            var subData: [String: UIImage] = [:]
+            for sub in subcategories {
+                if let image = StockImageLoader.shared.getImage(category: category, subcategory: sub) {
+                    subData[sub] = image
+                }
+            }
+            showProgressIndicator(completion: { (activity) in
+                Item.getResults(for: category) { (error, subCategoryItems) in
+                    DispatchQueue.main.async {
+                        activity.stopAnimating()
+                        guard error == nil else {
+                            Log.d(error!.localizedDescription)
+                            return
+                        }
+                        guard let subCategoryItems = subCategoryItems else {
+                            Log.d("Couldn't get items")
+                            return
+                        }
+                        self.coordinator.showSubCategories(forCategory: category, withData: subData, andItems: subCategoryItems)
+                    }
+                }
+            })
+        }
+    }
 }
 
 
