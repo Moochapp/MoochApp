@@ -117,7 +117,7 @@ class Item {
         }
     }
     
-    public func downloadImages(completion: @escaping (Bool)->()) {
+    public func downloadImages(completion: @escaping (Bool)->(), thumbnail: @escaping (UIImage)->()) {
         DispatchQueue.global(qos: .userInitiated).async {
             let group = DispatchGroup()
             for index in 0...self.numberOfImages - 1 {
@@ -125,6 +125,11 @@ class Item {
                 let name = "img-\(index).png"
                 Log.i("Starting download for:", self.id, name)
                 self.download(ID: self.id, name: name, completion: { (image) in
+                    
+                    if index == 0 {
+                        thumbnail(image)
+                    }
+                    
                     self.images.append(image)
                     Log.d("Downloaded image:", self.id, name)
                     do {
@@ -214,5 +219,46 @@ class Item {
             }
         }
         return images
+    }
+    
+    static func getResults(for category: String, results: @escaping (Error?, [String: [Item]]?)->()) {
+        let subs = StockImageLoader.shared.getSubcategories(for: category)
+        DispatchQueue.global(qos: .userInitiated).async {
+            var categoryItems: [String: [Item]] = [:]
+            
+            let group = DispatchGroup()
+            for subcat in subs {
+                group.enter()
+                FirebaseManager.items
+                    .whereField("Category", isEqualTo: category)
+                    .whereField("Subcategory", isEqualTo: subcat)
+                    .limit(to: 5).getDocuments(completion: { (snap, error) in
+                        guard error == nil else {
+                            results(error, nil)
+                            return
+                        }
+                        
+                        guard let snap = snap else {
+                            results(nil, nil)
+                            return
+                        }
+                        
+                        var items = [Item]()
+                        for doc in snap.documents {
+                            let newItem = Item(document: doc)
+                            items.append(newItem)
+                        }
+                        
+                        categoryItems[subcat] = items
+                        
+                        group.leave()
+                    })
+            }
+            
+            group.wait()
+            
+            results(nil, categoryItems)
+        }
+        
     }
 }

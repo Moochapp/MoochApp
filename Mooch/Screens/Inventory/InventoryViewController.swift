@@ -61,8 +61,6 @@ class InventoryViewController: UIViewController, Storyboarded {
         self.view.addSubview(collectionView)
         // Add to subview and make constraints
         collectionView.snp.makeConstraints { (make) in
-//            make.left.right.equalToSuperview().inset(8)
-//            make.top.bottom.equalToSuperview().inset(16)
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges).inset(8)
         }
         
@@ -137,7 +135,9 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
                 }
             }
         } else {
-            item.downloadImages { (done) in
+            item.downloadImages(completion: { (done) in
+                Log.d("Finished loading a set of data")
+            }) { (thumbnail) in
                 DispatchQueue.main.async {
                     do {
                         let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")

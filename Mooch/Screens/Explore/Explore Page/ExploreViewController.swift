@@ -33,7 +33,7 @@ class ExploreViewController: UIViewController, Storyboarded {
         }
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "featuredCell")
+        tableView.register(FavoriteCategoryTableViewCell.self, forCellReuseIdentifier: "featuredCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "favoritesCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
         tableView.backgroundColor = .clear
@@ -92,12 +92,15 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
             
+            let category = Array(viewModel.favorites.keys)[indexPath.row]
+            
             var image: UIImageView
             var tag = "11\(indexPath.row + 1)"
             if let img = view.viewWithTag(Int(tag)!) as? UIImageView {
                 image = img
             } else {
-                image = UIImageView(image: viewModel.images[indexPath.row])
+//                image = UIImageView(image: viewModel.favorites[category])
+                image = FadedImageView(image: viewModel.favorites[category])
                 image.tag = Int(tag)!
                 cell.addSubview(image)
                 image.snp.makeConstraints { (make) in
@@ -107,6 +110,22 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
                 image.contentMode = .scaleAspectFill
                 image.layer.cornerRadius = 5
                 image.clipsToBounds = true
+            }
+            
+            var title: UILabel
+            var t2 = "11\(indexPath.row + 1)1"
+            if let lbl = view.viewWithTag(Int(tag)!) as? UILabel {
+                title = lbl
+            } else {
+                title = UILabel()
+                title.font = UIFont(name: "Avenir", size: 20)
+                title.tag = Int(tag)!
+                cell.addSubview(title)
+                title.snp.makeConstraints { (make) in
+                    make.left.bottom.right.equalToSuperview().inset(16)
+                }
+                title.textColor = .white
+                title.text = category
             }
             
             return cell
@@ -175,7 +194,7 @@ class FeaturedDataObject: NSObject, UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredCell", for: indexPath)
         
-        let image = UIImageView(image: images[indexPath.row])
+        let image = FadedImageView(image: images[indexPath.row])
         cell.addSubview(image)
         image.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -242,6 +261,17 @@ class CategoriesDataObject: NSObject, UICollectionViewDataSource, UICollectionVi
         self.titles = titles
     }
     
+    init(categoryData: [String: UIImage]) {
+        var images = [UIImage]()
+        self.titles = categoryData.keys.sorted()
+        
+        for title in titles {
+            images.append(categoryData[title]!)
+        }
+        self.images = images
+        
+    }
+    
     var delegate: ExploreDataObjectDelegate?
     var images: [UIImage]
     var titles: [String]
@@ -257,7 +287,8 @@ class CategoriesDataObject: NSObject, UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoriesCell", for: indexPath)
         
-        let image = UIImageView(image: images[indexPath.row])
+//        let image = UIImageView(image: images[indexPath.row])
+        let image = FadedImageView(image: images[indexPath.row])
         cell.addSubview(image)
         image.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

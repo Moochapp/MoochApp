@@ -118,10 +118,14 @@ class SignUpViewController: UIViewController, Storyboarded {
                     PhoneAuthProvider.provider().verifyPhoneNumber(adjusted, uiDelegate: nil) { (verificationID, error) in
                         guard error == nil else {
                             Log.e(error)
+                            self.signUp.isEnabled = true
                             return
                         }
                         
-                        guard verificationID != nil else { return }
+                        guard verificationID != nil else {
+                            self.signUp.isEnabled = true
+                            return
+                        }
                         self.em.dismissEntry()
                         
                         self.loginViewModel.showVerify(in: self, code: { (code) in
@@ -131,16 +135,22 @@ class SignUpViewController: UIViewController, Storyboarded {
                                 guard error == nil else {
                                     Log.s(error!.localizedDescription)
                                     self.showError(title: "Hmm...", description: error!.localizedDescription)
+                                    self.signUp.isEnabled = true
                                     return
                                 }
                                 
-                                guard let result = result else { return }
+                                guard let result = result else { self.signUp.isEnabled = true
+                                    self.signUp.isEnabled = true
+                                    return
+                                    
+                                }
                                 let user = result.user
                                 
                                 let emailCredential = EmailAuthProvider.credential(withEmail: data!.email, password: data!.password)
                                 user.linkAndRetrieveData(with: emailCredential, completion: { (result, error) in
                                     guard error == nil else {
                                         self.showError(title: "Hmm...", description: error!.localizedDescription)
+                                        self.signUp.isEnabled = true
                                         return
                                     }
                                     
@@ -149,18 +159,25 @@ class SignUpViewController: UIViewController, Storyboarded {
                                     updates.commitChanges(completion: { (error) in
                                         guard error == nil else {
                                             self.showError(title: "Hmm...", description: error!.localizedDescription)
+                                            self.signUp.isEnabled = true
                                             return
                                         }
                                         
                                         let moocher = Moocher(user: user)
                                         Session.shared.moocher = moocher
-                                        moocher.syncToLocal(result: { (error) in
+                                        moocher.initializeUser(completion: { (done, error) in
                                             guard error == nil else {
-                                                self.showError(title: "Hmm...", description: error!.localizedDescription)
                                                 return
                                             }
-                                            
-                                            self.coordinator.mainApp()
+                                            moocher.syncToLocal(result: { (error) in
+                                                guard error == nil else {
+                                                    self.showError(title: "Hmm...", description: error!.localizedDescription)
+                                                    self.signUp.isEnabled = true
+                                                    return
+                                                }
+                                                
+                                                self.coordinator.selectFavorites()
+                                            })
                                         })
                                     })
                                 })

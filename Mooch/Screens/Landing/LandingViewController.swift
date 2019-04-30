@@ -28,7 +28,7 @@ class LandingViewController: UIViewController, Storyboarded {
             if exists {
                 self.coordinator.mainApp()
             } else {
-                coordinator.onboarding()
+                self.coordinator.onboarding()
             }
         }
     }

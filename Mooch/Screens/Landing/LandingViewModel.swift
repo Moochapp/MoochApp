@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import LDLogger
 
 class LandingViewModel: NSObject {
     
@@ -20,32 +21,43 @@ class LandingViewModel: NSObject {
     }
     
     // MARK: - Public
-    public func initializeApp(user exists: (Bool)->()) {
-        if shouldNavigateToMain() {
-            exists(true)
-        } else {
-            exists(false)
-        }
+    public func initializeApp(user exists: @escaping (Bool)->()) {
+        shouldNavigateToMain(completion: { (done) in
+            if done {
+                exists(true)
+            } else {
+                exists(false)
+            }
+        })
     }
     
     // MARK: - Private
-    private func shouldNavigateToMain() -> Bool {
-        if checkForUser() {
-            // user exists; we need to send them to the main portion of the app
-            return true
-        } else {
-            // no user; we need to send them to onboarding.
-            return false
-        }
+    private func shouldNavigateToMain(completion: @escaping (Bool)->()) {
+        checkForUser(completion: { (done) in
+            if done {
+                // user exists; we need to send them to the main portion of the app
+                completion(true)
+            } else {
+                // no user; we need to send them to onboarding.
+                completion(false)
+            }
+        })
     }
     
-    private func checkForUser() -> Bool {
+    private func checkForUser(completion: @escaping (Bool)->()) {
         if Auth.auth().currentUser != nil {
             let moocher = Moocher(user: Auth.auth().currentUser!)
             Session.shared.moocher = moocher
-            return true
+            moocher.syncToLocal { (error) in
+                guard error == nil else {
+                    Log.d(error!.localizedDescription)
+                    completion(false)
+                    return
+                }
+                completion(true)
+            }
         } else {
-            return false
+            completion(false)
         }
     }
     

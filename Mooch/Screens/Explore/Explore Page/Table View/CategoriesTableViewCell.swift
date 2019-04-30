@@ -2,7 +2,7 @@
 //  CategoriesTableViewCell.swift
 //  Mooch
 //
-//  Created by App Center on 3/25/19.
+//  Created by App Center on 4/29/19.
 //  Copyright © 2018 rlukedavis. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import UIKit
 
 class CategoriesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var categoriesCollectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+//        categoriesCollectionView.delegate = self
+//        categoriesCollectionView.dataSource = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,3 +25,15 @@ class CategoriesTableViewCell: UITableViewCell {
     }
 
 }
+
+//extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 1
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//
+//    }
+//
+//
+//}

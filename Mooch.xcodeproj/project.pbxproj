@@ -30,6 +30,7 @@
 		731B07462210CB0F0079E45A /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B07402210CB0F0079E45A /* UIView+Nib.swift */; };
 		731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B07492211E3A60079E45A /* FirebaseUserManager.swift */; };
 		731B074C221240A40079E45A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731B074B221240A40079E45A /* Item.swift */; };
+		732A5669226E3B5E007A6AA7 /* StockImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A5668226E3B5E007A6AA7 /* StockImageLoader.swift */; };
 		732B4B0A224E85DF009E8FF5 /* ChooseMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */; };
 		732B4B0E224E9949009E8FF5 /* SnappingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */; };
 		732B4B15224EB403009E8FF5 /* ImagePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */; };
@@ -42,6 +43,7 @@
 		733DFBE22229D65200A16995 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733DFBE12229D65100A16995 /* ExploreViewController.swift */; };
 		73417F87222DC171005A6714 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73417F86222DC171005A6714 /* MainApp.storyboard */; };
 		73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73417F89222DD55B005A6714 /* ExploreViewModel.swift */; };
+		734C2D24227223E8000F9A10 /* SelectFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C2D23227223E8000F9A10 /* SelectFavoritesViewController.swift */; };
 		734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C6E51220BF0F1000DC1F4 /* BasicInformationViewController.swift */; };
 		7353040D225E92BD00011F4C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7353040C225E92BD00011F4C /* DateExtension.swift */; };
 		735CEA06225D37DD00C06ECF /* ItemDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735CEA05225D37DD00C06ECF /* ItemDetailTableViewController.swift */; };
@@ -78,6 +80,11 @@
 		73D35FAF225ED3E600C8F00C /* ItemDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D35FAE225ED3E600C8F00C /* ItemDetailsView.xib */; };
 		73D35FB222613D6300C8F00C /* DeveloperPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D35FB122613D6300C8F00C /* DeveloperPanel.swift */; };
 		73E5A4322257EF6D002093F4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E5A4312257EF6D002093F4 /* LoadingView.swift */; };
+		73ED716A22777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716922777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift */; };
+		73ED716C2277846700D0D159 /* FeaturedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716B2277846700D0D159 /* FeaturedTableViewCell.swift */; };
+		73ED716E2277847400D0D159 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716D2277847400D0D159 /* FavoritesTableViewCell.swift */; };
+		73ED71702277849B00D0D159 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */; };
+		73ED7172227788F200D0D159 /* FadedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED7171227788F200D0D159 /* FadedImageView.swift */; };
 		73F3F9B8224FF1AF00CCE4F6 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; };
 		73F3F9B9224FF1AF00CCE4F6 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCFD5C221F7F6900C350AC /* UIViewControllerExtension.swift */; };
@@ -154,6 +161,7 @@
 		731B07402210CB0F0079E45A /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		731B07492211E3A60079E45A /* FirebaseUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserManager.swift; sourceTree = "<group>"; };
 		731B074B221240A40079E45A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		732A5668226E3B5E007A6AA7 /* StockImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockImageLoader.swift; sourceTree = "<group>"; };
 		732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMethodViewController.swift; sourceTree = "<group>"; };
 		732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnappingCollectionViewLayout.swift; sourceTree = "<group>"; };
 		732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewer.swift; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 		733DFBE12229D65100A16995 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		73417F86222DC171005A6714 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		73417F89222DD55B005A6714 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		734C2D23227223E8000F9A10 /* SelectFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFavoritesViewController.swift; sourceTree = "<group>"; };
 		734C6E51220BF0F1000DC1F4 /* BasicInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInformationViewController.swift; sourceTree = "<group>"; };
 		7353040C225E92BD00011F4C /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		735CEA05225D37DD00C06ECF /* ItemDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +211,11 @@
 		73D35FAE225ED3E600C8F00C /* ItemDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemDetailsView.xib; sourceTree = "<group>"; };
 		73D35FB122613D6300C8F00C /* DeveloperPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperPanel.swift; sourceTree = "<group>"; };
 		73E5A4312257EF6D002093F4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		73ED716922777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		73ED716B2277846700D0D159 /* FeaturedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedTableViewCell.swift; sourceTree = "<group>"; };
+		73ED716D2277847400D0D159 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		73ED7171227788F200D0D159 /* FadedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadedImageView.swift; sourceTree = "<group>"; };
 		73F3F987224FF0CA00CCE4F6 /* selectedImageGallery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedImageGallery@3x.png"; sourceTree = "<group>"; };
 		73F3F988224FF0CA00CCE4F6 /* focusIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "focusIcon@3x.png"; sourceTree = "<group>"; };
 		73F3F989224FF0CA00CCE4F6 /* ON@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ON@3x.png"; sourceTree = "<group>"; };
@@ -380,6 +394,7 @@
 			children = (
 				733DFBE12229D65100A16995 /* ExploreViewController.swift */,
 				73417F89222DD55B005A6714 /* ExploreViewModel.swift */,
+				73ED716922777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift */,
 				73B2DDDB222F59E50011E03F /* Table View */,
 			);
 			path = "Explore Page";
@@ -449,6 +464,8 @@
 				732B4B0D224E9949009E8FF5 /* SnappingCollectionViewLayout.swift */,
 				732B4B14224EB403009E8FF5 /* ImagePreviewer.swift */,
 				732B4B18224EC8A5009E8FF5 /* Photographer.swift */,
+				732A5668226E3B5E007A6AA7 /* StockImageLoader.swift */,
+				73ED7171227788F200D0D159 /* FadedImageView.swift */,
 				73D35FB0225ED3ED00C8F00C /* Item Details View */,
 				73E5A4332257EF73002093F4 /* Loading View */,
 				73B33FB32251910600452698 /* Profile Picture */,
@@ -512,6 +529,9 @@
 				73B2DDDC222F5DDE0011E03F /* FeaturedCollectionViewCell.swift */,
 				73ACEF0422499011005188D0 /* CategoriesCollectionViewCell.swift */,
 				73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */,
+				73ED716B2277846700D0D159 /* FeaturedTableViewCell.swift */,
+				73ED716D2277847400D0D159 /* FavoritesTableViewCell.swift */,
+				73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */,
 			);
 			path = "Table View";
 			sourceTree = "<group>";
@@ -556,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				73026A5622021BAE00CC767E /* SignUpViewController.swift */,
+				734C2D23227223E8000F9A10 /* SelectFavoritesViewController.swift */,
 				737927DC223304B900E33A35 /* LoginViewController.swift */,
 				73782E1F220BB2C900145B92 /* LoginViewModel.swift */,
 				734C6E51220BF0F1000DC1F4 /* BasicInformationViewController.swift */,
@@ -1010,6 +1031,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				73FCFD5F221F80B000C350AC /* GetStartedViewController.swift in Sources */,
+				73ED716A22777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift in Sources */,
+				732A5669226E3B5E007A6AA7 /* StockImageLoader.swift in Sources */,
 				7353040D225E92BD00011F4C /* DateExtension.swift in Sources */,
 				73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */,
 				73026A5722021BAE00CC767E /* SignUpViewController.swift in Sources */,
@@ -1018,8 +1041,10 @@
 				732B4B1B224ECD5D009E8FF5 /* CreateItemViewController.swift in Sources */,
 				737C87D221FFDA79006B5F18 /* MainCoordinator.swift in Sources */,
 				73782E1E220B846C00145B92 /* PhoneNumberExtension.swift in Sources */,
+				73ED71702277849B00D0D159 /* CategoriesTableViewCell.swift in Sources */,
 				731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */,
 				731B074C221240A40079E45A /* Item.swift in Sources */,
+				73ED7172227788F200D0D159 /* FadedImageView.swift in Sources */,
 				732B4B19224EC8A6009E8FF5 /* Photographer.swift in Sources */,
 				73782E24220BB89900145B92 /* AlertManager.swift in Sources */,
 				734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */,
@@ -1049,16 +1074,19 @@
 				73D35FB222613D6300C8F00C /* DeveloperPanel.swift in Sources */,
 				731465BB2206341D0092FBE0 /* Moocher.swift in Sources */,
 				73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */,
+				73ED716E2277847400D0D159 /* FavoritesTableViewCell.swift in Sources */,
 				73E5A4322257EF6D002093F4 /* LoadingView.swift in Sources */,
 				73026A512202108000CC767E /* LandingViewModel.swift in Sources */,
 				731B07382210CAAB0079E45A /* EntryManager.swift in Sources */,
 				737C87D421FFDA9E006B5F18 /* Coordinator.swift in Sources */,
 				73CEBE992200DE04007B8620 /* LandingViewController.swift in Sources */,
+				734C2D24227223E8000F9A10 /* SelectFavoritesViewController.swift in Sources */,
 				73D35FAB225EA09F00C8F00C /* ImageExtension.swift in Sources */,
 				732B4B15224EB403009E8FF5 /* ImagePreviewer.swift in Sources */,
 				73026A53220217DD00CC767E /* OnboardingViewController.swift in Sources */,
 				73D35FA7225EA07900C8F00C /* DataExtension.swift in Sources */,
 				732B4B0E224E9949009E8FF5 /* SnappingCollectionViewLayout.swift in Sources */,
+				73ED716C2277846700D0D159 /* FeaturedTableViewCell.swift in Sources */,
 				73CA25A02241466E006A8087 /* InventoryViewController.swift in Sources */,
 				73D35FA9225EA08B00C8F00C /* StringExtension.swift in Sources */,
 				732B4B0A224E85DF009E8FF5 /* ChooseMethodViewController.swift in Sources */,

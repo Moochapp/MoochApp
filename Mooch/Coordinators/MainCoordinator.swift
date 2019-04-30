@@ -47,6 +47,16 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func selectFavorites() {
+        let pickFavorites = SelectFavoritesViewController()
+        pickFavorites.coordinator = self
+        navigationController.isNavigationBarHidden = false
+        navigationController.navigationBar.barTintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationController.pushViewController(pickFavorites, animated: true)
+    }
+    
     func mainApp() {
         
         let tabbar = UITabBarController()
@@ -79,9 +89,17 @@ class MainCoordinator: Coordinator {
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
         
+//        let nav6 = UINavigationController()
+//        let pickFavorites = SelectFavoritesViewController()
+//        pickFavorites.coordinator = self
+//        pickFavorites.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 5)
+//        pickFavorites.tabBarItem.title = "test"
+//        nav6.viewControllers = [pickFavorites]
+        
         setupNavs(nav: nav3)
         setupNavs(nav: nav4)
         setupNavs(nav: nav5)
+//        setupNavs(nav: nav6)
         
         tabbar.viewControllers = [nav5, nav4, nav3]
         tabbar.selectedIndex = 1

@@ -415,7 +415,9 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
             }
         } catch {
             Log.e(error)
-            item.downloadImages { (done) in
+            item.downloadImages(completion: { (done) in
+                Log.d("Finished loading images")
+            }) { (thumbnail) in
                 do {
                     let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
                     DispatchQueue.main.async {

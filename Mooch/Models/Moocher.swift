@@ -23,27 +23,33 @@ class Moocher: FirebaseUser {
     var id: String
     var fullName: String
     var items: [Item] = []
+    var favoriteCategories: [String] = []
     
     // MARK: Initializer
     init(user: User) {
         self.firebaseUser = user
-        
         self.id = user.uid
-        
         guard let name = user.displayName else {
             fatalError("User is not valid. Firebase users should always have a display name")
         }
-        
         self.fullName = name
-        
-        FirebaseManager.users.document(self.id).setData(["ID":self.id, "FullName":self.fullName])
-        
+    }
+    
+    public func initializeUser(completion: @escaping (Bool, Error?)->()) {
+        FirebaseManager.users.document(self.id).setData(["ID": self.id, "FullName": self.fullName]) { (error) in
+            guard error == nil else {
+                completion(false, error!)
+                return
+            }
+            completion(true, nil)
+        }
     }
     
     // MARK: - Class methods
     private func toMap() -> [String: Any] {
         let map: [String: Any] = ["ID": firebaseUser.uid,
-                                  "FullName": fullName]
+                                  "FullName": fullName,
+                                  "favoriteCategories": favoriteCategories]
         return map
     }
     
@@ -51,11 +57,11 @@ class Moocher: FirebaseUser {
         if let data = document.data() {
             self.id = data["ID"] as! String
             self.fullName = data["FullName"] as! String
+            self.favoriteCategories = (data["favoriteCategories"] as? [String]) ?? []
         }
     }
     
     // MARK: - Firebase User Methods
-    
     /// Syncs local changes to the database
     ///
     /// - Parameter result: An optional error from the database call

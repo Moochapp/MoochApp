@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LDLogger
 
 class SubcategoryViewController: UIViewController {
 
@@ -14,7 +15,8 @@ class SubcategoryViewController: UIViewController {
         super.viewDidLoad()
 
         title = category
-        setupTable()
+        self.setupTable()
+        self.navigationController?.isNavigationBarHidden = false
         
     }
     
@@ -25,11 +27,13 @@ class SubcategoryViewController: UIViewController {
         guard let category = self.category else {
             fatalError("SubcategoryViewController must have a category to load")
         }
-        guard let subcategories = ExploreViewModel.categoryData.data[category] else {
-            fatalError("An array must be returned from the the category data object to initialize the page")
-        }
+//        guard let subcategories = ExploreViewModel.categoryData.data[category] else {
+//            fatalError("An array must be returned from the the category data object to initialize the page")
+//        }
         
-        var sorted = subcategories.sorted()
+        let subs = StockImageLoader.shared.getSubcategories(for: category)
+        
+        var sorted = subs.sorted()
         
         return sorted
     }()
@@ -51,12 +55,20 @@ class SubcategoryViewController: UIViewController {
     
     // MARK: - Setup
     
-    func downloadItems(test: String, completion: ([Item])->()) {
-        // Item.getResults(for: self.category) { (results) in {
-        //                                        results = ["subcategory": [Item]]
-        //     self.dataSourceForCollectionViews = results
-        // }
-//        #error("Start planning the item Implimentation phase") 
+    func downloadItems(category: String, completion: @escaping ([String: [Item]])->()) {
+        Item.getResults(for: category) { (error, items) in
+            guard error == nil else {
+                Log.d(error!.localizedDescription)
+                return
+            }
+            
+            guard let items = items else {
+                Log.d("Hmmmmm something happened")
+                return
+            }
+            
+            completion(items)
+        }
     }
     func setupTable() {
         self.view.addSubview(tableView)
@@ -142,17 +154,19 @@ extension SubcategoryViewController: UITableViewDataSource, UITableViewDelegate 
                 collectionView.snp.makeConstraints { (make) in
                     make.left.right.top.bottom.equalToSuperview().inset(8)
                 }
-                let random = Int.random(in: 0...11)
-                let img = ExploreViewModel.categoryData.demoImages[random]
-                let delegate = SubcategoryCollectionViewDelegate(subcategory: title, subcategoryImage: img,
-                                                                 items: ["testing", "testing", "testing 234"])
-                collectionViewDataSources[title] = delegate
                 
-                collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "subcategoryCell")
-                collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
-                collectionView.delegate = delegate
-                collectionView.dataSource = delegate
-                collectionView.reloadData()
+                let img = StockImageLoader.shared.getImage(category: category, subcategory: title) ?? UIImage()
+                if let items = dataSourceForCollectionViews[title] {
+                    let delegate = SubcategoryCollectionViewDelegate(subcategory: title,
+                                                                     subcategoryImage: img,
+                                                                     items: items)
+                    collectionViewDataSources[title] = delegate
+                    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "subcategoryCell")
+                    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
+                    collectionView.delegate = delegate
+                    collectionView.dataSource = delegate
+                    collectionView.reloadData()
+                }
                 
                 return cell
             }
@@ -175,7 +189,7 @@ extension SubcategoryViewController: UITableViewDataSource, UITableViewDelegate 
 
 class SubcategoryCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    init(subcategory: String, subcategoryImage: UIImage, items: [String]) {
+    init(subcategory: String, subcategoryImage: UIImage, items: [Item]) {
         self.subcategory = subcategory
         self.subcategoryImage = subcategoryImage
         self.items = items
@@ -184,7 +198,7 @@ class SubcategoryCollectionViewDelegate: NSObject, UICollectionViewDelegate, UIC
     
     let subcategory: String
     let subcategoryImage: UIImage
-    let items: [String]
+    let items: [Item]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -71,7 +71,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTF-WR-OVB">
                                         <rect key="frame" x="0.0" y="177" width="343" height="30"/>
-                                        <state key="normal" title="Sign Up"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="signUp:" destination="UAx-Ea-6P9" eventType="touchUpInside" id="D4N-WW-9H8"/>
                                         </connections>
@@ -107,7 +109,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GtV-7W-UcA">
                                         <rect key="frame" x="163" y="0.0" width="42" height="30"/>
-                                        <state key="normal" title="Log In"/>
+                                        <state key="normal" title="Log In">
+                                            <color key="titleColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="login:" destination="UAx-Ea-6P9" eventType="touchUpInside" id="jUw-0d-oEi"/>
                                         </connections>
@@ -164,6 +168,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q47-TZ-WhM">
                                         <rect key="frame" x="77" y="0.0" width="189" height="30"/>
+                                        <color key="tintColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="    Sign in with email" image="message">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -185,7 +190,9 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAg-N7-vRo">
                                         <rect key="frame" x="0.0" y="138" width="343" height="30"/>
-                                        <state key="normal" title="Forgot Password?"/>
+                                        <state key="normal" title="Forgot Password?">
+                                            <color key="titleColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="forgotPassword:" destination="Xd6-J6-Gut" eventType="touchUpInside" id="FCz-qR-ivp"/>
                                             <action selector="signUp:" destination="UAx-Ea-6P9" eventType="touchUpInside" id="TPo-NA-IQ1"/>
@@ -193,6 +200,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7b-kO-ecw">
                                         <rect key="frame" x="72.5" y="184" width="198" height="30"/>
+                                        <color key="tintColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="    Sign in with phone" image="phone">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -208,7 +216,9 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFB-gd-CLr">
                                         <rect key="frame" x="0.0" y="276" width="343" height="30"/>
-                                        <state key="normal" title="Sign in"/>
+                                        <state key="normal" title="Sign in">
+                                            <color key="titleColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="signIn:" destination="Xd6-J6-Gut" eventType="touchUpInside" id="SSQ-C5-vUy"/>
                                             <action selector="signUp:" destination="UAx-Ea-6P9" eventType="touchUpInside" id="QVn-LP-1WR"/>
@@ -239,7 +249,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiH-eD-bQG">
                                         <rect key="frame" x="196" y="0.0" width="54" height="30"/>
-                                        <state key="normal" title="Sign Up"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" red="0.01112855412" green="0.78457409140000001" blue="0.98641937970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="login:" destination="UAx-Ea-6P9" eventType="touchUpInside" id="aEY-tn-GFR"/>
                                             <action selector="signUp:" destination="Xd6-J6-Gut" eventType="touchUpInside" id="N9K-04-9rq"/>
