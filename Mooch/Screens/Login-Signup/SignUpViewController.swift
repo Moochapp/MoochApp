@@ -55,7 +55,7 @@ class SignUpViewController: UIViewController, Storyboarded {
     // MARK: - Setup
     private func setupSignUpButton() {
         signUp.layer.cornerRadius = 5
-        signUp.backgroundColor = EKColor.LightBlue.a700
+        signUp.backgroundColor = EKColor.Mooch.lightBlue
         signUp.setTitleColor(.white, for: .normal)
         signUp.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -64,7 +64,7 @@ class SignUpViewController: UIViewController, Storyboarded {
     }
     
     private func setupNavigationBar() {
-        navigationController?.navigationBar.tintColor = EKColor.LightBlue.a700
+        navigationController?.navigationBar.tintColor = EKColor.Mooch.lightBlue
     }
     
     private func setupStackView() {
@@ -96,7 +96,7 @@ class SignUpViewController: UIViewController, Storyboarded {
         self.toolbar = UIToolbar(frame: .zero)
         
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneEditing(textField:)))
-        done.tintColor = EKColor.LightBlue.a700
+        done.tintColor = EKColor.Mooch.lightBlue
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         
         self.toolbar.setItems([spacer, done], animated: true)

@@ -21,11 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     // MARK: - Developer
     var devMode = DeveloperPanel.shared.devMode
     var shouldStartOnTabbar = DeveloperPanel.shared.shouldStartOnTabbar
+    
 
     // MARK: - Application
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        Fabric.sharedSDK().debug = true
         
         if devMode {
             print(devModeText)

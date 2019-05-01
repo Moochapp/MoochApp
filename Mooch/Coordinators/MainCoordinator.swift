@@ -62,16 +62,16 @@ class MainCoordinator: Coordinator {
         let tabbar = UITabBarController()
         
         let nav3 = UINavigationController()
-        nav3.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-        nav3.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        nav3.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+//        nav3.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let profile = ProfileViewController.instantiate(from: "Profile")
         profile.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
         profile.coordinator = self
         nav3.viewControllers = [profile]
         
         let nav4 = UINavigationController()
-        nav4.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-        nav4.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        nav4.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+//        nav4.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         let explore = ExploreViewController.instantiate(from: "MainApp")
         explore.coordinator = self
         explore.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 3)
@@ -79,7 +79,7 @@ class MainCoordinator: Coordinator {
         nav4.viewControllers = [explore]
         
         let nav5 = UINavigationController()
-        nav5.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
+//        nav5.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
 //        nav5.navigationBar.backgroundColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
         nav5.navigationBar.isTranslucent = false
         nav5.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -89,17 +89,9 @@ class MainCoordinator: Coordinator {
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
         
-//        let nav6 = UINavigationController()
-//        let pickFavorites = SelectFavoritesViewController()
-//        pickFavorites.coordinator = self
-//        pickFavorites.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 5)
-//        pickFavorites.tabBarItem.title = "test"
-//        nav6.viewControllers = [pickFavorites]
-        
         setupNavs(nav: nav3)
         setupNavs(nav: nav4)
         setupNavs(nav: nav5)
-//        setupNavs(nav: nav6)
         
         tabbar.viewControllers = [nav5, nav4, nav3]
         tabbar.selectedIndex = 1

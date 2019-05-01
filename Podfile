@@ -25,6 +25,8 @@ pod 'LDLogger'
 pod 'IHKeyboardAvoiding'
 pod 'lottie-ios'
 pod 'DZNEmptyDataSet'
+pod 'Fabric', '~> 1.9.0'
+pod 'Crashlytics', '~> 3.12.0'
 
 
   target 'MoochTests' do

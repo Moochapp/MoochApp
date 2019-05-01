@@ -67,6 +67,7 @@ class OnboardingViewController: UIPageViewController, Storyboarded {
         self.pageControl.pageIndicatorTintColor = UIColor.lightGray
         self.pageControl.numberOfPages = self.onboardingViewControllers.count
         self.pageControl.currentPage = 0
+        self.pageControl.tintColor = EKColor.Mooch.lightBlue
         self.view.addSubview(self.pageControl)
         
         pageControl.snp.makeConstraints { (make) in
@@ -98,6 +99,7 @@ class OnboardingViewController: UIPageViewController, Storyboarded {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
         button.addTarget(self, action: #selector(skipToGettingStarted(_:)), for: .touchUpInside)
+        button.tintColor = EKColor.Mooch.lightBlue
         controller.view.addSubview(button)
         button.snp.makeConstraints { (make) in
             make.bottom.right.equalToSuperview().inset(32)

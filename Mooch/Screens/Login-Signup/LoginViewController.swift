@@ -29,6 +29,16 @@ class LoginViewController: UIViewController, Storyboarded {
         setupButtons()
     }
     
+    // MARK: - Outlets
+    @IBOutlet weak var mainStackVIew: UIStackView!
+    @IBOutlet weak var signInWithEmailButton: UIButton!
+    @IBOutlet weak var emailTF: UITextField!
+    @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    @IBOutlet weak var signInWithPhoneButton: UIButton!
+    @IBOutlet weak var phoneTF: PhoneNumberTextField!
+    @IBOutlet weak var signInButton: UIButton!
+    
     // MARK: - Setup
     private func setupStackView() {
         mainStackVIew.setCustomSpacing(16, after: signInWithEmailButton)
@@ -42,25 +52,15 @@ class LoginViewController: UIViewController, Storyboarded {
     
     func setupButtons() {
         signInWithEmailButton.layer.cornerRadius = 5
-        signInWithEmailButton.setTitleColor(EKColor.LightBlue.a700, for: .normal)
+        signInWithEmailButton.setTitleColor(EKColor.Mooch.lightBlue, for: .normal)
         
         signInWithPhoneButton.layer.cornerRadius = 5
-        signInWithPhoneButton.setTitleColor(EKColor.LightBlue.a700, for: .normal)
+        signInWithPhoneButton.setTitleColor(EKColor.Mooch.lightBlue, for: .normal)
         
         signInButton.layer.cornerRadius = 5
-        signInButton.backgroundColor = EKColor.LightBlue.a700
+        signInButton.backgroundColor = EKColor.Mooch.lightBlue
         signInButton.setTitleColor(.white, for: .normal)
     }
-    
-    // MARK: - Outlets
-    @IBOutlet weak var mainStackVIew: UIStackView!
-    @IBOutlet weak var signInWithEmailButton: UIButton!
-    @IBOutlet weak var emailTF: UITextField!
-    @IBOutlet weak var passwordTF: UITextField!
-    @IBOutlet weak var forgotPasswordButton: UIButton!
-    @IBOutlet weak var signInWithPhoneButton: UIButton!
-    @IBOutlet weak var phoneTF: PhoneNumberTextField!
-    @IBOutlet weak var signInButton: UIButton!
     
     // MARK: - Actions
     @IBAction func signInWithEmail(_ sender: UIButton) {
@@ -76,90 +76,129 @@ class LoginViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
-        if signInWithEmail {
-            guard let email = emailTF.text else { return }
-            guard email.isEmpty == false else {
-                self.showError(title: "Hmm...", description: "Please enter your email address!")
-                return
-            }
-            
-            guard let password = passwordTF.text else { return }
-            guard password.isEmpty == false else {
-                self.showError(title: "Hmm...", description: "Please enter your password!")
-                return
-            }
-            
-            FirebaseManager.auth.signIn(withEmail: email, password: password) { (result, error) in
-                guard error == nil else {
-                    if let errCode = AuthErrorCode(rawValue: error!._code) {
-                        switch errCode {
-                        case .invalidEmail:
-                            self.showError(title: "Oops!", description: error!.localizedDescription)
-                        case .emailAlreadyInUse:
-                            self.showError(title: "Oops!", description: error!.localizedDescription)
-                        default:
-                            self.showError(title: "Oops!", description: "Please try again.")
-                        }
-                    }
+        showProgressIndicator { (activityIndicator) in
+            self.signInButton.isEnabled = false
+            if signInWithEmail {
+                guard let email = emailTF.text else { return }
+                guard email.isEmpty == false else {
+                    activityIndicator.stopAnimating()
+                    self.signInButton.isEnabled = true
+                    self.showError(title: "Hmm...", description: "Please enter your email address!")
                     return
                 }
                 
-                guard let result = result else {
-                    Log.e("Result block error")
+                guard let password = passwordTF.text else { return }
+                guard password.isEmpty == false else {
+                    activityIndicator.stopAnimating()
+                    self.signInButton.isEnabled = true
+                    self.showError(title: "Hmm...", description: "Please enter your password!")
                     return
                 }
                 
-                Session.shared.moocher = Moocher(user: result.user)
-                Session.shared.moocher.syncToLocal(result: { (error) in
+                FirebaseManager.auth.signIn(withEmail: email, password: password) { (result, error) in
                     guard error == nil else {
-                        Log.e(error?.localizedDescription)
+                        activityIndicator.stopAnimating()
+                        self.signInButton.isEnabled = true
+                        if let errCode = AuthErrorCode(rawValue: error!._code) {
+                            switch errCode {
+                            case .invalidEmail:
+                                self.showError(title: "Oops!", description: "We can't find an account for that email.")
+                            case .emailAlreadyInUse:
+                                self.showError(title: "Oops!", description: "Email is already in use.")
+                            default:
+                                self.showError(title: "Oops!", description: "Please try again.")
+                            }
+                        }
                         return
                     }
-                    self.coordinator.mainApp()
-                })
-            }
-        } else {
-            let num = phoneTF.nationalNumber
-            let adjusted = "+1\(num)"
-            guard phoneTF.text!.isEmpty == false else {
-                self.showError(title: "Hmm...", description: "Please enter a valid phone number.")
-                return
-            }
-            
-            PhoneAuthProvider.provider().verifyPhoneNumber(adjusted, uiDelegate: nil) { (verificationID, error) in
-                if let error = error {
-                    self.showError(title: "Hmm...", description: error.localizedDescription)
+                    
+                    guard let result = result else {
+                        Log.e("Result block error")
+                        activityIndicator.stopAnimating()
+                        self.signInButton.isEnabled = true
+                        return
+                    }
+                    
+                    Session.shared.moocher = Moocher(user: result.user)
+                    Session.shared.moocher.syncToLocal(result: { (error) in
+                        guard error == nil else {
+                            Log.e(error?.localizedDescription)
+                            activityIndicator.stopAnimating()
+                            self.signInButton.isEnabled = true
+                            return
+                        }
+                        self.coordinator.mainApp()
+                    })
+                }
+            } else {
+                let num = phoneTF.nationalNumber
+                let adjusted = "+1\(num)"
+                guard phoneTF.text!.isEmpty == false else {
+                    activityIndicator.stopAnimating()
+                    self.showError(title: "Hmm...", description: "Please enter a valid phone number.")
                     return
                 }
                 
-                guard let verification = verificationID else {
-                    self.showError(title: "Hmm...", description: "Please try again later.")
-                    return
-                }
-                
-                self.showVerify(in: self, code: { (code) in
-                    if let code = code {
-                        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verification,
-                                                                                 verificationCode: code)
-                        FirebaseManager.auth.signInAndRetrieveData(with: credential, completion: { (result, error) in
-                            guard error == nil else {
-                                self.showError(title: "Hmm...", description: error!.localizedDescription)
-                                return
+                PhoneAuthProvider.provider().verifyPhoneNumber(adjusted, uiDelegate: nil) { (verificationID, error) in
+                    if let error = error {
+                        activityIndicator.stopAnimating()
+                        self.signInButton.isEnabled = true
+                        if let errCode = AuthErrorCode(rawValue: error._code) {
+                            switch errCode {
+                            case .invalidEmail:
+                                self.showError(title: "Oops!", description: "We can't find an account for that email.")
+                            case .emailAlreadyInUse:
+                                self.showError(title: "Oops!", description: "Email is already in use.")
+                            case .invalidPhoneNumber:
+                                self.showError(title: "Oops!", description: "Invalid phone number.")
+                            case .missingPhoneNumber:
+                                self.showError(title: "Oops!", description: "Please provide a valid phone number.")
+                            default:
+                                self.showError(title: "Oops!", description: "Please try again in a moment.")
                             }
-                            guard let result = result else { return }
-                            let user = result.user
-                            Session.shared.moocher = Moocher(user: user)
-                            Session.shared.moocher.syncToLocal(result: { (error) in
+                        }
+                        return
+                    }
+                    
+                    guard let verification = verificationID else {
+                        activityIndicator.stopAnimating()
+                        self.signInButton.isEnabled = true
+                        self.showError(title: "Hmm...", description: "Please try again later.")
+                        return
+                    }
+                    
+                    self.showVerify(in: self, code: { (code) in
+                        if let code = code {
+                            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verification,
+                                                                                     verificationCode: code)
+                            FirebaseManager.auth.signInAndRetrieveData(with: credential, completion: { (result, error) in
                                 guard error == nil else {
+                                    activityIndicator.stopAnimating()
+                                    self.signInButton.isEnabled = true
                                     self.showError(title: "Hmm...", description: error!.localizedDescription)
                                     return
                                 }
-                                
-                                self.coordinator.mainApp()
+                                guard let result = result else {
+                                    activityIndicator.stopAnimating()
+                                    self.signInButton.isEnabled = true
+                                    return
+                                }
+                                let user = result.user
+                                Session.shared.moocher = Moocher(user: user)
+                                Session.shared.moocher.syncToLocal(result: { (error) in
+                                    guard error == nil else {
+                                        activityIndicator.stopAnimating()
+                                        self.signInButton.isEnabled = true
+                                        self.showError(title: "Hmm...", description: error!.localizedDescription)
+                                        return
+                                    }
+                                    
+                                    self.coordinator.mainApp()
+                                })
                             })
-                        })
-                    }
-                })
+                        }
+                    })
+                }
             }
         }
     }

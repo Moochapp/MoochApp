@@ -15,11 +15,13 @@ class GetStartedViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        getStartedButton.tintColor = EKColor.Mooch.lightBlue
         
     }
 
+    
+    @IBOutlet weak var getStartedButton: UIButton!
     @IBAction func getStarted(_ sender: Any) {
         coordinator.signup()
     }
