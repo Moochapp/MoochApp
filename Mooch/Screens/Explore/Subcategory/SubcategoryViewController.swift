@@ -8,6 +8,7 @@
 
 import UIKit
 import LDLogger
+import DZNEmptyDataSet
 
 class SubcategoryViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
@@ -15,6 +16,7 @@ class SubcategoryViewController: UICollectionViewController, UICollectionViewDel
     public var category: String!
     public var subcategories: [String]!
     public var itemsForSubcategories: [String: [Item]]?
+    private var dataSourceForView: [String: [Item]] = [:]
     
     private let topCellID = "topCell"
     private let mainCellID = "mainCell"
@@ -29,18 +31,29 @@ class SubcategoryViewController: UICollectionViewController, UICollectionViewDel
         collectionView.backgroundColor = EKColor.Mooch.darkGray
         collectionView.register(TopNavCVCell.self, forCellWithReuseIdentifier: topCellID)
         collectionView.register(MainCVCell.self, forCellWithReuseIdentifier: mainCellID)
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if let items = itemsForSubcategories {
+            dataSourceForView = items
+        }
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
     
+    var shouldShowEmptyDataSet = false
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
-            return itemsForSubcategories?.count ?? 0
+            let count = dataSourceForView.count
+            if count == 0 {
+                shouldShowEmptyDataSet = true
+                return 1
+            } else {
+                return count
+            }
         }
     }
     
@@ -48,16 +61,26 @@ class SubcategoryViewController: UICollectionViewController, UICollectionViewDel
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellID, for: indexPath) as! TopNavCVCell
             cell.segmentDelegate = self
+            if shouldShowEmptyDataSet {
+                cell.segmentedControl.isEnabled = false
+            }
             
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: mainCellID, for: indexPath) as! MainCVCell
-            cell.categoryName = self.category
-            let subcategory = Array(itemsForSubcategories!.keys)[indexPath.row]
-            guard let items = itemsForSubcategories?[subcategory] else { return cell }
-            cell.subcategoryName = subcategory
-            cell.itemsForSubcategory = items
-            cell.itemDelegate = self
+            if shouldShowEmptyDataSet {
+                cell.itemsCollectionView.emptyDataSetDelegate = self
+                cell.itemsCollectionView.emptyDataSetSource = self
+            } else {
+                cell.categoryName = self.category
+                let subcategory = Array(itemsForSubcategories!.keys)[indexPath.row]
+                guard let items = dataSourceForView[subcategory] else { return cell }
+                cell.subcategoryName = subcategory
+                cell.itemsForSubcategory = items
+                cell.itemDelegate = self
+                cell.itemsCollectionView.emptyDataSetDelegate = self
+                cell.itemsCollectionView.emptyDataSetSource = self
+            }
             return cell
         }
     }
@@ -66,7 +89,25 @@ class SubcategoryViewController: UICollectionViewController, UICollectionViewDel
         if indexPath.section == 0 {
             return CGSize(width: collectionView.frame.width, height: 75.0)
         } else {
-            return CGSize(width: collectionView.frame.width, height: 120.0)
+            if shouldShowEmptyDataSet {
+                return CGSize(width: collectionView.frame.width, height: 320.0)
+            } else {
+                return CGSize(width: collectionView.frame.width, height: 120.0)
+            }
+        }
+    }
+    
+    
+    func filterItems(with filter: Item.Availability) {
+        if let data = itemsForSubcategories {
+            var filteredDicts: [String: [Item]] = [:]
+            for dict in data {
+                let filtered = dict.value.filter { (item) -> Bool in
+                    return item.availableFor[filter] ?? false
+                }
+                filteredDicts[dict.key] = filtered
+            }
+            dataSourceForView = filteredDicts
         }
     }
 }
@@ -74,10 +115,41 @@ class SubcategoryViewController: UICollectionViewController, UICollectionViewDel
 extension SubcategoryViewController: MoochSegmentedControlDelegate, CellItemDelegate {
     func didSelect(index: Int) {
         print("Selected: \(index)")
+        switch index {
+        case 0:
+            // mooch
+            filterItems(with: .mooch)
+            collectionView.reloadData()
+        case 1:
+            filterItems(with: .buy)
+            collectionView.reloadData()
+        case 2:
+            filterItems(with: .rent)
+            collectionView.reloadData()
+        default:
+            if let items = itemsForSubcategories {
+                dataSourceForView = items
+                collectionView.reloadData()
+            }
+        }
     }
     
     func didSelect(item: Item) {
         coordinator.showItemDetail(for: item)
+    }
+}
+
+extension SubcategoryViewController: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "Nothing to see here... Yet!"
+        let attr = NSAttributedString(string: title)
+        return attr
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "There are no items in these categories yet! When you and your friends add items in this category, they will appear here!"
+        let attr = NSAttributedString(string: title)
+        return attr
     }
 }
 
@@ -99,7 +171,6 @@ class TopNavCVCell: UICollectionViewCell {
     var segmentDelegate: MoochSegmentedControlDelegate? = nil
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Mooch", "Buy", "Rent", "All"])
-        control.addTarget(self, action: #selector(didSelectItem(control:)), for: .valueChanged)
         control.tintColor = EKColor.Mooch.lightBlue
         control.selectedSegmentIndex = 3
         return control
@@ -107,6 +178,7 @@ class TopNavCVCell: UICollectionViewCell {
     
     func setupView() {
         backgroundColor = .clear
+        segmentedControl.addTarget(self, action: #selector(didSelectItem(control:)), for: .valueChanged)
         addSubview(segmentedControl)
         segmentedControl.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview().inset(8)
@@ -114,7 +186,7 @@ class TopNavCVCell: UICollectionViewCell {
         }
     }
     
-    @objc private func didSelectItem(control: UISegmentedControl) {
+    @objc func didSelectItem(control: UISegmentedControl) {
         segmentDelegate?.didSelect(index: control.selectedSegmentIndex)
     }
 }
@@ -130,7 +202,11 @@ class MainCVCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVi
     
     var categoryName: String!
     var subcategoryName: String!
-    var itemsForSubcategory: [Item]!
+    var itemsForSubcategory: [Item]! {
+        didSet {
+            itemsCollectionView.reloadData()
+        }
+    }
     let itemsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -158,7 +234,15 @@ class MainCVCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemsForSubcategory.count + 1
+        if let items = itemsForSubcategory {
+            if items.count == 0 {
+                return 0
+            } else {
+                return itemsForSubcategory.count + 1
+            }
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

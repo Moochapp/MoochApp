@@ -8,6 +8,7 @@
 
 import UIKit
 import LDLogger
+import DZNEmptyDataSet
 
 class ItemDetailTableViewController: UITableViewController {
 
@@ -80,10 +81,13 @@ class ItemDetailTableViewController: UITableViewController {
             }
         }
         item.images = orderedImages
+        // Images
         IDImageCollectionViewDelegate = ItemDetailImageCollectionViewDelegate(images: item.images, collectionView: IDImageCollectionView)
         IDImageCollectionView.delegate = IDImageCollectionViewDelegate
         IDImageCollectionView.dataSource = IDImageCollectionViewDelegate
         
+        
+        // Related
         IDRelatedCollectionViewDelegate = ItemDetailRelatedCollectionViewDelegate(items: [], collectionView: IDRelatedCollectionView, coordinator: self.coordinator)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirebaseManager.items
@@ -100,7 +104,12 @@ class ItemDetailTableViewController: UITableViewController {
                 
                 var related: [Item] = []
                 for doc in snap.documents {
-                    related.append(Item(document: doc))
+                    let newItem = Item(document: doc)
+                    if newItem.id != self?.item.id {
+                        related.append(newItem)
+                    } else {
+                        Log.d("Skipping duplicate item.")
+                    }
                 }
                 
                 self?.IDRelatedCollectionViewDelegate.relatedItems = related
@@ -112,7 +121,10 @@ class ItemDetailTableViewController: UITableViewController {
                 }
             }
         }
+        IDRelatedCollectionView.emptyDataSetSource = IDRelatedCollectionViewDelegate
+        IDRelatedCollectionView.emptyDataSetDelegate = IDRelatedCollectionViewDelegate
         
+        // Owner
         IDOwnerItemsCollectionViewDelegate = ItemDetailOwnerItemsCollectionViewDelegate(items: [], collectionView: IDOwnerItemsCollectionView, coordinator: self.coordinator)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirebaseManager.items.whereField("Owner", isEqualTo: self?.item.owner).order(by: "Timestamp", descending: true).limit(to: 12).getDocuments(completion: { (snapshot, error) in
@@ -127,7 +139,12 @@ class ItemDetailTableViewController: UITableViewController {
                 
                 var related: [Item] = []
                 for doc in snap.documents {
-                    related.append(Item(document: doc))
+                    let newItem = Item(document: doc)
+                    if newItem.id != self?.item.id {
+                        related.append(newItem)
+                    } else {
+                        Log.d("Skipping duplicate item")
+                    }
                 }
                 
                 self?.IDOwnerItemsCollectionViewDelegate.ownerItems = related
@@ -315,7 +332,7 @@ class ItemDetailImageCollectionViewDelegate: NSObject, UICollectionViewDelegate,
     }
 }
 
-class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     static var identifier = "IDRelatedCVCell"
     
     var relatedItems: [Item]
@@ -327,27 +344,48 @@ class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegat
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailRelatedCollectionViewDelegate.identifier)
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if relatedItems.count == 0 {
-            if DeveloperPanel.shared.shouldLoadDummyData {
-                return 7
-            } else {
-                return 0
-            }
-        } else {
-            return relatedItems.count
-        }
+        return relatedItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemDetailRelatedCollectionViewDelegate.identifier, for: indexPath)
         
+        
+        let item = relatedItems[indexPath.row]
+        
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 5
+        
+        let imgView = UIImageView()
+        imgView.contentMode = .scaleAspectFill
+        imgView.layer.cornerRadius = 5
+        imgView.clipsToBounds = true
+        cell.addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        do {
+            let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
+            DispatchQueue.main.async {
+                imgView.image = img
+            }
+        } catch {
+            Log.e(error)
+            item.downloadImages(completion: { (done) in
+                Log.d("Finished loading images")
+            }) { (thumbnail) in
+                do {
+                    let img = try Session.shared.cache.getImageFrom(itemID: item.id, imageID: "img-0")
+                    DispatchQueue.main.async {
+                        imgView.image = img
+                    }
+                } catch {
+                    Log.e(error)
+                }
+            }
+        }
         
         return cell
     }
@@ -363,11 +401,24 @@ class ItemDetailRelatedCollectionViewDelegate: NSObject, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Log.d(indexPath.row)
+        let item = relatedItems[indexPath.row]
+        coordinator.showItemDetail(for: item)
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "Nothing to see here... yet!"
+        let attr = NSAttributedString(string: title)
+        return attr
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "When you and you friends add more items to this category, you'll see those items appear here!"
+        let attr = NSAttributedString(string: title)
+        return attr
     }
 }
 
-class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     static var identifier = "IDOwnerItemsCVCell"
     
     var ownerItems: [Item]
@@ -379,27 +430,12 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailOwnerItemsCollectionViewDelegate.identifier)
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if ownerItems.count == 0 {
-            if DeveloperPanel.shared.shouldLoadDummyData {
-                return 7
-            } else {
-                return 0
-            }
-        } else {
-            return ownerItems.count
-        }
+        return ownerItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemDetailOwnerItemsCollectionViewDelegate.identifier, for: indexPath)
-        
-        cell.backgroundColor = .lightGray
-        cell.layer.cornerRadius = 5
         
         let item = ownerItems[indexPath.row]
         
@@ -449,6 +485,18 @@ class ItemDetailOwnerItemsCollectionViewDelegate: NSObject, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = ownerItems[indexPath.row]
         coordinator.showItemDetail(for: item)
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "Nothing to see here... yet!"
+        let attr = NSAttributedString(string: title)
+        return attr
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "When your friend add more items, you'll see those items appear here!"
+        let attr = NSAttributedString(string: title)
+        return attr
     }
 }
 

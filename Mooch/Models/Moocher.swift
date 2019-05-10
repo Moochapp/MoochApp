@@ -96,6 +96,9 @@ class Moocher: FirebaseUser {
         }
     }
     
+    static func findUser(with phone: String) {
+        
+    }
 }
 
 extension Moocher {

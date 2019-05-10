@@ -15,6 +15,11 @@
 		73026A5B2202206B00CC767E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5A2202206B00CC767E /* ProfileViewController.swift */; };
 		73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5C2202207B00CC767E /* SocialViewController.swift */; };
 		73026A5F2202209700CC767E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5E2202209700CC767E /* SearchViewController.swift */; };
+		73056C12227F4EEA0033A1D3 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C11227F4EEA0033A1D3 /* BarcodeScannerViewController.swift */; };
+		73056C15227F4FA40033A1D3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C14227F4FA40033A1D3 /* Network.swift */; };
+		73056C17227F4FC20033A1D3 /* UPCItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C16227F4FC20033A1D3 /* UPCItem.swift */; };
+		73056C19227F502C0033A1D3 /* BarcodeScannerResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C18227F502C0033A1D3 /* BarcodeScannerResultViewController.swift */; };
+		73056C1C227F53910033A1D3 /* CameraModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C1B227F53910033A1D3 /* CameraModule.swift */; };
 		730CE8D521FA497F00350C40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730CE8D421FA497F00350C40 /* AppDelegate.swift */; };
 		730CE8DC21FA498000350C40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 730CE8DB21FA498000350C40 /* Assets.xcassets */; };
 		730CE8DF21FA498000350C40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 730CE8DD21FA498000350C40 /* LaunchScreen.storyboard */; };
@@ -141,6 +146,11 @@
 		73026A5A2202206B00CC767E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		73026A5C2202207B00CC767E /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		73026A5E2202209700CC767E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		73056C11227F4EEA0033A1D3 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
+		73056C14227F4FA40033A1D3 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		73056C16227F4FC20033A1D3 /* UPCItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCItem.swift; sourceTree = "<group>"; };
+		73056C18227F502C0033A1D3 /* BarcodeScannerResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerResultViewController.swift; sourceTree = "<group>"; };
+		73056C1B227F53910033A1D3 /* CameraModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModule.swift; sourceTree = "<group>"; };
 		730CE8D121FA497F00350C40 /* Mooch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mooch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		730CE8D421FA497F00350C40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		730CE8DB21FA498000350C40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -302,6 +312,14 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		73056C1A227F537A0033A1D3 /* CameraModule */ = {
+			isa = PBXGroup;
+			children = (
+				73056C1B227F53910033A1D3 /* CameraModule.swift */,
+			);
+			path = CameraModule;
+			sourceTree = "<group>";
+		};
 		730CE8C821FA497F00350C40 = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +402,8 @@
 			children = (
 				73CA259F2241466E006A8087 /* InventoryViewController.swift */,
 				732B4B09224E85DF009E8FF5 /* ChooseMethodViewController.swift */,
+				73056C11227F4EEA0033A1D3 /* BarcodeScannerViewController.swift */,
+				73056C18227F502C0033A1D3 /* BarcodeScannerResultViewController.swift */,
 				732B4B1A224ECD5D009E8FF5 /* CreateItemViewController.swift */,
 			);
 			path = Inventory;
@@ -423,6 +443,7 @@
 				731B07392210CAF70079E45A /* Entry Manager */,
 				735E28B021FCD7310035AD82 /* Session.swift */,
 				735E28B121FCD7310035AD82 /* Firebase.swift */,
+				73056C14227F4FA40033A1D3 /* Network.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -466,6 +487,7 @@
 				732B4B18224EC8A5009E8FF5 /* Photographer.swift */,
 				732A5668226E3B5E007A6AA7 /* StockImageLoader.swift */,
 				73ED7171227788F200D0D159 /* FadedImageView.swift */,
+				73056C1A227F537A0033A1D3 /* CameraModule */,
 				73D35FB0225ED3ED00C8F00C /* Item Details View */,
 				73E5A4332257EF73002093F4 /* Loading View */,
 				73B33FB32251910600452698 /* Profile Picture */,
@@ -480,6 +502,7 @@
 				735E28B721FCD7310035AD82 /* Realm */,
 				731465BA2206341D0092FBE0 /* Moocher.swift */,
 				731B074B221240A40079E45A /* Item.swift */,
+				73056C16227F4FC20033A1D3 /* UPCItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1052,10 +1075,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73056C15227F4FA40033A1D3 /* Network.swift in Sources */,
 				73FCFD5F221F80B000C350AC /* GetStartedViewController.swift in Sources */,
 				73ED716A22777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift in Sources */,
 				732A5669226E3B5E007A6AA7 /* StockImageLoader.swift in Sources */,
 				7353040D225E92BD00011F4C /* DateExtension.swift in Sources */,
+				73056C17227F4FC20033A1D3 /* UPCItem.swift in Sources */,
 				73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */,
 				73026A5722021BAE00CC767E /* SignUpViewController.swift in Sources */,
 				735CEA06225D37DD00C06ECF /* ItemDetailTableViewController.swift in Sources */,
@@ -1066,8 +1091,11 @@
 				73ED71702277849B00D0D159 /* CategoriesTableViewCell.swift in Sources */,
 				731B074A2211E3A60079E45A /* FirebaseUserManager.swift in Sources */,
 				731B074C221240A40079E45A /* Item.swift in Sources */,
+				73056C12227F4EEA0033A1D3 /* BarcodeScannerViewController.swift in Sources */,
+				73056C19227F502C0033A1D3 /* BarcodeScannerResultViewController.swift in Sources */,
 				73ED7172227788F200D0D159 /* FadedImageView.swift in Sources */,
 				732B4B19224EC8A6009E8FF5 /* Photographer.swift in Sources */,
+				73056C1C227F53910033A1D3 /* CameraModule.swift in Sources */,
 				73782E24220BB89900145B92 /* AlertManager.swift in Sources */,
 				734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */,
 				73026A5922021DC100CC767E /* MoochCoordinator.swift in Sources */,

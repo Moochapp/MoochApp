@@ -31,20 +31,18 @@ class ChooseMethodViewController: UIViewController, Storyboarded {
         scanBarcodeButton.layer.cornerRadius = 10
     }
     
+    lazy var cameraModule: CameraModule = {
+        let cm = CameraModule()
+        cm.start()
+        return cm
+    }()
     
     @IBAction func takePhoto(_ sender: UIButton) {
-        let config = Configuration()
-        config.allowMultiplePhotoSelection = true
-        config.allowPinchToZoom = true
-        config.allowVideoSelection = false
-        config.allowVolumeButtonsToTakePicture = true
-        let picker = ImagePickerController(configuration: config)
-        picker.imageLimit = 5
-        picker.delegate = self
-        picker.startOnFrontCamera = false
-        self.present(picker, animated: true, completion: nil)
+        cameraModule.cameraDelegate = self
+        self.present(cameraModule.picker, animated: true, completion: nil)
     }
     
+    // Remove This
     @IBAction func chooseFromLibrary(_ sender: UIButton) {
         print("Library")
         let photographer = Photographer(viewController: self, type: .photoLibrary)
@@ -53,11 +51,10 @@ class ChooseMethodViewController: UIViewController, Storyboarded {
     
     @IBAction func scanBarcode(_ sender: UIButton) {
         print("Scan")
-        showDemoMessage(title: "Scanner", desc: "This feature hasn't been implimented yet.")
+        coordinator.scanBarcode()
     }
     
     func proceedWithPhotos(images: [UIImage]) {
-        print("proceeding with \(images.count) photos")
         coordinator.createItem(with: images)
     }
     
@@ -101,3 +98,8 @@ extension ChooseMethodViewController: ImagePickerDelegate {
     }
 }
 
+extension ChooseMethodViewController: CameraModuleDelegate {
+    func camera(_ camera: CameraModule, didFinishWithImages images: [UIImage]) {
+        proceedWithPhotos(images: images)
+    }
+}

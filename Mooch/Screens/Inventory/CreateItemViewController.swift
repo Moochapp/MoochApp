@@ -291,6 +291,7 @@ extension CreateItemViewController: UITableViewDelegate, UITableViewDataSource {
                 textfield = view
             } else {
                 textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
+                textfield.text = self.item.name
                 cell.addSubview(textfield)
                 textfield.snp.makeConstraints { (make) in
                     make.left.right.equalToSuperview().inset(16)

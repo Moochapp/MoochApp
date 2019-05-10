@@ -17,7 +17,10 @@ class ProfileViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
 
         title = "Profile"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logout(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout",
+                                                                 style: .done,
+                                                                 target: self,
+                                                                 action: #selector(logout(sender:)))
         
     }
     
@@ -30,14 +33,6 @@ class ProfileViewController: UIViewController, Storyboarded {
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

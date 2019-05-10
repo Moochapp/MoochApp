@@ -127,6 +127,20 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func scanBarcode() {
+        let vc = BarcodeScannerViewController()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: false)
+    }
+    
+    func selectImagesFromAPI(item: UPCItem) {
+        let vc = BarcodeScannerResultViewController()
+        vc.item = item
+        vc.coordinator = self
+        
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func createItem(with item: Item) {
         
     }
@@ -136,6 +150,16 @@ class MainCoordinator: Coordinator {
         vc.coordinator = self
         vc.item = Item()
         vc.item.images = images
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func createItem(with images: [UIImage], upcItem: UPCItem) {
+        let vc = CreateItemViewController()
+        vc.coordinator = self
+        vc.item = Item()
+        vc.item.images = images
+        vc.item.name = upcItem.title
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(vc, animated: true)
     }

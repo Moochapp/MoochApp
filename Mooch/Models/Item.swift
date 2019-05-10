@@ -125,11 +125,6 @@ class Item {
                 let name = "img-\(index).png"
                 Log.i("Starting download for:", self.id, name)
                 self.download(ID: self.id, name: name, completion: { (image) in
-                    
-                    if index == 0 {
-                        thumbnail(image)
-                    }
-                    
                     self.images.append(image)
                     Log.d("Downloaded image:", self.id, name)
                     do {
@@ -139,6 +134,10 @@ class Item {
                     } catch {
                         Log.e(error)
                         group.leave()
+                    }
+                    
+                    if index == 0 {
+                        thumbnail(image)
                     }
                 })
             }

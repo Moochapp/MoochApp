@@ -76,8 +76,8 @@ class LoginViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
+        self.signInButton.isEnabled = false
         showProgressIndicator { (activityIndicator) in
-            self.signInButton.isEnabled = false
             if signInWithEmail {
                 guard let email = emailTF.text else { return }
                 guard email.isEmpty == false else {
@@ -135,6 +135,7 @@ class LoginViewController: UIViewController, Storyboarded {
                 let adjusted = "+1\(num)"
                 guard phoneTF.text!.isEmpty == false else {
                     activityIndicator.stopAnimating()
+                    self.signInButton.isEnabled = true
                     self.showError(title: "Hmm...", description: "Please enter a valid phone number.")
                     return
                 }

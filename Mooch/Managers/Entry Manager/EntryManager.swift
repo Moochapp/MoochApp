@@ -119,42 +119,39 @@ class EntryManager {
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
-    func showAlertView(attributes: EKAttributes) {
+    struct AlertOption {
+        var isCancel = false
+        var title: String
+        var action: ()->()
+    }
+    
+    func showAlertView(title: String, desc: String, attributes: EKAttributes, affirmTitle: String, affirmAction: @escaping ()->(),
+                       cancelTitle: String, cancelAction: @escaping ()->()) {
         
         // Generate textual content
-        let title = EKProperty.LabelContent(text: "Hopa!", style: .init(font: MainFont.medium.with(size: 15), color: .black, alignment: .center))
-        let description = EKProperty.LabelContent(text: "This is a system-like alert, with several buttons. You can display even more buttons if you want. Click on one of them to dismiss it.", style: .init(font: MainFont.light.with(size: 13), color: .black, alignment: .center))
-//        let image = EKProperty.ImageContent(imageName: "ic_apple", size: CGSize(width: 25, height: 25), contentMode: .scaleAspectFit)
-        let simpleMessage = EKSimpleMessage(image: nil, title: title, description: description)
+        let titleLbl = EKProperty.LabelContent(text: title, style: .init(font: MainFont.medium.with(size: 15), color: .black, alignment: .center))
+        let description = EKProperty.LabelContent(text: desc, style: .init(font: MainFont.light.with(size: 13), color: .black, alignment: .center))
+        let simpleMessage = EKSimpleMessage(image: nil, title: titleLbl, description: description)
         
         // Generate buttons content
         let buttonFont = MainFont.medium.with(size: 16)
         
-        // Close button
-        let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor.Gray.a800)
-        let closeButtonLabel = EKProperty.LabelContent(text: "NOT NOW", style: closeButtonLabelStyle)
-        let closeButton = EKProperty.ButtonContent(label: closeButtonLabel, backgroundColor: .clear, highlightedBackgroundColor:  EKColor.Gray.a800.withAlphaComponent(0.05)) {
+        let aStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor.Mooch.lightBlue)
+        let aLabel = EKProperty.LabelContent(text: affirmTitle, style: aStyle)
+        let affirm = EKProperty.ButtonContent(label: aLabel, backgroundColor: .clear, highlightedBackgroundColor: EKColor.Gray.a800) {
             SwiftEntryKit.dismiss()
+            affirmAction()
         }
-        
-        // Remind me later Button
-        let laterButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor.Teal.a600)
-        let laterButtonLabel = EKProperty.LabelContent(text: "MAYBE LATER", style: laterButtonLabelStyle)
-        let laterButton = EKProperty.ButtonContent(label: laterButtonLabel, backgroundColor: .clear, highlightedBackgroundColor:  EKColor.Teal.a600.withAlphaComponent(0.05)) {
+        let cStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor.Gray.a800)
+        let cLabel = EKProperty.LabelContent(text: cancelTitle, style: cStyle)
+        let cancel = EKProperty.ButtonContent(label: cLabel, backgroundColor: .clear, highlightedBackgroundColor: EKColor.Gray.a800) {
             SwiftEntryKit.dismiss()
-        }
-        
-        // Ok Button
-        let okButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor.Teal.a600)
-        let okButtonLabel = EKProperty.LabelContent(text: "SHOW ME", style: okButtonLabelStyle)
-        let okButton = EKProperty.ButtonContent(label: okButtonLabel, backgroundColor: .clear, highlightedBackgroundColor:  EKColor.Teal.a600.withAlphaComponent(0.05)) {
-            SwiftEntryKit.dismiss()
+            cancelAction()
         }
         
         // Generate the content
-        let buttonsBarContent = EKProperty.ButtonBarContent(with: okButton, laterButton, closeButton, separatorColor: EKColor.Gray.light, expandAnimatedly: true)
-        
-        let alertMessage = EKAlertMessage(simpleMessage: simpleMessage, buttonBarContent: buttonsBarContent)
+        let bar = EKProperty.ButtonBarContent(with: affirm, cancel, separatorColor: EKColor.Mooch.darkGray, expandAnimatedly: true)
+        let alertMessage = EKAlertMessage(simpleMessage: simpleMessage, buttonBarContent: bar)
         
         // Setup the view itself
         let contentView = EKAlertMessageView(with: alertMessage)
