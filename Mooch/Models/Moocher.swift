@@ -24,6 +24,7 @@ class Moocher: FirebaseUser {
     var fullName: String
     var items: [Item] = []
     var favoriteCategories: [String] = []
+    var friends: [String] = []
     
     // MARK: Initializer
     init(user: User) {
@@ -58,6 +59,12 @@ class Moocher: FirebaseUser {
             self.id = data["ID"] as! String
             self.fullName = data["FullName"] as! String
             self.favoriteCategories = (data["favoriteCategories"] as? [String]) ?? []
+            if let friends = data["Friends"] as? [Any] {
+                var friendSet: [Friend] = []
+                for friend in friends {
+                    print(friend)
+                }
+            }
         }
     }
     
@@ -127,4 +134,11 @@ extension Moocher {
     private static func getDataFromMap(document: DocumentSnapshot) {
         
     }
+}
+
+struct Friend {
+    var id: String
+    var status: String
+    var isUserBloackedByRef: Bool
+    var isRefBlockedByUser: Bool
 }

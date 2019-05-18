@@ -12,8 +12,6 @@
 		73026A53220217DD00CC767E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A52220217DD00CC767E /* OnboardingViewController.swift */; };
 		73026A5722021BAE00CC767E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5622021BAE00CC767E /* SignUpViewController.swift */; };
 		73026A5922021DC100CC767E /* MoochCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5822021DC100CC767E /* MoochCoordinator.swift */; };
-		73026A5B2202206B00CC767E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5A2202206B00CC767E /* ProfileViewController.swift */; };
-		73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5C2202207B00CC767E /* SocialViewController.swift */; };
 		73026A5F2202209700CC767E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73026A5E2202209700CC767E /* SearchViewController.swift */; };
 		73056C12227F4EEA0033A1D3 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C11227F4EEA0033A1D3 /* BarcodeScannerViewController.swift */; };
 		73056C15227F4FA40033A1D3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056C14227F4FA40033A1D3 /* Network.swift */; };
@@ -46,6 +44,7 @@
 		73318A0A2249CD8A00BB1443 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */; };
 		733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */; };
 		733DFBE22229D65200A16995 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733DFBE12229D65100A16995 /* ExploreViewController.swift */; };
+		734117992288FA8200DAF086 /* InterworksFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734117982288FA8200DAF086 /* InterworksFileLoader.swift */; };
 		73417F87222DC171005A6714 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73417F86222DC171005A6714 /* MainApp.storyboard */; };
 		73417F8A222DD55B005A6714 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73417F89222DD55B005A6714 /* ExploreViewModel.swift */; };
 		734C2D24227223E8000F9A10 /* SelectFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C2D23227223E8000F9A10 /* SelectFavoritesViewController.swift */; };
@@ -90,6 +89,7 @@
 		73ED716E2277847400D0D159 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716D2277847400D0D159 /* FavoritesTableViewCell.swift */; };
 		73ED71702277849B00D0D159 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */; };
 		73ED7172227788F200D0D159 /* FadedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED7171227788F200D0D159 /* FadedImageView.swift */; };
+		73F1B197228F49E10058E538 /* MoochersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1B196228F49E10058E538 /* MoochersViewController.swift */; };
 		73F3F9B8224FF1AF00CCE4F6 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; };
 		73F3F9B9224FF1AF00CCE4F6 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCFD5C221F7F6900C350AC /* UIViewControllerExtension.swift */; };
@@ -143,8 +143,6 @@
 		73026A52220217DD00CC767E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		73026A5622021BAE00CC767E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73026A5822021DC100CC767E /* MoochCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoochCoordinator.swift; sourceTree = "<group>"; };
-		73026A5A2202206B00CC767E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		73026A5C2202207B00CC767E /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		73026A5E2202209700CC767E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		73056C11227F4EEA0033A1D3 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		73056C14227F4FA40033A1D3 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -182,6 +180,7 @@
 		73318A092249CD8A00BB1443 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		733B9E5D224BCDB300D702DA /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
 		733DFBE12229D65100A16995 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		734117982288FA8200DAF086 /* InterworksFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterworksFileLoader.swift; sourceTree = "<group>"; };
 		73417F86222DC171005A6714 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		73417F89222DD55B005A6714 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		734C2D23227223E8000F9A10 /* SelectFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFavoritesViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +225,7 @@
 		73ED716D2277847400D0D159 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		73ED7171227788F200D0D159 /* FadedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadedImageView.swift; sourceTree = "<group>"; };
+		73F1B196228F49E10058E538 /* MoochersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoochersViewController.swift; sourceTree = "<group>"; };
 		73F3F987224FF0CA00CCE4F6 /* selectedImageGallery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedImageGallery@3x.png"; sourceTree = "<group>"; };
 		73F3F988224FF0CA00CCE4F6 /* focusIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "focusIcon@3x.png"; sourceTree = "<group>"; };
 		73F3F989224FF0CA00CCE4F6 /* ON@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ON@3x.png"; sourceTree = "<group>"; };
@@ -444,6 +444,7 @@
 				735E28B021FCD7310035AD82 /* Session.swift */,
 				735E28B121FCD7310035AD82 /* Firebase.swift */,
 				73056C14227F4FA40033A1D3 /* Network.swift */,
+				734117982288FA8200DAF086 /* InterworksFileLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -454,11 +455,10 @@
 				73CEBE972200DDEF007B8620 /* Landing */,
 				73CEBE9B22010CA6007B8620 /* Login-Signup */,
 				73CEBE9A22010C8A007B8620 /* Onboarding */,
-				73CEBE9C22010CEB007B8620 /* Profile */,
 				73CEBE9E22010D2E007B8620 /* Search */,
-				73CEBE9D22010D0B007B8620 /* Social */,
 				73417F88222DD419005A6714 /* Explore */,
 				732B4B08224D2C10009E8FF5 /* Inventory */,
+				73F1B195228F490D0058E538 /* Moochers */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -607,22 +607,6 @@
 			path = "Login-Signup";
 			sourceTree = "<group>";
 		};
-		73CEBE9C22010CEB007B8620 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				73026A5A2202206B00CC767E /* ProfileViewController.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		73CEBE9D22010D0B007B8620 /* Social */ = {
-			isa = PBXGroup;
-			children = (
-				73026A5C2202207B00CC767E /* SocialViewController.swift */,
-			);
-			path = Social;
-			sourceTree = "<group>";
-		};
 		73CEBE9E22010D2E007B8620 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,6 +631,14 @@
 				73E5A4312257EF6D002093F4 /* LoadingView.swift */,
 			);
 			path = "Loading View";
+			sourceTree = "<group>";
+		};
+		73F1B195228F490D0058E538 /* Moochers */ = {
+			isa = PBXGroup;
+			children = (
+				73F1B196228F49E10058E538 /* MoochersViewController.swift */,
+			);
+			path = Moochers;
 			sourceTree = "<group>";
 		};
 		73F3F972224FF0C900CCE4F6 /* ImagePicker */ = {
@@ -1077,11 +1069,11 @@
 			files = (
 				73056C15227F4FA40033A1D3 /* Network.swift in Sources */,
 				73FCFD5F221F80B000C350AC /* GetStartedViewController.swift in Sources */,
+				73F1B197228F49E10058E538 /* MoochersViewController.swift in Sources */,
 				73ED716A22777ABC00D0D159 /* FavoriteCategoryTableViewCell.swift in Sources */,
 				732A5669226E3B5E007A6AA7 /* StockImageLoader.swift in Sources */,
 				7353040D225E92BD00011F4C /* DateExtension.swift in Sources */,
 				73056C17227F4FC20033A1D3 /* UPCItem.swift in Sources */,
-				73026A5D2202207B00CC767E /* SocialViewController.swift in Sources */,
 				73026A5722021BAE00CC767E /* SignUpViewController.swift in Sources */,
 				735CEA06225D37DD00C06ECF /* ItemDetailTableViewController.swift in Sources */,
 				735E28BE21FCD7310035AD82 /* Firebase.swift in Sources */,
@@ -1097,13 +1089,13 @@
 				732B4B19224EC8A6009E8FF5 /* Photographer.swift in Sources */,
 				73056C1C227F53910033A1D3 /* CameraModule.swift in Sources */,
 				73782E24220BB89900145B92 /* AlertManager.swift in Sources */,
+				734117992288FA8200DAF086 /* InterworksFileLoader.swift in Sources */,
 				734C6E52220BF0F1000DC1F4 /* BasicInformationViewController.swift in Sources */,
 				73026A5922021DC100CC767E /* MoochCoordinator.swift in Sources */,
 				73ACEF0522499011005188D0 /* CategoriesCollectionViewCell.swift in Sources */,
 				73B2DDDD222F5DDE0011E03F /* FeaturedCollectionViewCell.swift in Sources */,
 				731B07462210CB0F0079E45A /* UIView+Nib.swift in Sources */,
 				731B07442210CB0F0079E45A /* Object+ClassName.swift in Sources */,
-				73026A5B2202206B00CC767E /* ProfileViewController.swift in Sources */,
 				733B9E5E224BCDB300D702DA /* SubcategoryViewController.swift in Sources */,
 				731B07432210CB0F0079E45A /* UIScreen+Utils.swift in Sources */,
 				735E28BD21FCD7310035AD82 /* Session.swift in Sources */,

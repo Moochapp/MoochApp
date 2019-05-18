@@ -11,6 +11,7 @@ import UIKit
 
 struct StockImageLoader {
     static var shared = StockImageLoader()
+    
     func getCategories() -> [String] {
         let keys = categoryImages.keys
         var keyss: [String] = []

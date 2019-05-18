@@ -61,14 +61,6 @@ class MainCoordinator: Coordinator {
         
         let tabbar = UITabBarController()
         
-        let nav3 = UINavigationController()
-//        nav3.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
-//        nav3.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        let profile = ProfileViewController.instantiate(from: "Profile")
-        profile.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
-        profile.coordinator = self
-        nav3.viewControllers = [profile]
-        
         let nav4 = UINavigationController()
 //        nav4.navigationBar.tintColor = #colorLiteral(red: 0.01112855412, green: 0.7845740914, blue: 0.9864193797, alpha: 1)
 //        nav4.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -88,12 +80,11 @@ class MainCoordinator: Coordinator {
         inventory.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
-        
-        setupNavs(nav: nav3)
+    
         setupNavs(nav: nav4)
         setupNavs(nav: nav5)
         
-        tabbar.viewControllers = [nav5, nav4, nav3]
+        tabbar.viewControllers = [nav5, nav4]
         tabbar.selectedIndex = 1
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(tabbar, animated: true)
