@@ -24,7 +24,7 @@ class Moocher: FirebaseUser {
     var fullName: String
     var items: [Item] = []
     var favoriteCategories: [String] = []
-    var friends: [String] = []
+    var friends: [Friend] = []
     
     // MARK: Initializer
     init(user: User) {
@@ -59,11 +59,30 @@ class Moocher: FirebaseUser {
             self.id = data["ID"] as! String
             self.fullName = data["FullName"] as! String
             self.favoriteCategories = (data["favoriteCategories"] as? [String]) ?? []
-            if let friends = data["Friends"] as? [Any] {
+            if let friends = data["Friends"] as? [[String: Any]] {
                 var friendSet: [Friend] = []
                 for friend in friends {
                     print(friend)
+                    let isUserBlockedByRef = friend["isUserBlockedByRef"] as? Bool
+                    let isRefBlockedByUser = friend["isRefBlockedByUser"] as? Bool
+                    let reference = friend["reference"] as? DocumentReference
+                    let status = friend["status"] as? String
+                    
+                    if isUserBlockedByRef == nil || isRefBlockedByUser == nil || reference == nil || status == nil {
+                        Log.e("isUserBlockedByRef: ", isUserBlockedByRef,
+                              "isRefBlockedByUser:", isRefBlockedByUser,
+                              "reference:", reference,
+                              "status:", status)
+                    } else {
+                        let newFriend = Friend(id: reference!.documentID,
+                                               status: status!,
+                                               isUserBloackedByRef: isUserBlockedByRef!,
+                                               isRefBlockedByUser: isRefBlockedByUser!)
+                        friendSet.append(newFriend)
+                    }
                 }
+                
+                self.friends = friendSet
             }
         }
     }

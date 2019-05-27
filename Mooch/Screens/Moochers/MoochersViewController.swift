@@ -7,18 +7,27 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+import PromiseKit
 
 class MoochersViewController: UIViewController {
     
     // Admin
+    var coordinator: MainCoordinator!
     let MoocherCollectionViewCellID = "MoocherCollectionViewCellID"
     
     // Properties
-    var collectionDataSource: [Moocher] = []
+    var collectionDataSource: [Friend] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupSegmentedControl()
+        getDataForCollectionView()
         
     }
     
@@ -43,10 +52,45 @@ class MoochersViewController: UIViewController {
 
     
     // MARK: - Setups
+    private func setupSegmentedControl() {
+        self.segmentedControl.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalToSuperview().inset(16)
+        }
+        segmentedControl.addTarget(self, action: #selector(didSelectSegment(sender:)), for: .valueChanged)
+    }
     
     
     // MARK: - Class Methods
+    private func getDataForCollectionView() {
+        sync { (friends) in
+            self.collectionDataSource = friends
+            self.collectionView.reloadData()
+        }
+        
+    }
     
+    private func sync(compltion: ([Friend])->()) {
+        
+        Session.shared.moocher.syncToLocal { (error) in
+            guard error == nil else {
+                let em = EntryManager(viewController: self)
+                em.showNotificationMessage(attributes: em.topToast,
+                                           title: "Hmmm",
+                                           desc: error!.localizedDescription,
+                                           textColor: .white, imageName: nil,
+                                           backgroundColor: EKColor.Mooch.darkGray, haptic: .error)
+                return
+            }
+            
+            // Do sorting here (probably)
+            
+        }
+        
+    }
+    
+    @objc private func didSelectSegment(sender: UISegmentedControl) {
+        print(sender.selectedSegmentIndex)
+    }
 }
 
 extension MoochersViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -67,6 +111,10 @@ extension MoochersViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+}
+
+extension MoochersViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
 }
 
 class MoocherCollectionViewCell: UICollectionViewCell {

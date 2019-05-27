@@ -90,6 +90,7 @@
 		73ED71702277849B00D0D159 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */; };
 		73ED7172227788F200D0D159 /* FadedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED7171227788F200D0D159 /* FadedImageView.swift */; };
 		73F1B197228F49E10058E538 /* MoochersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1B196228F49E10058E538 /* MoochersViewController.swift */; };
+		73F1B19A22960A1A0058E538 /* Future + Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1B19922960A1A0058E538 /* Future + Promise.swift */; };
 		73F3F9B8224FF1AF00CCE4F6 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; };
 		73F3F9B9224FF1AF00CCE4F6 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3F9B4224FF0CA00CCE4F6 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73FCFD5D221F7F6900C350AC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FCFD5C221F7F6900C350AC /* UIViewControllerExtension.swift */; };
@@ -226,6 +227,7 @@
 		73ED716F2277849B00D0D159 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		73ED7171227788F200D0D159 /* FadedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadedImageView.swift; sourceTree = "<group>"; };
 		73F1B196228F49E10058E538 /* MoochersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoochersViewController.swift; sourceTree = "<group>"; };
+		73F1B19922960A1A0058E538 /* Future + Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future + Promise.swift"; sourceTree = "<group>"; };
 		73F3F987224FF0CA00CCE4F6 /* selectedImageGallery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedImageGallery@3x.png"; sourceTree = "<group>"; };
 		73F3F988224FF0CA00CCE4F6 /* focusIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "focusIcon@3x.png"; sourceTree = "<group>"; };
 		73F3F989224FF0CA00CCE4F6 /* ON@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ON@3x.png"; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 				737C87D321FFDA9E006B5F18 /* Coordinator.swift */,
 				737C87D521FFE44C006B5F18 /* Storyboarded.swift */,
 				731B07492211E3A60079E45A /* FirebaseUserManager.swift */,
+				73F1B19922960A1A0058E538 /* Future + Promise.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/LDLogger/LDLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -1042,6 +1046,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LDLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -1121,6 +1126,7 @@
 				73026A512202108000CC767E /* LandingViewModel.swift in Sources */,
 				731B07382210CAAB0079E45A /* EntryManager.swift in Sources */,
 				737C87D421FFDA9E006B5F18 /* Coordinator.swift in Sources */,
+				73F1B19A22960A1A0058E538 /* Future + Promise.swift in Sources */,
 				73CEBE992200DE04007B8620 /* LandingViewController.swift in Sources */,
 				734C2D24227223E8000F9A10 /* SelectFavoritesViewController.swift in Sources */,
 				73D35FAB225EA09F00C8F00C /* ImageExtension.swift in Sources */,

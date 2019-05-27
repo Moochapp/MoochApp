@@ -80,11 +80,18 @@ class MainCoordinator: Coordinator {
         inventory.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
         inventory.tabBarItem.title = "Inventory"
         nav5.viewControllers = [inventory]
+        
+        let nav6 = UINavigationController()
+        let moochers = MoochersViewController()
+        moochers.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 5)
+        moochers.tabBarItem.title = "Moochers"
+        nav6.viewControllers = [moochers]
     
         setupNavs(nav: nav4)
         setupNavs(nav: nav5)
+        setupNavs(nav: nav6)
         
-        tabbar.viewControllers = [nav5, nav4]
+        tabbar.viewControllers = [nav5, nav4, nav6]
         tabbar.selectedIndex = 1
         navigationController.isNavigationBarHidden = false
         navigationController.pushViewController(tabbar, animated: true)
